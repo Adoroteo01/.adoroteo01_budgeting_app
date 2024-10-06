@@ -9,7 +9,9 @@ public class BudgetEntry {
     // EFFECTS: creates a new BudgetEntry object with given name and budgetAmount
     // the actualAmount starts at 0
     public BudgetEntry(String name, double budgetAmount) {
-
+        this.name = name;
+        this.budgetAmount = budgetAmount;
+        this.actualAmount = 0;
     }
 
     // getters
@@ -41,13 +43,13 @@ public class BudgetEntry {
     // MODIFIES: this
     // EFECTS: adds amount to actualAmount
     public void addActual(double amount) {
-
+        actualAmount += amount;
     }
 
     // MODIFIES: this
     // EFECTS: subtracts amount from actualAmount
     public void substractActual(double amount) {
-
+        actualAmount -= amount;
     }
 
 }
