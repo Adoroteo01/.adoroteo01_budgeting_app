@@ -3,12 +3,12 @@ package model.budgetentries;
 // A budget entry that has a name, budgeted amount, and actual amount
 public class BudgetEntry {
     String name;
-    float budgetAmount;
-    float actualAmount;
+    double budgetAmount;
+    double actualAmount;
 
     // EFFECTS: creates a new BudgetEntry object with given name and budgetAmount
     // the actualAmount starts at 0
-    public BudgetEntry(String name, float budgetAmount) {
+    public BudgetEntry(String name, double budgetAmount) {
 
     }
 
@@ -17,11 +17,11 @@ public class BudgetEntry {
         return name;
     }
 
-    public float getBudgetAmount() {
+    public double getBudgetAmount() {
         return budgetAmount;
     }
 
-    public float getActualAmount() {
+    public double getActualAmount() {
         return actualAmount;
     }
 
@@ -30,23 +30,23 @@ public class BudgetEntry {
         this.name = name;
     }
 
-    public void setBudgetAmount(float budgetAmount) {
+    public void setBudgetAmount(double budgetAmount) {
         this.budgetAmount = budgetAmount;
     }
 
-    public void setActualAmount(float actualAmount) {
+    public void setActualAmount(double actualAmount) {
         this.actualAmount = actualAmount;
     }
 
     // MODIFIES: this
     // EFECTS: adds amount to actualAmount
-    public void addActual(float amount) {
+    public void addActual(double amount) {
 
     }
 
     // MODIFIES: this
     // EFECTS: subtracts amount from actualAmount
-    public void substractActual(float amount) {
+    public void substractActual(double amount) {
 
     }
 
