@@ -12,6 +12,7 @@ public class BudgetEntry {
 
     }
 
+    // getters
     public String getName() {
         return name;
     }
@@ -24,6 +25,7 @@ public class BudgetEntry {
         return actualAmount;
     }
 
+    // setters
     public void setName(String name) {
         this.name = name;
     }
@@ -34,6 +36,18 @@ public class BudgetEntry {
 
     public void setActualAmount(float actualAmount) {
         this.actualAmount = actualAmount;
+    }
+
+    // MODIFIES: this
+    // EFECTS: adds amount to actualAmount
+    public void addActual(float amount) {
+
+    }
+
+    // MODIFIES: this
+    // EFECTS: subtracts amount from actualAmount
+    public void substractActual(float amount) {
+
     }
 
 }
