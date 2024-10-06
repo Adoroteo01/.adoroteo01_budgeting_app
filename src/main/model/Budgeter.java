@@ -1,6 +1,7 @@
 package model;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class Budgeter {
         budgetEntries = new HashMap<String, BudgetEntry>();
     }
 
-    // EFFECTS: returns a collection of all the entries in budgetEntries
-    public Collection<BudgetEntry> getbudgetEntries() {
-        return budgetEntries.values();
+    // EFFECTS: returns an ArrayList of all the entries in budgetEntries
+    public ArrayList<BudgetEntry> getbudgetEntries() {
+        return new ArrayList<BudgetEntry>(budgetEntries.values());
     }
 
     // EFFECTS: clears budgetEntries
@@ -40,10 +41,24 @@ public class Budgeter {
         budgetEntries.remove(key);
     }
 
-    // EFFECTS: returns a list of BudgetEntry in deceding order
-    // of actualAmounts
+    // EFFECTS: returns a list of BudgetEntry objects in budgetEntries map.
+    // list is in descending order of actualAmounts
     public List<BudgetEntry> rankSpending() {
-        return null;
+        List<BudgetEntry> entries;
+        entries = new ArrayList<BudgetEntry>(getbudgetEntries());
+        sort(entries);
+
+        return entries;
+    }
+
+    // MODIFIES: entries
+    // EFFECTS: sorts entries in decending order of BudgetEntry.getActualAmount()
+    // TODO: write tests for this
+    private void sort(List<BudgetEntry> entries) {
+        Comparator<BudgetEntry> byActualAmount;
+        byActualAmount = Comparator.comparingDouble(BudgetEntry::getActualAmount).reversed();
+
+        entries.sort(byActualAmount);
     }
 
 }
