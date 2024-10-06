@@ -14,7 +14,7 @@
 
 - As a user, I want to be able to view all my purchases in the table of entries
 
-- As a user, I want to be able to add new columns and rows to the table of entries
+- As a user, I want to be able to view the categories I have most spending
 
 - As a user, I want to be able to create custom budgets with diffferent tables of entries
 
