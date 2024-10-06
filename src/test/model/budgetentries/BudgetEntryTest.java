@@ -2,14 +2,14 @@ package model.budgetentries;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BudgetEntryTest {
 
     BudgetEntry budgetEntry;
 
-    @BeforeAll
+    @BeforeEach
     void setup() {
         budgetEntry = new BudgetEntry("Test", 100);
     }
@@ -28,7 +28,7 @@ class BudgetEntryTest {
         budgetEntry.addActual(1);
         assertEquals(2, budgetEntry.getActualAmount());
         budgetEntry.addActual(5.52);
-        assertEquals(7.2, budgetEntry.getActualAmount());
+        assertEquals(7.52, budgetEntry.getActualAmount());
     }
 
     @Test
