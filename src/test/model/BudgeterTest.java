@@ -22,7 +22,7 @@ public class BudgeterTest {
         budgeter = new Budgeter();
         b1 = new BudgetEntry("B1", 0);
         b2 = new BudgetEntry("B2", 200);
-        b3 = new BudgetEntry("B2", 60);
+        b3 = new BudgetEntry("B3", 60);
 
     }
 
@@ -86,12 +86,17 @@ public class BudgeterTest {
         budgeter.addEntry(b2);
         budgeter.addEntry(b3);
 
+        assertEquals(3, budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+        assertTrue(budgeter.getbudgetEntries().contains(b2));
+        assertTrue(budgeter.getbudgetEntries().contains(b3));
+
         ArrayList<BudgetEntry> output = new ArrayList<BudgetEntry>();
         output.add(b1);
         output.add(b3);
         output.add(b2);
 
-        assertEquals(output, budgeter.rankSpending());
+        assertTrue(output.equals(budgeter.rankSpending()));
     }
 
     @Test
@@ -102,11 +107,16 @@ public class BudgeterTest {
         budgeter.addEntry(b1);
         budgeter.addEntry(b2);
 
-        ArrayList<BudgetEntry> output = new ArrayList<BudgetEntry>();
-        output.add(b1);
-        output.add(b2);
+        assertEquals(2, budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+        assertTrue(budgeter.getbudgetEntries().contains(b2));
 
-        assertEquals(output, budgeter.rankSpending());
+        ArrayList<BudgetEntry> output = new ArrayList<BudgetEntry>();
+        output.add(b2);
+        output.add(b1);
+
+        System.out.println(budgeter.rankSpending());
+        assertTrue(budgeter.rankSpending().equals(output));
     }
 
     @Test
@@ -117,9 +127,23 @@ public class BudgeterTest {
         budgeter.addEntry(b1);
         budgeter.addEntry(b2);
 
+        assertEquals(2, budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+        assertTrue(budgeter.getbudgetEntries().contains(b2));
+
         ArrayList<BudgetEntry> output = new ArrayList<BudgetEntry>();
         output.add(b2);
         output.add(b1);
+
+        assertEquals(output, budgeter.rankSpending());
+    }
+
+    @Test
+    void testRankSpendingNoEntries() {
+
+        assertEquals(0, budgeter.getbudgetEntries().size());
+
+        ArrayList<BudgetEntry> output = new ArrayList<BudgetEntry>();
 
         assertEquals(output, budgeter.rankSpending());
     }
