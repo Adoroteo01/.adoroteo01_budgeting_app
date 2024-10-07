@@ -32,6 +32,42 @@ public class BudgeterTest {
     }
 
     @Test
+    // TODO: do I even need to test this?
+    void testGetBudgetEntries() {
+        budgeter.addEntry(b1);
+        ArrayList<BudgetEntry> output;
+        output = new ArrayList<>();
+        output.add(b1);
+        assertTrue(output.equals(budgeter.getbudgetEntries()));
+    }
+
+
+    @Test
+    void testClear() {
+        budgeter.addEntry(b1);
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+        assertEquals(1, budgeter.getbudgetEntries().size());
+
+        budgeter.clear();
+        assertEquals(0, budgeter.getbudgetEntries().size());
+    }
+
+    @Test
+    void testClearMultiple() {
+        budgeter.addEntry(b1);
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+        assertEquals(1, budgeter.getbudgetEntries().size());
+
+        budgeter.addEntry(b3);
+        assertTrue(budgeter.getbudgetEntries().contains(b3));
+        assertEquals(2, budgeter.getbudgetEntries().size());
+
+
+        budgeter.clear();
+        assertEquals(0, budgeter.getbudgetEntries().size());
+    }
+
+    @Test
     void testAddEntry() {
         budgeter.addEntry(b1);
         assertTrue(budgeter.getbudgetEntries().contains(b1));
