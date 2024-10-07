@@ -20,6 +20,17 @@ class BudgetEntryTest {
         assertEquals(100, budgetEntry.getBudgetAmount());
         assertEquals(0, budgetEntry.getActualAmount());
     }
+    
+    @Test
+    void testSetters(){
+        budgetEntry.setActualAmount(2.99);
+        budgetEntry.setBudgetAmount(3);
+        budgetEntry.setName("changed");
+
+        assertEquals(2.99, budgetEntry.getActualAmount());
+        assertEquals(3, budgetEntry.getBudgetAmount());
+        assertEquals("changed", budgetEntry.getName());
+    }
 
     @Test
     void testAddActual() {
