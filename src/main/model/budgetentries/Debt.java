@@ -4,6 +4,6 @@ package model.budgetentries;
 public class Debt extends BudgetEntry {
 
     public Debt(String name, double budgetAmount) {
-        super(null, 0);
+        super(name, budgetAmount);
     }
 }
