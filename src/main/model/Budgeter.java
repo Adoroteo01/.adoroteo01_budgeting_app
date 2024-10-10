@@ -36,7 +36,6 @@ public class Budgeter {
         budgetEntries.put(budgetEntry.getName(), budgetEntry);
     }
 
-    // TODO
     // EFFECTS: if BudgetEntry with key = name is in budgetEntries, returns that
     // BudgetEntry
     // if key with that name does not exist in budgetEntries returns null
@@ -63,7 +62,7 @@ public class Budgeter {
 
     // MODIFIES: entries
     // EFFECTS: sorts entries in decending order of BudgetEntry.getActualAmount()
-    // TODO: write tests for this
+    // TODO: Do I test this. If so, how since its private.
     private void sort(List<BudgetEntry> entries) {
         Comparator<BudgetEntry> byActualAmount;
         byActualAmount = Comparator.comparingDouble(BudgetEntry::getActualAmount).reversed();
