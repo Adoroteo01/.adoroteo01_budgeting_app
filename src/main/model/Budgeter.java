@@ -7,38 +7,16 @@ import java.util.List;
 
 import model.budgetentries.BudgetEntry;
 
-// A budget tracker that has the name of the budget, the start and end date, 
-// and a map of budget entries
+// A budget tracker that has a map of budget entries
 public class Budgeter {
-
-    private String name;
-    private String startDate;
-    private String endDate;
 
     private HashMap<String, BudgetEntry> budgetEntries;
 
-    // REQUIRES: startDate and endDate mus be in the form "yyyy-mm-dd"
-    // EFFECTS: creates a new budgeter with given name, start and end date,
-    // and no budget entries
-    public Budgeter(String name, String startDate, String endDate) {
-
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    // EFFECTS: creates a new budgeter with no budget entries
+    public Budgeter() {
         budgetEntries = new HashMap<String, BudgetEntry>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
 
     // EFFECTS: returns an ArrayList of all the entries in budgetEntries
     public ArrayList<BudgetEntry> getbudgetEntries() {
