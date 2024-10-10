@@ -35,7 +35,6 @@ public class BudgeterTest {
     }
 
     @Test
-    // TODO: do I even need to test this?
     void testGetBudgetEntries() {
         budgeter.addEntry(b1);
         ArrayList<BudgetEntry> output;
