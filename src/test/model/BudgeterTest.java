@@ -19,7 +19,7 @@ public class BudgeterTest {
 
     @BeforeEach
     void setup() {
-        budgeter = new Budgeter();
+        budgeter = new Budgeter("Budget 1","2024-10-10","2024-11-10");
         b1 = new BudgetEntry("B1", 0);
         b2 = new BudgetEntry("B2", 200);
         b3 = new BudgetEntry("B3", 60);
@@ -28,6 +28,9 @@ public class BudgeterTest {
 
     @Test
     void testConstructor() {
+        assertEquals("Budget 1", budgeter.getName());
+        assertEquals("2024-10-10", budgeter.getStartDate());
+        assertEquals("2024-11-10", budgeter.getEndDate());
         assertEquals(0, budgeter.getbudgetEntries().size());
     }
 
