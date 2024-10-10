@@ -19,12 +19,12 @@ public class Budgeter {
 
 
     // EFFECTS: returns an ArrayList of all the entries in budgetEntries
-    public ArrayList<BudgetEntry> getbudgetEntries() {
+    protected ArrayList<BudgetEntry> getbudgetEntries() {
         return new ArrayList<BudgetEntry>(budgetEntries.values());
     }
 
     // EFFECTS: clears budgetEntries
-    public void clear() {
+    protected void clear() {
         budgetEntries.clear();
     }
 
@@ -32,20 +32,27 @@ public class Budgeter {
     // MODIFIES: this
     // EFFECTS: adds budgetEntry to budgetEntries with a key the
     // same as the budgetEntry name
-    public void addEntry(BudgetEntry budgetEntry) {
+    protected void addEntry(BudgetEntry budgetEntry) {
 
         budgetEntries.put(budgetEntry.getName(), budgetEntry);
     }
 
+    // TODO
+    //EFFECTS: if BudgetEntry with key = name is in budgetEntries, returns that BudgetEntry
+    //         if key with that name does not exist in budgetEntries returns null
+    protected BudgetEntry findEntry(String name) {
+        return null;
+    }
+
     // MODIFIES: this
     // EFFECTS: removes specified entry from budgetEntries
-    public void removeEntry(String key) {
+    protected void removeEntry(String key) {
         budgetEntries.remove(key);
     }
 
     // EFFECTS: returns a list of BudgetEntry objects in budgetEntries map.
     // list is in descending order of actualAmounts
-    public List<BudgetEntry> rankSpending() {
+    protected List<BudgetEntry> rankSpending() {
         List<BudgetEntry> entries;
         entries = new ArrayList<BudgetEntry>(getbudgetEntries());
         sort(entries);
