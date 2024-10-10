@@ -13,9 +13,25 @@ public class Budget {
     private Tracker tracker;
 
     // TODO
-    // creates a new budget with a new budgeter and tracker
+    // EFFECT: creates a new budget with given name, start date, end date,
+    //         and new budgeter and tracker.
     public Budget() {
 
+    }
+
+    // EFFECT: returns name
+    public String getName() {
+        return name;
+    }
+
+    // EFFECT: returns startDate
+    public String getStartDate() {
+        return startDate;
+    }
+
+    // EFFECT: returns endDate
+    public String getEndDate() {
+        return endDate;
     }
 
     // TODO
@@ -48,8 +64,13 @@ public class Budget {
 
     // TODO
     // MODIFIES: tracker
-    // EFFECT: adds a new TrackerEnter entry to tracker
-    public void track() {
+    // EFFECT: if budgeter.find(budgetEntryName) is null:
+    //         throws InvalidBudgetEntry Exception
+    //
+    //         if not null:
+    //         adds amount to specified budget entry's actualAmount
+    //         adds a new TrackerEnter to tracker
+    public void addTrackerEntry(String date, String budgetEntryName, int amount) {
 
     }
 
