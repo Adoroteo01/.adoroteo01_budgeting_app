@@ -17,7 +17,6 @@ public class Budgeter {
         budgetEntries = new HashMap<String, BudgetEntry>();
     }
 
-
     // EFFECTS: returns an ArrayList of all the entries in budgetEntries
     protected ArrayList<BudgetEntry> getbudgetEntries() {
         return new ArrayList<BudgetEntry>(budgetEntries.values());
@@ -38,10 +37,12 @@ public class Budgeter {
     }
 
     // TODO
-    //EFFECTS: if BudgetEntry with key = name is in budgetEntries, returns that BudgetEntry
-    //         if key with that name does not exist in budgetEntries returns null
+    // EFFECTS: if BudgetEntry with key = name is in budgetEntries, returns that
+    // BudgetEntry
+    // if key with that name does not exist in budgetEntries returns null
     protected BudgetEntry findEntry(String name) {
-        return null;
+
+        return budgetEntries.get(name);
     }
 
     // MODIFIES: this
