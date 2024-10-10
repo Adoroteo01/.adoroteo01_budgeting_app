@@ -31,6 +31,9 @@ public class BudgeterTest {
 
     @Test
     void testConstructor() {
+        assertEquals("Budget 1", budgeter.getName());
+        assertEquals("2024-10-10", budgeter.getStartDate());
+        assertEquals("2024-11-10", budgeter.getEndDate());
         assertEquals(0, budgeter.getbudgetEntries().size());
     }
 
