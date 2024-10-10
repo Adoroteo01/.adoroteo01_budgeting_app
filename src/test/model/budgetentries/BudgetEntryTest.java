@@ -2,17 +2,13 @@ package model.budgetentries;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BudgetEntryTest {
+abstract class BudgetEntryTest {
 
-    BudgetEntry budgetEntry;
+    protected BudgetEntry budgetEntry;
 
-    @BeforeEach
-    void setup() {
-        budgetEntry = new BudgetEntry("Test", 100);
-    }
+    abstract void setup();
 
     @Test
     void testConstructor() {
