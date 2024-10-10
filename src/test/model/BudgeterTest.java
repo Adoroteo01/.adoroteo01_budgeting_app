@@ -186,4 +186,34 @@ public class BudgeterTest {
 
         assertEquals(output, budgeter.rankSpending());
     }
+
+
+    @Test
+    void testFindEntry1Entry() {
+        budgeter.addEntry(b1);
+
+        assertEquals(b1, budgeter.findEntry("B1"));
+        assertEquals(1, budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+    }
+
+    @Test
+    void testFindEntry2Entries() {
+        budgeter.addEntry(b1);
+        budgeter.addEntry(b2);
+
+        assertEquals(b2, budgeter.findEntry("B2"));
+        assertEquals(2, budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+        assertTrue(budgeter.getbudgetEntries().contains(b2));
+    }
+
+    @Test
+    void testFindEntryNotFound() {
+        budgeter.addEntry(b1);
+
+        assertEquals(null, budgeter.findEntry("B7"));
+        assertEquals(1 , budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+    }
 }
