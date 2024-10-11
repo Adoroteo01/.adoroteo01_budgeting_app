@@ -19,11 +19,12 @@ public class BudgetingApp {
 
     private Window mainMenu;
     private Window newBudgetMaker;
-    private Window budgetOpener;
+    private BudgetOpener budgetOpener;
     private BudgetViewer budgetViewer;
 
     private List<Budget> budgets;
 
+    // EFFECTS: creates new budgeting app and runs the app
     public BudgetingApp() {
         mainMenu = new MainMenu();
         newBudgetMaker = new NewBudgetMaker();
@@ -52,27 +53,46 @@ public class BudgetingApp {
             case "2": // New Budget
 
                 newBugetMaker();
-                
+
             default:
                 run();
         }
     }
 
+    // EFFECTS: opens the BudgetOpener window
     private void budgetOpener() {
+        budgetOpener.setBudgets(budgets);
         budgetOpener.open();
-        // TODO
+
+        userInput = budgetOpener.getUserInput();
+
+        Budget targetBudget = null;
+
+        for (Budget budget : budgets) {
+            if (budget.getName().equals(userInput)) {
+                targetBudget = budget;
+                break;
+            }
+        }
+
+        if (targetBudget != null) {
+            budgetViewer(targetBudget);
+        } else {
+            mainMenu();
+        }
     }
 
+    // EFFECTS: opens the NewBudgetMaker window
     private void newBugetMaker() {
         newBudgetMaker.open();
         userInputs = newBudgetMaker.getAllInputs();
         Budget newBudget = makeNewBudget(userInputs.get(0), userInputs.get(1), userInputs.get(2));
-        budgets.add(newBudget);
 
-        bugetViewer(newBudget);
+        budgetViewer(newBudget);
     }
 
-    private void bugetViewer(Budget newBudget) {
+    // EFFECTS: opens the BudgetViewer window
+    private void budgetViewer(Budget newBudget) {
         budgetViewer.setBudget(newBudget);
         budgetViewer.open();
 
@@ -80,18 +100,18 @@ public class BudgetingApp {
 
         switch (userInput) {
             case "1": // TODO: Edit Budget Entries
-                
+
                 break;
             case "2": // TODO: Track
-                
+
                 break;
             case "3": // TODO: Summary
-                
+
                 break;
             case "4": // TODO: Main Menu
-                
+
                 mainMenu();
-        
+
             default:
                 mainMenu();
         }
