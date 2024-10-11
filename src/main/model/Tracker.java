@@ -18,9 +18,9 @@ public class Tracker {
         return entries;
     }
 
-    // add entry to entries. 
+    // add entry to entries.
     protected void addEntry(TrackerEntry entry) {
-
+        entries.add(entry);
     }
 
 }
