@@ -39,7 +39,7 @@ public class Budgeter {
     // EFFECTS: if BudgetEntry with key = name is in budgetEntries, returns that
     // BudgetEntry
     // if key with that name does not exist in budgetEntries returns null
-    protected BudgetEntry findEntry(String name) {
+    public BudgetEntry findEntry(String name) {
 
         return budgetEntries.get(name);
     }

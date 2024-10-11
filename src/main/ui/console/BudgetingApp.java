@@ -3,11 +3,16 @@ package ui.console;
 import java.util.ArrayList;
 import java.util.List;
 
+import Exceptions.InvalidBudgetEntryException;
 import model.Budget;
+import model.Budgeter;
+import model.budgetentries.BudgetEntry;
 import ui.console.menus.BudgetOpener;
 import ui.console.menus.BudgetViewer;
 import ui.console.menus.MainMenu;
 import ui.console.menus.NewBudgetMaker;
+import ui.console.menus.TrackerEntryMaker;
+import ui.console.menus.TrackingWindow;
 import ui.console.menus.Window;
 
 // a budgeting app that allows you to create a budget, track your spending,
@@ -26,6 +31,8 @@ public class BudgetingApp {
     private Window newBudgetMaker;
     private Window budgetOpener;
     private Window budgetViewer;
+    private Window trackingWindow;
+    private Window trackerEntryMaker;
 
     private List<Budget> budgets;
 
@@ -36,6 +43,8 @@ public class BudgetingApp {
         newBudgetMaker = new NewBudgetMaker();
         budgetOpener = new BudgetOpener();
         budgetViewer = new BudgetViewer();
+        trackingWindow = new TrackingWindow();
+        trackerEntryMaker = new TrackerEntryMaker();
 
         budgets = new ArrayList<Budget>();
 
@@ -61,13 +70,81 @@ public class BudgetingApp {
                 case "budgetViewer":
                     budgetViewer(currenBudget);
                     break;
+                case "trackingWindow":
+                    trackingWindow();
+                    break;
+                case "trackerEntryMaker":
+                    trackerEntryMaker();
+                    break;
 
             }
         }
     }
 
-    // EFFECTS: Prints main menu to console
+    // EFFECTS: opens tracking window
+    private void trackingWindow() {
+        trackingWindow.set(currenBudget.getTracker());
+        trackingWindow.open();
+
+        userInput = trackingWindow.getUserInput();
+
+        switch (userInput) {
+            case "1": // New entry
+
+                currentWindow = "trackerEntryMaker";
+                break;
+
+            case "2": // Back
+
+                currentWindow = "budgetViewer";
+                break;
+
+            default:
+
+                System.out.println("Invalid input... returning to Budget Viewer");
+                currentWindow = "budgetViewer";
+                break;
+        }
+
+    }
+
+    // EFFECTS: prints tracker entry window and gets inputs needed to make
+    // new TrackerEntry
+    private void trackerEntryMaker() {
+        trackerEntryMaker.open();
+        userInputs = trackerEntryMaker.getAllInputs();
+
+        Budgeter budgeter = currenBudget.getBudgeter();
+        BudgetEntry budgetEntry = budgeter.findEntry(userInputs.get(1));
+        if (userInputs.get(1).equals("")) { // go back to tracking window if no budgetEntry was entered
+
+            System.out.println("Entry was not added... ");
+            currentWindow = "trackingWindow";
+
+        } else if (budgetEntry != null) {
+
+            try {
+                currenBudget.addTrackerEntry(userInputs.get(0), userInputs.get(1), Double.valueOf(userInputs.get(2)));
+                budgetEntry.addActual(Double.valueOf(userInputs.get(2)));
+                currentWindow = "trackingWindow";
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount... try again...");
+
+            } catch (InvalidBudgetEntryException e) {
+                System.out.println("That budget entry does not exist... try again...");
+
+            }
+
+        } else {
+            System.out.println("That budget entry does not exist... try again...");
+        }
+    }
+
+    // EFFECTS: prints main menu to console
     private void mainMenu() {
+        currenBudget = null; // resetting currentBudget
+
         mainMenu.open();
         userInput = mainMenu.getUserInput();
 
@@ -127,7 +204,6 @@ public class BudgetingApp {
 
     // EFFECTS: opens the BudgetViewer window
     private void budgetViewer(Budget newBudget) {
-        currenBudget = null;
         budgetViewer.set(newBudget);
         budgetViewer.open();
 
@@ -139,6 +215,7 @@ public class BudgetingApp {
                 break;
             case "2": // TODO: Track
 
+                currentWindow = "trackingWindow";
                 break;
             case "3": // TODO: Summary
 
