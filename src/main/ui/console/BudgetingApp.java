@@ -13,6 +13,7 @@ import ui.console.menus.BudgetOpener;
 import ui.console.menus.BudgetViewer;
 import ui.console.menus.MainMenu;
 import ui.console.menus.NewBudgetMaker;
+import ui.console.menus.SummaryWindow;
 import ui.console.menus.TrackerEntryMaker;
 import ui.console.menus.TrackingWindow;
 import ui.console.menus.Window;
@@ -36,6 +37,7 @@ public class BudgetingApp {
     private Window trackingWindow;
     private Window trackerEntryMaker;
     private Window budgetEntryMaker;
+    private Window summaryWindow;
 
     private List<Budget> budgets;
 
@@ -49,6 +51,7 @@ public class BudgetingApp {
         trackingWindow = new TrackingWindow();
         trackerEntryMaker = new TrackerEntryMaker();
         budgetEntryMaker = new BudgetEntryMaker();
+        summaryWindow = new SummaryWindow();
 
         budgets = new ArrayList<Budget>();
 
@@ -82,9 +85,31 @@ public class BudgetingApp {
                     break;
                 case "budgetEntryMaker":
                     budgetEntryMaker();
+                    break;
+                case "summaryWindow":
+                    summaryWindow();
+                    break;
 
             }
         }
+    }
+
+    // EFFECTS: opens summary window
+    private void summaryWindow() {
+        summaryWindow.set(currenBudget.getBudgeter().rankSpending());
+
+        summaryWindow.open();
+        userInput = summaryWindow.getUserInput();
+
+        switch (userInput) {
+            case "1":
+                currentWindow = "budgetViewer";
+                break;
+
+            default:
+                break;
+        }
+
     }
 
     // EFFECTS: opens budget entry maker window and gets required inputs to make
@@ -233,15 +258,15 @@ public class BudgetingApp {
         userInput = budgetViewer.getUserInput();
 
         switch (userInput) {
-            case "1": // TODO: Add Budget Entries
+            case "1":
                 currentWindow = "budgetEntryMaker";
                 break;
             case "2":
 
                 currentWindow = "trackingWindow";
                 break;
-            case "3": // TODO: Summary
-
+            case "3":
+                currentWindow = "summaryWindow";
                 break;
             case "4":
 

@@ -52,7 +52,7 @@ public class Budgeter {
 
     // EFFECTS: returns a list of BudgetEntry objects in budgetEntries map.
     // list is in descending order of actualAmounts
-    protected List<BudgetEntry> rankSpending() {
+    public List<BudgetEntry> rankSpending() {
         List<BudgetEntry> entries;
         entries = new ArrayList<BudgetEntry>(getbudgetEntries());
         sort(entries);
