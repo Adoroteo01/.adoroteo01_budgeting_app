@@ -1,6 +1,5 @@
 package model;
 
-import model.budgetentries.Bill;
 import model.budgetentries.BudgetEntry;
 
 // a budget that has a name, start date, end date, budgeter and a spending tracker
