@@ -1,6 +1,7 @@
 package model;
 
-import javax.sound.midi.Track;
+import model.budgetentries.Bill;
+import model.budgetentries.BudgetEntry;
 
 // a budget that has a name, start date, end date, budgeter and a spending tracker
 public class Budget {
@@ -14,9 +15,13 @@ public class Budget {
 
     // TODO
     // EFFECT: creates a new budget with given name, start date, end date,
-    //         and new budgeter and tracker.
-    public Budget() {
-
+    // and new budgeter and tracker.
+    public Budget(String name, String startDate, String endDate) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        budgeter = new Budgeter();
+        tracker = new Tracker();
     }
 
     // EFFECT: returns name
@@ -34,44 +39,31 @@ public class Budget {
         return endDate;
     }
 
-    // TODO
-    // MODIFIES: budgeter
-    // EFFECT: adds a new Bill entry to budgeter
-    public void addBill() {
+    public Budgeter getBudgeter() {
+        return budgeter;
+    }
 
+    public Tracker getTracker() {
+        return tracker;
     }
 
     // TODO
     // MODIFIES: budgeter
-    // EFFECT: adds a new Debt entry to budgeter
-    public void addDebt() {
-
-    }
-
-    // TODO
-    // MODIFIES: budgeter
-    // EFFECT: adds a new Expense entry to budgeter
-    public void addExpense() {
-
-    }
-
-    // TODO
-    // MODIFIES: budgeter
-    // EFFECT: adds a new Income entry to budgeter
-    public void addIncome() {
-
+    // EFFECT: adds a BudgetEntry to budgeter
+    public void addBudgetEntry(BudgetEntry budgetEntry) {
+        budgeter.addEntry(budgetEntry);
     }
 
     // TODO
     // MODIFIES: tracker
     // EFFECT: if budgeter.find(budgetEntryName) is null:
-    //         throws InvalidBudgetEntry Exception
+    // throws InvalidBudgetEntry Exception
     //
-    //         if not null:
-    //         adds amount to specified budget entry's actualAmount
-    //         adds a new TrackerEnter to tracker
+    // if not null:
+    // adds amount to specified budget entry's actualAmount
+    // adds a new TrackerEnter to tracker
     public void addTrackerEntry(String date, String budgetEntryName, int amount) {
-
+        // stub
     }
 
 }
