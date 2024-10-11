@@ -2,7 +2,7 @@ package ui.console.menus;
 
 import java.util.ArrayList;
 
-public class NewBudgetMaker extends Window{
+public class NewBudgetMaker extends Window {
 
     String newBudgetName;
     String newBudgetStartDate;
@@ -19,6 +19,10 @@ public class NewBudgetMaker extends Window{
     @Override
     public void open() {
         newPage();
+    }
+
+    @Override
+    public void set(Object object) {
     }
 
 }

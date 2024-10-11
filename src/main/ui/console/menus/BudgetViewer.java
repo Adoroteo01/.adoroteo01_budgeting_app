@@ -37,14 +37,16 @@ public class BudgetViewer extends Window {
     private void printEntries() {
         System.out.println("Budget Entries\n--------------\n");
         for (BudgetEntry budgetEntry : budget.getBudgetEntries()) {
-            System.out.println("- " + budgetEntry.getName() + " | " + String.valueOf(budgetEntry.getBudgetAmount()) + " | " + String.valueOf(budgetEntry.getActualAmount()));
+            System.out.println("- " + budgetEntry.getName() + " | " + String.valueOf(budgetEntry.getBudgetAmount())
+                    + " | " + String.valueOf(budgetEntry.getActualAmount()));
         }
     }
 
+    @Override
     // MODIFIES: this
     // EFFECTS: sets this.budget value
-    public void setBudget(Budget budget) {
-        this.budget = budget;
+    public void set(Object budget) {
+        this.budget = (Budget) budget;
     }
 
 }

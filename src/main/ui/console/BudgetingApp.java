@@ -14,30 +14,56 @@ import ui.console.menus.Window;
 // and view a summary of your spending
 public class BudgetingApp {
 
+    boolean running;
+
     private String userInput;
     private List<String> userInputs;
 
+    private String currentWindow;
+    private Budget currenBudget;
+
     private Window mainMenu;
     private Window newBudgetMaker;
-    private BudgetOpener budgetOpener;
-    private BudgetViewer budgetViewer;
+    private Window budgetOpener;
+    private Window budgetViewer;
 
     private List<Budget> budgets;
 
     // EFFECTS: creates new budgeting app and runs the app
     public BudgetingApp() {
+
         mainMenu = new MainMenu();
         newBudgetMaker = new NewBudgetMaker();
         budgetOpener = new BudgetOpener();
         budgetViewer = new BudgetViewer();
 
         budgets = new ArrayList<Budget>();
+
+        running = true;
+        currentWindow = "mainMenu";
         run();
     }
 
     // EFFECTS: runs the budgeting app
     private void run() {
-        mainMenu();
+        while (running) {
+
+            switch (currentWindow) {
+                case "mainMenu":
+                    mainMenu();
+                    break;
+                case "budgetOpener":
+                    budgetOpener();
+                    break;
+                case "newBudgetMaker":
+                    newBugetMaker();
+                    break;
+                case "budgetViewer":
+                    budgetViewer(currenBudget);
+                    break;
+
+            }
+        }
     }
 
     // EFFECTS: Prints main menu to console
@@ -47,38 +73,46 @@ public class BudgetingApp {
 
         switch (userInput) {
             case "1": // Open Budget
-
-                budgetOpener();
+                currentWindow = "budgetOpener";
+                break;
 
             case "2": // New Budget
 
-                newBugetMaker();
+                currentWindow = "newBudgetMaker";
+                break;
+
+            case "3": // Exit Program
+                running = false;
+                break;
 
             default:
-                run();
+                System.out.println("Invalid Input... Returning to Main Menu");
+                currentWindow = "mainMenu";
+                break;
         }
     }
 
     // EFFECTS: opens the BudgetOpener window
     private void budgetOpener() {
-        budgetOpener.setBudgets(budgets);
+        budgetOpener.set(budgets); // for printing budget names
         budgetOpener.open();
 
         userInput = budgetOpener.getUserInput();
 
-        Budget targetBudget = null;
-
         for (Budget budget : budgets) {
             if (budget.getName().equals(userInput)) {
-                targetBudget = budget;
+                currenBudget = budget;
                 break;
+            } else {
+                currenBudget = null;
             }
         }
 
-        if (targetBudget != null) {
-            budgetViewer(targetBudget);
+        if (currenBudget != null) {
+            currentWindow = "budgetViewer";
         } else {
-            mainMenu();
+            System.out.println("Budget not found... Returning to main menu");
+            currentWindow = "mainMenu";
         }
     }
 
@@ -86,14 +120,15 @@ public class BudgetingApp {
     private void newBugetMaker() {
         newBudgetMaker.open();
         userInputs = newBudgetMaker.getAllInputs();
-        Budget newBudget = makeNewBudget(userInputs.get(0), userInputs.get(1), userInputs.get(2));
+        currenBudget = makeNewBudget(userInputs.get(0), userInputs.get(1), userInputs.get(2));
 
-        budgetViewer(newBudget);
+        currentWindow = "budgetViewer";
     }
 
     // EFFECTS: opens the BudgetViewer window
     private void budgetViewer(Budget newBudget) {
-        budgetViewer.setBudget(newBudget);
+        currenBudget = null;
+        budgetViewer.set(newBudget);
         budgetViewer.open();
 
         userInput = budgetViewer.getUserInput();
@@ -110,10 +145,12 @@ public class BudgetingApp {
                 break;
             case "4": // TODO: Main Menu
 
-                mainMenu();
+                currentWindow = "mainMenu";
+                break;
 
             default:
-                mainMenu();
+                currentWindow = "mainMenu";
+                break;
         }
     }
 

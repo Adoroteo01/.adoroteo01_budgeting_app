@@ -29,8 +29,8 @@ public class BudgetOpener extends Window {
         System.out.println("");
     }
 
-    public void setBudgets(List<Budget> budgets) {
-        this.budgets = budgets;
+    public void set(Object budgets) {
+        this.budgets = (List<Budget>) budgets;
     }
 
 }

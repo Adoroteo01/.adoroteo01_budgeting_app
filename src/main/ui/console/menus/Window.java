@@ -25,6 +25,8 @@ public abstract class Window {
         scanner = new Scanner(System.in);
     }
 
+    abstract public void set(Object object);
+
     protected void drawDivider() {
         final String divider;
         divider = DIVIDER.repeat(DIVDER_LENGTH);
@@ -63,7 +65,7 @@ public abstract class Window {
         System.out.println(newPage);
     }
 
-    
+
 
     
 }
