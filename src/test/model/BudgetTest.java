@@ -35,10 +35,7 @@ public class BudgetTest {
     void testAddBudgetEntry() {
         budget.addBudgetEntry(b1);
 
-        Budgeter budgeter;
-        budgeter = budget.getBudgeter();
-
-        assertEquals(b1, budgeter.getbudgetEntries().get(0));
+        assertEquals(b1, budget.getBudgetEntries().get(0));
 
     }
 

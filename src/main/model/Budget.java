@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import Exceptions.InvalidBudgetEntryException;
 import model.budgetentries.BudgetEntry;
 
@@ -47,14 +49,18 @@ public class Budget {
         return tracker;
     }
 
-    // TODO
     // MODIFIES: budgeter
     // EFFECT: adds a BudgetEntry to budgeter
     public void addBudgetEntry(BudgetEntry budgetEntry) {
         budgeter.addEntry(budgetEntry);
     }
 
-    // TODO
+    // EFFECT: returns budgeter's budget entries
+    public List<BudgetEntry> getBudgetEntries() {
+        return budgeter.getbudgetEntries();
+    }
+
+
     // MODIFIES: tracker
     // EFFECT: if budgeter.findEntry(budgetEntryName) is null:
     // throws InvalidBudgetEntryException
