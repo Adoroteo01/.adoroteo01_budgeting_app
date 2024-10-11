@@ -10,7 +10,7 @@ public class BudgetViewer extends Window {
     // EFFECTS: creates a new BudgetViewer with a scanner
     public BudgetViewer() {
         super();
-        options = "1) Edit Budget Entries\n2) Track\n3) Summary\n4) Main Menu";
+        options = "1) Add Budget Entries\n2) Track\n3) Summary\n4) Main Menu";
 
     }
 

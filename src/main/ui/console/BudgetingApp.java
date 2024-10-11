@@ -7,6 +7,8 @@ import Exceptions.InvalidBudgetEntryException;
 import model.Budget;
 import model.Budgeter;
 import model.budgetentries.BudgetEntry;
+import model.budgetentries.Expense;
+import ui.console.menus.BudgetEntryMaker;
 import ui.console.menus.BudgetOpener;
 import ui.console.menus.BudgetViewer;
 import ui.console.menus.MainMenu;
@@ -33,6 +35,7 @@ public class BudgetingApp {
     private Window budgetViewer;
     private Window trackingWindow;
     private Window trackerEntryMaker;
+    private Window budgetEntryMaker;
 
     private List<Budget> budgets;
 
@@ -45,6 +48,7 @@ public class BudgetingApp {
         budgetViewer = new BudgetViewer();
         trackingWindow = new TrackingWindow();
         trackerEntryMaker = new TrackerEntryMaker();
+        budgetEntryMaker = new BudgetEntryMaker();
 
         budgets = new ArrayList<Budget>();
 
@@ -76,9 +80,28 @@ public class BudgetingApp {
                 case "trackerEntryMaker":
                     trackerEntryMaker();
                     break;
+                case "budgetEntryMaker":
+                    budgetEntryMaker();
 
             }
         }
+    }
+
+    // EFFECTS: opens budget entry maker window and gets required inputs to make
+    // a new budget entry
+    private void budgetEntryMaker() {
+        budgetEntryMaker.open();
+        userInputs = budgetEntryMaker.getAllInputs();
+
+        try {
+            BudgetEntry budgetEntry = new Expense(userInputs.get(0), Double.valueOf(userInputs.get(1)));
+            currenBudget.addBudgetEntry(budgetEntry);
+            currentWindow = "budgetViewer";
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid amount... try again...");
+        }
+
     }
 
     // EFFECTS: opens tracking window
@@ -116,6 +139,7 @@ public class BudgetingApp {
 
         Budgeter budgeter = currenBudget.getBudgeter();
         BudgetEntry budgetEntry = budgeter.findEntry(userInputs.get(1));
+
         if (userInputs.get(1).equals("")) { // go back to tracking window if no budgetEntry was entered
 
             System.out.println("Entry was not added... ");
@@ -125,7 +149,6 @@ public class BudgetingApp {
 
             try {
                 currenBudget.addTrackerEntry(userInputs.get(0), userInputs.get(1), Double.valueOf(userInputs.get(2)));
-                budgetEntry.addActual(Double.valueOf(userInputs.get(2)));
                 currentWindow = "trackingWindow";
 
             } catch (NumberFormatException e) {
@@ -210,17 +233,17 @@ public class BudgetingApp {
         userInput = budgetViewer.getUserInput();
 
         switch (userInput) {
-            case "1": // TODO: Edit Budget Entries
-
+            case "1": // TODO: Add Budget Entries
+                currentWindow = "budgetEntryMaker";
                 break;
-            case "2": // TODO: Track
+            case "2":
 
                 currentWindow = "trackingWindow";
                 break;
             case "3": // TODO: Summary
 
                 break;
-            case "4": // TODO: Main Menu
+            case "4":
 
                 currentWindow = "mainMenu";
                 break;
