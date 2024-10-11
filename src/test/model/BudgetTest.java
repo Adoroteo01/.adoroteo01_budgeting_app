@@ -1,10 +1,12 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Exceptions.InvalidBudgetEntryException;
 import model.budgetentries.*;
 
 public class BudgetTest {
@@ -19,8 +21,7 @@ public class BudgetTest {
         budget = new Budget("Test Budget", "Jan 1, 2024", "Feb 1, 2024");
 
         b1 = new Bill("B1", 300);
-
-        // t1 = new TrackerEntry("df", "f", 2); // TODO: finish TrackerEntry implementation
+        budget.addBudgetEntry(b1);
     }
 
     @Test
@@ -42,9 +43,20 @@ public class BudgetTest {
     }
 
     @Test
-    void testAddTrackerEntry() {
-        // TODO: Finish this after TrackerEntry implementation
+    void testAddTrackerEntryExistingBudgetEntry() throws InvalidBudgetEntryException {
+        budget.addTrackerEntry("Jan 1, 2024", "B1", 3.99);
 
+        assertEquals(3.99, budget.getBudgeter().findEntry("B1").getActualAmount());   
+        assertEquals(3.99, budget.getTracker().getEntries().get(0).getAmount());     
+        assertEquals(3.99, budget.getTracker().getEntries().get(0).getAmount());     
+        assertEquals("Jan 1, 2024", budget.getTracker().getEntries().get(0).getDate());     
+        assertEquals(b1, budget.getTracker().getEntries().get(0).getBudgetEntry());     
+    }
+
+    @Test
+    void testAddTrackerEntryBudgetEntryNotFound() {
+
+        assertThrows(InvalidBudgetEntryException.class, () -> budget.addTrackerEntry("Jan 1, 2024", "B120", 8.95));
     }
 
 }
