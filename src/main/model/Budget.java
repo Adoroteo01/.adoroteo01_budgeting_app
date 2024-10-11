@@ -1,5 +1,6 @@
 package model;
 
+import Exceptions.InvalidBudgetEntryException;
 import model.budgetentries.BudgetEntry;
 
 // a budget that has a name, start date, end date, budgeter and a spending tracker
@@ -55,14 +56,21 @@ public class Budget {
 
     // TODO
     // MODIFIES: tracker
-    // EFFECT: if budgeter.find(budgetEntryName) is null:
-    // throws InvalidBudgetEntry Exception
+    // EFFECT: if budgeter.findEntry(budgetEntryName) is null:
+    // throws InvalidBudgetEntryException
     //
     // if not null:
     // adds amount to specified budget entry's actualAmount
     // adds a new TrackerEnter to tracker
-    public void addTrackerEntry(String date, String budgetEntryName, int amount) {
-        // stub
+    public void addTrackerEntry(String date, String budgetEntryName, double amount) throws InvalidBudgetEntryException {
+        if (budgeter.findEntry(budgetEntryName) == null) {
+            throw new InvalidBudgetEntryException();
+        }
+
+        BudgetEntry entry = budgeter.findEntry(budgetEntryName);
+        entry.addActual(amount);
+
+        tracker.addEntry(new TrackerEntry(date, entry, amount));
     }
 
 }
