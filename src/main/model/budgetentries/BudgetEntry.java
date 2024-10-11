@@ -1,7 +1,7 @@
 package model.budgetentries;
 
 // A budget entry that has a name, budgeted amount, and actual amount
-public class BudgetEntry {
+public abstract class BudgetEntry {
     String name;
     double budgetAmount;
     double actualAmount;
