@@ -5,7 +5,7 @@ import model.budgetentries.BudgetEntry;
 
 public class BudgetViewer extends Window {
 
-    Budget budget;
+    private Budget budget;
 
     // EFFECTS: creates a new BudgetViewer with a scanner
     public BudgetViewer() {
