@@ -19,6 +19,8 @@ public class BudgetOpener extends Window {
         System.out.println("Enter budget name: ");
     }
 
+    // REQUIRES: bugets has been set with setBudgets()
+    // EFFECTS: prints a list seperated by " | " of all created budget names
     private void printAvailableBudgets() {
 
         for (Budget budget : budgets) {
