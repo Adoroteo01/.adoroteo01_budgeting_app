@@ -1,12 +1,34 @@
 package ui.console.menus;
 
+import java.util.List;
+
+import model.Budget;
+
 public class BudgetOpener extends Window {
 
+    List<Budget> budgets;
+
     @Override
+    // REQUIRES: bugets has been set with setBudgets()
+    // EFFECTS: prints budget opener window
     public void open() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'open'");
+        newPage();
+        printAvailableBudgets();
+        drawDivider();
+
+        System.out.println("Enter budget name: ");
+    }
+
+    private void printAvailableBudgets() {
+
+        for (Budget budget : budgets) {
+            System.out.print(budget.getName() + " | ");
+        }
+        System.out.println("");
+    }
+
+    public void setBudgets(List<Budget> budgets) {
+        this.budgets = budgets;
     }
 
 }
-
