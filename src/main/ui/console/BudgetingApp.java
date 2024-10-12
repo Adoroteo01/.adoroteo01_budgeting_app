@@ -5,9 +5,9 @@ import java.util.List;
 
 import model.Budget;
 import model.Budgeter;
-import model.Exceptions.InvalidBudgetEntryException;
 import model.budgetentries.BudgetEntry;
 import model.budgetentries.Expense;
+import model.exceptions.InvalidBudgetEntryException;
 import ui.console.menus.BudgetEntryMaker;
 import ui.console.menus.BudgetOpener;
 import ui.console.menus.BudgetViewer;
