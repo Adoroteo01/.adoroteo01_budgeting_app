@@ -18,7 +18,7 @@ abstract class BudgetEntryTest {
     }
     
     @Test
-    void testSetters(){
+    void testSetters() {
         budgetEntry.setActualAmount(2.99);
         budgetEntry.setBudgetAmount(3);
         budgetEntry.setName("changed");

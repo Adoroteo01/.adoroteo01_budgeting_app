@@ -212,7 +212,7 @@ public class BudgeterTest {
         budgeter.addEntry(b1);
 
         assertEquals(null, budgeter.findEntry("B7"));
-        assertEquals(1 , budgeter.getbudgetEntries().size());
+        assertEquals(1, budgeter.getbudgetEntries().size());
         assertTrue(budgeter.getbudgetEntries().contains(b1));
     }
 }
