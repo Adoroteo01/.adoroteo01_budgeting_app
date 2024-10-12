@@ -9,6 +9,7 @@ import model.budgetentries.BudgetEntry;
 
 // A budget tracker that has a map of budget entries
 public class Budgeter {
+
     private HashMap<String, BudgetEntry> budgetEntries;
 
     // EFFECTS: creates a new budgeter with no budget entries
@@ -17,12 +18,12 @@ public class Budgeter {
     }
 
     // EFFECTS: returns an ArrayList of all the entries in budgetEntries
-    public ArrayList<BudgetEntry> getbudgetEntries() {
+    protected ArrayList<BudgetEntry> getbudgetEntries() {
         return new ArrayList<BudgetEntry>(budgetEntries.values());
     }
 
     // EFFECTS: clears budgetEntries
-    public void clear() {
+    protected void clear() {
         budgetEntries.clear();
     }
 
@@ -30,14 +31,22 @@ public class Budgeter {
     // MODIFIES: this
     // EFFECTS: adds budgetEntry to budgetEntries with a key the
     // same as the budgetEntry name
-    public void addEntry(BudgetEntry budgetEntry) {
+    protected void addEntry(BudgetEntry budgetEntry) {
 
         budgetEntries.put(budgetEntry.getName(), budgetEntry);
     }
 
+    // EFFECTS: if BudgetEntry with key = name is in budgetEntries, returns that
+    // BudgetEntry
+    // if key with that name does not exist in budgetEntries returns null
+    public BudgetEntry findEntry(String name) {
+
+        return budgetEntries.get(name);
+    }
+
     // MODIFIES: this
     // EFFECTS: removes specified entry from budgetEntries
-    public void removeEntry(String key) {
+    protected void removeEntry(String key) {
         budgetEntries.remove(key);
     }
 
@@ -53,7 +62,6 @@ public class Budgeter {
 
     // MODIFIES: entries
     // EFFECTS: sorts entries in decending order of BudgetEntry.getActualAmount()
-    // TODO: write tests for this
     private void sort(List<BudgetEntry> entries) {
         Comparator<BudgetEntry> byActualAmount;
         byActualAmount = Comparator.comparingDouble(BudgetEntry::getActualAmount).reversed();

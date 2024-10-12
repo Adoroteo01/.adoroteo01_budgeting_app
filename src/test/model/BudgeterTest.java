@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.budgetentries.Bill;
 import model.budgetentries.BudgetEntry;
+import model.budgetentries.Debt;
+import model.budgetentries.Expense;
 
 public class BudgeterTest {
     Budgeter budgeter;
@@ -20,9 +23,9 @@ public class BudgeterTest {
     @BeforeEach
     void setup() {
         budgeter = new Budgeter();
-        b1 = new BudgetEntry("B1", 0);
-        b2 = new BudgetEntry("B2", 200);
-        b3 = new BudgetEntry("B3", 60);
+        b1 = new Bill("B1", 0);
+        b2 = new Expense("B2", 200);
+        b3 = new Debt("B3", 60);
 
     }
 
@@ -32,7 +35,6 @@ public class BudgeterTest {
     }
 
     @Test
-    // TODO: do I even need to test this?
     void testGetBudgetEntries() {
         budgeter.addEntry(b1);
         ArrayList<BudgetEntry> output;
@@ -182,5 +184,35 @@ public class BudgeterTest {
         ArrayList<BudgetEntry> output = new ArrayList<BudgetEntry>();
 
         assertEquals(output, budgeter.rankSpending());
+    }
+
+
+    @Test
+    void testFindEntry1Entry() {
+        budgeter.addEntry(b1);
+
+        assertEquals(b1, budgeter.findEntry("B1"));
+        assertEquals(1, budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+    }
+
+    @Test
+    void testFindEntry2Entries() {
+        budgeter.addEntry(b1);
+        budgeter.addEntry(b2);
+
+        assertEquals(b2, budgeter.findEntry("B2"));
+        assertEquals(2, budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
+        assertTrue(budgeter.getbudgetEntries().contains(b2));
+    }
+
+    @Test
+    void testFindEntryNotFound() {
+        budgeter.addEntry(b1);
+
+        assertEquals(null, budgeter.findEntry("B7"));
+        assertEquals(1 , budgeter.getbudgetEntries().size());
+        assertTrue(budgeter.getbudgetEntries().contains(b1));
     }
 }
