@@ -2,6 +2,7 @@ package ui.console.menus;
 
 public class MainMenu extends Window {
 
+    // EFFECTS: creates new main menu with title and needed options
     public MainMenu() {
         super();
         title = "MAIN MENU";
@@ -9,6 +10,7 @@ public class MainMenu extends Window {
     }
 
     @Override
+    // EFFECTS: prints main menu
     public void open() {
         newPage();
         printTitle();
@@ -17,6 +19,7 @@ public class MainMenu extends Window {
     }
 
     @Override
+    // EFFECTS: nothing
     public void set(Object object) {
 
     }

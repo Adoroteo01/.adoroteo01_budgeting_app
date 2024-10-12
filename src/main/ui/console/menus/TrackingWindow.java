@@ -6,6 +6,7 @@ import model.TrackerEntry;
 public class TrackingWindow extends Window {
     private Tracker tracker;
 
+    // EFFECTS: makes tracking window with title and needed options
     public TrackingWindow() {
         super();
         title = "Tracking";

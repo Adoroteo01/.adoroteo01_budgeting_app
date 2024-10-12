@@ -8,6 +8,7 @@ public class SummaryWindow extends Window {
 
     List<BudgetEntry> entries;
 
+    // EFFECTS: creates new summary window with title and needed options
     public SummaryWindow() {
         super();
         title = "Summary";

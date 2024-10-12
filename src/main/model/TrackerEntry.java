@@ -8,7 +8,6 @@ public class TrackerEntry {
     private BudgetEntry budgetEntry;
     private double amount;
 
-
     // EFFECT: creates new TrackerEntry with given date, budget, and amount
     public TrackerEntry(String date, BudgetEntry budgetEntry, double amount) {
         this.date = date;

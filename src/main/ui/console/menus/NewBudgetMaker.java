@@ -8,6 +8,7 @@ public class NewBudgetMaker extends Window {
     String newBudgetStartDate;
     String newBudgetEndDate;
 
+    // EFFECTS: creates new budget maker window with needed inputs
     public NewBudgetMaker() {
         super();
         inputs = new ArrayList<String>();
@@ -17,11 +18,13 @@ public class NewBudgetMaker extends Window {
     }
 
     @Override
+    // EFFECTS: prints new budget maker window
     public void open() {
         newPage();
     }
 
     @Override
+    // EFFECTS: nothing
     public void set(Object object) {
     }
 

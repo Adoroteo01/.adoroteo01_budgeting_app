@@ -60,6 +60,7 @@ public class BudgetingApp {
         run();
     }
 
+    @SuppressWarnings("methodlength") // cannot split up into more methods
     // EFFECTS: runs the budgeting app
     private void run() {
         while (running) {

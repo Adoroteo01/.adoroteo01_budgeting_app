@@ -7,12 +7,11 @@ import java.util.Scanner;
 // a window in a budgetting app with a title, selectable options, inputs
 public abstract class Window {
 
-    private String DIVIDER = "-";
-    private int DIVDER_LENGTH = 48;
+    private static String DIVIDER = "-";
+    private static int DIVDER_LENGTH = 48;
 
-    private String NEW_LINE = "\n";
-    private int NEW_PAGE_SPACER_LENGTH = 8;
-
+    private static String NEW_LINE = "\n";
+    private static int NEW_PAGE_SPACER_LENGTH = 8;
 
     protected Scanner scanner;
     protected String title;
@@ -20,27 +19,26 @@ public abstract class Window {
 
     protected List<String> inputs;
 
-
     public Window() {
         scanner = new Scanner(System.in);
     }
 
-    abstract public void set(Object object);
+    public abstract void set(Object object);
 
     protected void drawDivider() {
         final String divider;
         divider = DIVIDER.repeat(DIVDER_LENGTH);
-        System.out.println(divider+"\n");
+        System.out.println(divider + "\n");
     }
 
-    abstract public void open();
+    public abstract void open();
 
     protected void printTitle() {
         System.out.println(title);
     }
 
     protected void printOptions() {
-        System.out.println(options+"\n\n");
+        System.out.println(options + "\n\n");
     }
 
     public String getUserInput() {
@@ -52,7 +50,7 @@ public abstract class Window {
         List<String> returnedInputs;
         returnedInputs = new ArrayList<String>();
         for (String desiredInput : inputs) {
-            System.out.print(desiredInput+": ");
+            System.out.print(desiredInput + ": ");
             returnedInputs.add(scanner.nextLine());
         }
 
@@ -65,7 +63,4 @@ public abstract class Window {
         System.out.println(newPage);
     }
 
-
-
-    
 }

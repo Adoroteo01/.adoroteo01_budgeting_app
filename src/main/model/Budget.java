@@ -15,7 +15,6 @@ public class Budget {
     private Budgeter budgeter;
     private Tracker tracker;
 
-    // TODO
     // EFFECT: creates a new budget with given name, start date, end date,
     // and new budgeter and tracker.
     public Budget(String name, String startDate, String endDate) {
@@ -59,7 +58,6 @@ public class Budget {
     public List<BudgetEntry> getBudgetEntries() {
         return budgeter.getbudgetEntries();
     }
-
 
     // MODIFIES: tracker
     // EFFECT: if budgeter.findEntry(budgetEntryName) is null:

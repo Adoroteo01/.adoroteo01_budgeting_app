@@ -62,7 +62,6 @@ public class Budgeter {
 
     // MODIFIES: entries
     // EFFECTS: sorts entries in decending order of BudgetEntry.getActualAmount()
-    // TODO: Do I test this. If so, how since its private.
     private void sort(List<BudgetEntry> entries) {
         Comparator<BudgetEntry> byActualAmount;
         byActualAmount = Comparator.comparingDouble(BudgetEntry::getActualAmount).reversed();
