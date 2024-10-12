@@ -3,9 +3,9 @@ package ui.console;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.InvalidBudgetEntryException;
 import model.Budget;
 import model.Budgeter;
+import model.Exceptions.InvalidBudgetEntryException;
 import model.budgetentries.BudgetEntry;
 import model.budgetentries.Expense;
 import ui.console.menus.BudgetEntryMaker;

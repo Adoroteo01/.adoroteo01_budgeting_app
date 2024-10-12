@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Exceptions.InvalidBudgetEntryException;
+import model.Exceptions.InvalidBudgetEntryException;
 import model.budgetentries.*;
 
 public class BudgetTest {

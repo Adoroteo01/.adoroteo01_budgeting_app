@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-import Exceptions.InvalidBudgetEntryException;
+import model.Exceptions.InvalidBudgetEntryException;
 import model.budgetentries.BudgetEntry;
 
 // a budget that has a name, start date, end date, budgeter and a spending tracker
