@@ -1,9 +1,0 @@
-package model.budgetentries;
-
-// A budget entry of a debt that has a name, budgeted amount, and actual amount
-public class Debt extends BudgetEntry {
-
-    public Debt(String name, double budgetAmount) {
-        super(name, budgetAmount);
-    }
-}
