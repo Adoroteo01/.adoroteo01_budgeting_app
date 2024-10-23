@@ -2,12 +2,16 @@ package model.budgetentries;
 
 // A budget entry that has a name, budgeted amount, and actual amount
 public abstract class BudgetEntry {
-    String name;
-    double budgetAmount;
-    double actualAmount;
+    protected String name;
+    protected double budgetAmount;
+    protected double actualAmount;
+    private static int idCounter = 1000;
+    protected int id;
 
-    // EFFECTS: creates a new BudgetEntry object with given name and budgetAmount
+    // REQUIRES: id is unique to each BudgetEntry Object
+    // EFFECTS: creates a new BudgetEntry object with given name, budgetAmount, and a unique id.
     // the actualAmount starts at 0
+    // TODO: Update constuctor for id
     public BudgetEntry(String name, double budgetAmount) {
         this.name = name;
         this.budgetAmount = budgetAmount;
@@ -25,6 +29,11 @@ public abstract class BudgetEntry {
 
     public double getActualAmount() {
         return actualAmount;
+    }
+
+    // TODO: Implement
+    public int getId() {
+        return 0; // stub
     }
 
     // setters
