@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import model.budgetentries.Bill;
 import model.budgetentries.BudgetEntry;
-import model.budgetentries.Debt;
 import model.budgetentries.Expense;
 
 public class BudgeterTest {
@@ -25,7 +24,6 @@ public class BudgeterTest {
         budgeter = new Budgeter();
         b1 = new Bill("B1", 0);
         b2 = new Expense("B2", 200);
-        b3 = new Debt("B3", 60);
 
     }
 
