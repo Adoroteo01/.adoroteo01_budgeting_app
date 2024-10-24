@@ -6,7 +6,7 @@ public class MainMenu extends Window {
     public MainMenu() {
         super();
         title = "MAIN MENU";
-        options = "1) Open Budget\n2) New Buget\n3) Exit";
+        options = "1) Open Budget\n2) New Buget\n3) Save\n4) Load\n5) Exit";
     }
 
     @Override

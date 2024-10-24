@@ -90,9 +90,40 @@ public class BudgetingApp {
                 case "summaryWindow":
                     summaryWindow();
                     break;
+                case "saveWindow":
+                    saveWindow();
+                    break;
+                case "loadWindow":
+                    loadWindow();
+                    break;
 
             }
         }
+    }
+
+    // EFFECTS: opens app loading window, loads the app state from file and prints
+    // if loading was
+    // succesful or not.
+    private void loadWindow() {
+        // TODO:
+        /*
+         * budgets = JsonHandler.load("../data/save.json")
+         */
+    }
+
+    // EFFECTS: opens app saving window, writes the app state to file, and prints if
+    // saving was successful or not
+    private void saveWindow() {
+        // TODO:
+        /* 
+         * JSONArray jsonBudgets = new JSONArray();
+         * 
+         * for (Budget budget : budgets) {
+         *      JSONObject jsonBudget = JsonHandler.save(budget);
+         *      jsonBudgets.add(jsonBudget);
+         * }
+         * 
+         */
     }
 
     // EFFECTS: opens summary window
@@ -207,7 +238,15 @@ public class BudgetingApp {
                 currentWindow = "newBudgetMaker";
                 break;
 
-            case "3": // Exit Program
+            case "3": // Save
+                currentWindow = "saveWindow";
+                break;
+
+            case "4": // Load
+                currentWindow = "loadWindow";
+                break;
+
+            case "5": // Exit Program
                 running = false;
                 break;
 
