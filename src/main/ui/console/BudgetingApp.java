@@ -115,12 +115,12 @@ public class BudgetingApp {
     // saving was successful or not
     private void saveWindow() {
         // TODO:
-        /* 
+        /*
          * JSONArray jsonBudgets = new JSONArray();
          * 
          * for (Budget budget : budgets) {
-         *      JSONObject jsonBudget = JsonHandler.save(budget);
-         *      jsonBudgets.add(jsonBudget);
+         * JSONObject jsonBudget = JsonHandler.save(budget);
+         * jsonBudgets.add(jsonBudget);
          * }
          * 
          */
@@ -151,7 +151,8 @@ public class BudgetingApp {
         userInputs = budgetEntryMaker.getAllInputs();
 
         try {
-            BudgetEntry budgetEntry = new Expense(userInputs.get(0), Double.valueOf(userInputs.get(1)));
+            BudgetEntry budgetEntry = new Expense(userInputs.get(0), userInputs.get(1),
+                    Double.valueOf(userInputs.get(2)));
             currenBudget.addBudgetEntry(budgetEntry);
             currentWindow = "budgetViewer";
 
@@ -221,6 +222,7 @@ public class BudgetingApp {
         }
     }
 
+    @SuppressWarnings("methodlength") // cannot split up into more methods
     // EFFECTS: prints main menu to console
     private void mainMenu() {
         currenBudget = null; // resetting currentBudget

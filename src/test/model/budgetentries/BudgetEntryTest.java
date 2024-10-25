@@ -12,6 +12,7 @@ abstract class BudgetEntryTest {
 
     @Test
     void testConstructor() {
+        assertEquals("1000", budgetEntry.getId());
         assertEquals("Test", budgetEntry.getName());
         assertEquals(100, budgetEntry.getBudgetAmount());
         assertEquals(0, budgetEntry.getActualAmount());

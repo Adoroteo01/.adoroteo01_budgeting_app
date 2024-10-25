@@ -12,15 +12,15 @@ import model.exceptions.InvalidBudgetEntryException;
 public class BudgetTest {
 
     Budget budget;
-    Bill b1;
 
     TrackerEntry t1;
+    BudgetEntry b1;
 
     @BeforeEach
     void setup() {
         budget = new Budget("Test Budget", "Jan 1, 2024", "Feb 1, 2024");
 
-        b1 = new Bill("B1", 300);
+        b1 = new Expense("1000", "B1", 300);
         budget.addBudgetEntry(b1);
     }
 

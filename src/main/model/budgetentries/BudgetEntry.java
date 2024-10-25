@@ -5,14 +5,14 @@ public abstract class BudgetEntry {
     protected String name;
     protected double budgetAmount;
     protected double actualAmount;
-    private static int idCounter = 1000;
-    protected int id;
+    protected String id;
 
     // REQUIRES: id is unique to each BudgetEntry Object
     // EFFECTS: creates a new BudgetEntry object with given name, budgetAmount, and a unique id.
     // the actualAmount starts at 0
     // TODO: Update constuctor for id
-    public BudgetEntry(String name, double budgetAmount) {
+    public BudgetEntry(String id, String name, double budgetAmount) {
+        this.id = id;
         this.name = name;
         this.budgetAmount = budgetAmount;
         this.actualAmount = 0;
@@ -32,8 +32,8 @@ public abstract class BudgetEntry {
     }
 
     // TODO: Implement
-    public int getId() {
-        return 0; // stub
+    public String getId() {
+        return id;
     }
 
     // setters

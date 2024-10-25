@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import model.budgetentries.Bill;
 import model.budgetentries.BudgetEntry;
 import model.budgetentries.Expense;
 
@@ -22,8 +21,7 @@ public class BudgeterTest {
     @BeforeEach
     void setup() {
         budgeter = new Budgeter();
-        b1 = new Bill("B1", 0);
-        b2 = new Expense("B2", 200);
+        b2 = new Expense("1000", "B2", 200);
 
     }
 
