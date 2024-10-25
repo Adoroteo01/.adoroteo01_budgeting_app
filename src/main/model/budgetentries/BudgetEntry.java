@@ -10,7 +10,6 @@ public abstract class BudgetEntry {
     // REQUIRES: id is unique to each BudgetEntry Object
     // EFFECTS: creates a new BudgetEntry object with given name, budgetAmount, and a unique id.
     // the actualAmount starts at 0
-    // TODO: Update constuctor for id
     public BudgetEntry(String id, String name, double budgetAmount) {
         this.id = id;
         this.name = name;
@@ -31,7 +30,6 @@ public abstract class BudgetEntry {
         return actualAmount;
     }
 
-    // TODO: Implement
     public String getId() {
         return id;
     }
