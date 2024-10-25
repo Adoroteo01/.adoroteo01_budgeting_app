@@ -63,8 +63,20 @@ public class JsonHandler {
     // TODO:
     // EFFECT: returns JSONObject for a BudgetEntry
     public JSONObject budgetEntryToJson(BudgetEntry budgetEntry) {
+        JSONObject jsonBudgetEntry = new JSONObject();
 
-        return null; // stub
+        String id = budgetEntry.getId();
+        String name = budgetEntry.getName();
+        Double budgetAmount = budgetEntry.getBudgetAmount();
+        Double actualAmount = budgetEntry.getActualAmount();
+
+        jsonBudgetEntry.put("id", id);
+        jsonBudgetEntry.put("name", name);
+        jsonBudgetEntry.put("budgetAmount", budgetAmount);
+        jsonBudgetEntry.put("actualAmount", actualAmount);
+
+        return jsonBudgetEntry;
+
     }
 
     // TODO:
