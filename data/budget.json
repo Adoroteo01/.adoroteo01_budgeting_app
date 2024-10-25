@@ -1,122 +1,114 @@
 [
-    [
-        {
+    {
+        "primitives": {
             "name": "budget 1",
             "startdate": "start date",
             "endDate": "end date"
         },
-        {
+        "budgetEntries": [
+            {
+                "id": 1001,
+                "name": "entry name 1",
+                "budgetAmount": 10.0,
+                "actualAmount": 0.0
+            },
+            {
+                "id": 1002,
+                "name": "entry name 2",
+                "budgetAmount": 20.0,
+                "actualAmount": 5.0
+            }
+        ],
+        "budgeter": {
             "budgetEntries": [
                 {
-                    "id": 1001,
-                    "name": "entry name 1",
-                    "budgetAmount": 10.0,
-                    "actualAmount": 0.0
+                    "id": 1001
                 },
                 {
-                    "id": 1002,
-                    "name": "entry name 2",
-                    "budgetAmount": 20.0,
-                    "actualAmount": 5.0
+                    "id": 1002
                 }
             ]
         },
-        {
-            "budgeter": {
-                "budgetEntries": [
-                    {
+        "tracker": {
+            "entries": [
+                {
+                    "date": "Jan 1",
+                    "budgetEntry": {
                         "id": 1001
                     },
-                    {
+                    "amount": 12.00
+                },
+                {
+                    "date": "Jan 2",
+                    "budgetEntry": {
+                        "id": 1001
+                    },
+                    "amount": 1.00
+                },
+                {
+                    "date": "Jan 3",
+                    "budgetEntry": {
                         "id": 1002
-                    }
-                ]
-            },
-            "tracker": {
-                "entries": [
-                    {
-                        "date": "Jan 1",
-                        "budgetEntry": {
-                            "id": 1001
-                        },
-                        "amount": 12.00
                     },
-                    {
-                        "date": "Jan 2",
-                        "budgetEntry": {
-                            "id": 1001
-                        },
-                        "amount": 1.00
-                    },
-                    {
-                        "date": "Jan 3",
-                        "budgetEntry": {
-                            "id": 1002
-                        },
-                        "amount": 10.00
-                    }
-                ]
-            }
+                    "amount": 10.00
+                }
+            ]
         }
-    ],
-    [
-        {
+    },
+    {
+        "primitives": {
             "name": "budget 2",
-            "startdate": "start date",
-            "endDate": "end date"
+            "startdate": "start date 2",
+            "endDate": "end date 2"
         },
-        {
+        "budgetEntries": [
+            {
+                "id": 1001,
+                "name": "entry name2 1",
+                "budgetAmount": 9.0,
+                "actualAmount": 0.0
+            },
+            {
+                "id": 1002,
+                "name": "entry name2 2",
+                "budgetAmount": 65.0,
+                "actualAmount": 5.0
+            }
+        ],
+        "budgeter": {
             "budgetEntries": [
                 {
-                    "id": 1001,
-                    "name": "entry name 3",
-                    "budgetAmount": 10.0,
-                    "actualAmount": 0.0
+                    "id": 1001
                 },
                 {
-                    "id": 1002,
-                    "name": "entry name 4",
-                    "budgetAmount": 20.0,
-                    "actualAmount": 5.0
+                    "id": 1002
                 }
             ]
         },
-        {
-            "budgeter": {
-                "budgetEntries": [
-                    {
+        "tracker": {
+            "entries": [
+                {
+                    "date": "Jan 1",
+                    "budgetEntry": {
                         "id": 1001
                     },
-                    {
+                    "amount": 12.00
+                },
+                {
+                    "date": "Jan 2",
+                    "budgetEntry": {
+                        "id": 1001
+                    },
+                    "amount": 1.00
+                },
+                {
+                    "date": "Jan 3",
+                    "budgetEntry": {
                         "id": 1002
-                    }
-                ]
-            },
-            "tracker": {
-                "entries": [
-                    {
-                        "date": "Jan 1",
-                        "budgetEntry": {
-                            "id": 1001
-                        },
-                        "amount": 12.00
                     },
-                    {
-                        "date": "Jan 2",
-                        "budgetEntry": {
-                            "id": 1001
-                        },
-                        "amount": 1.00
-                    },
-                    {
-                        "date": "Jan 3",
-                        "budgetEntry": {
-                            "id": 1002
-                        },
-                        "amount": 10.00
-                    }
-                ]
-            }
+                    "amount": 10.00
+                }
+            ]
         }
-    ]
+    }
 ]
