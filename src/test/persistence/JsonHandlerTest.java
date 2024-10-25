@@ -10,22 +10,21 @@ import model.Budget;
 
 public class JsonHandlerTest {
     Budget b1;
-    JsonHandler j;
+    JsonHandler jh;
 
     @BeforeEach
     void setup() {
         b1 = new Budget("B1", "Oct 1", "Nov 1");
-        j = new JsonHandler();
+        jh = new JsonHandler();
     }
-
 
     @Test
     void testbudgetPrimitiveFieldsToJson() {
-        JSONObject jsonObject = j.budgetPrimitiveFieldsToJson(b1);
+        JSONObject jsonObject = jh.budgetPrimitiveFieldsToJson(b1);
         String jsonName = jsonObject.optString("name");
         String jsonStartDate = jsonObject.optString("startDate");
         String jsonEndDate = jsonObject.optString("endDate");
-        
+
         assertEquals(b1.getName(), jsonName);
         assertEquals(b1.getStartDate(), jsonStartDate);
         assertEquals(b1.getEndDate(), jsonEndDate);

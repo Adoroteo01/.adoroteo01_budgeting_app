@@ -32,15 +32,27 @@ public class JsonHandler {
 
     // EFFECTS: returns JSONObject for primitive fields in budget
     public JSONObject budgetPrimitiveFieldsToJson(Budget budget) {
-        return null; // stub
+        JSONObject jsonPrimitives = new JSONObject();
+
+        String name = budget.getName();
+        String startDate = budget.getStartDate();
+        String endDate = budget.getEndDate();
+
+        jsonPrimitives.put("name", name);
+        jsonPrimitives.put("startDate", startDate);
+        jsonPrimitives.put("endDate", endDate);
+
+        return jsonPrimitives;
     }
 
+    // TODO:
     // EFFECT: returns JSONObject for budget's budgeter
     public JSONObject budgeterToJson(Budgeter budgeter) {
         budgetEntriesToJson(null); // use helper
         return null; // stub
     }
 
+    // TODO:
     // EFFECT: returns JSONObject for budgeter's list of BudgetEntries
     public JSONObject budgetEntriesToJson(List<BudgetEntry> budgetEntries) {
 
@@ -48,12 +60,14 @@ public class JsonHandler {
         return null; // stub
     }
 
+    // TODO:
     // EFFECT: returns JSONObject for a BudgetEntry
     public JSONObject budgetEntryToJson(BudgetEntry budgetEntry) {
 
         return null; // stub
     }
 
+    // TODO:
     // EFFECT: returns JSONObject for budget's tracker
     public JSONObject trackerToJson(Tracker tracker) {
 
@@ -61,6 +75,7 @@ public class JsonHandler {
         return null; // stub
     }
 
+    // TODO:
     // EFFECT: returns JSONObject for tracker's list of TrackerEntries
     public JSONObject trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
 
@@ -68,6 +83,7 @@ public class JsonHandler {
         return null; // stub
     }
 
+    // TODO:
     // EFFECT: returns JSONObject for a TrackerEntry
     public JSONObject trackerEntryToJson(TrackerEntry trackerEntry) {
         return null; // stub
