@@ -8,6 +8,7 @@ public class BudgetEntryMaker extends Window {
     public BudgetEntryMaker() {
         super();
         inputs = new ArrayList<String>();
+        inputs.add("Enter budget entry id");
         inputs.add("Enter budget entry name");
         inputs.add("Enter budgeted amount");
     }
