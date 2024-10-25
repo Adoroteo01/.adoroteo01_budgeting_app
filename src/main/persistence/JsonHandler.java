@@ -31,45 +31,45 @@ public class JsonHandler {
     }
 
     // EFFECTS: returns JSONObject for primitive fields in budget
-    private JSONObject budgetPrimitiveFieldsToJson(Budget budget) {
+    public JSONObject budgetPrimitiveFieldsToJson(Budget budget) {
         return null; // stub
     }
 
     // EFFECT: returns JSONObject for budget's budgeter
-    private JSONObject budgeterToJson(Budgeter budgeter) {
+    public JSONObject budgeterToJson(Budgeter budgeter) {
         budgetEntriesToJson(null); // use helper
         return null; // stub
     }
 
     // EFFECT: returns JSONObject for budgeter's list of BudgetEntries
-    private JSONObject budgetEntriesToJson(List<BudgetEntry> budgetEntries) {
+    public JSONObject budgetEntriesToJson(List<BudgetEntry> budgetEntries) {
 
         budgetEntryToJson(null); // use helper
         return null; // stub
     }
 
     // EFFECT: returns JSONObject for a BudgetEntry
-    private JSONObject budgetEntryToJson(BudgetEntry budgetEntry) {
+    public JSONObject budgetEntryToJson(BudgetEntry budgetEntry) {
 
         return null; // stub
     }
 
     // EFFECT: returns JSONObject for budget's tracker
-    private JSONObject trackerToJson(Tracker tracker) {
+    public JSONObject trackerToJson(Tracker tracker) {
 
         trackerEntriesToJson(null); // use helper
         return null; // stub
     }
 
     // EFFECT: returns JSONObject for tracker's list of TrackerEntries
-    private JSONObject trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
+    public JSONObject trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
 
         trackerEntryToJson(null); // use helper
         return null; // stub
     }
 
     // EFFECT: returns JSONObject for a TrackerEntry
-    private JSONObject trackerEntryToJson(TrackerEntry trackerEntry) {
+    public JSONObject trackerEntryToJson(TrackerEntry trackerEntry) {
         return null; // stub
     }
 
