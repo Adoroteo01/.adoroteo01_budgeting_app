@@ -77,6 +77,7 @@ public class JsonHandlerTest {
 
         assertEquals(2, jsonBudgetEntries.length());
 
+        assertEquals(4, jsonBudgetEntry2.keySet().size());
         assertEquals(be1.getId(), jsonId1);
         assertEquals(be1.getName(), jsonName1);
         assertEquals(be1.getBudgetAmount(), jsonBudgetAmount1);
@@ -87,6 +88,7 @@ public class JsonHandlerTest {
         Double jsonBudgetAmount2 = jsonBudgetEntry2.optDouble("budgetAmount");
         Double jsonActualAmount2 = jsonBudgetEntry2.optDouble("actualAmount");
 
+        assertEquals(4, jsonBudgetEntry1.keySet().size());
         assertEquals(be2.getId(), jsonId2);
         assertEquals(be2.getName(), jsonName2);
         assertEquals(be2.getBudgetAmount(), jsonBudgetAmount2);
@@ -114,9 +116,11 @@ public class JsonHandlerTest {
 
         String jsonId1 = jsonBudgetEntry1.optString("id");
         assertEquals(be1.getId(), jsonId1);
+        assertEquals(1, jsonBudgetEntry1.keySet().size());
 
         String jsonId2 = jsonBudgetEntry2.optString("id");
         assertEquals(be2.getId(), jsonId2);
+        assertEquals(1, jsonBudgetEntry2.keySet().size());
 
     }
 
