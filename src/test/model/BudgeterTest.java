@@ -21,7 +21,9 @@ public class BudgeterTest {
     @BeforeEach
     void setup() {
         budgeter = new Budgeter();
-        b2 = new Expense("1000", "B2", 200);
+        b1 = new Expense("1000", "B1", 800);
+        b2 = new Expense("1001", "B2", 200);
+        b3 = new Expense("1002", "B3", 500);
 
     }
 
