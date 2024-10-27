@@ -67,9 +67,14 @@ public class JsonHandler {
 
     // TODO:
     // EFFECT: returns JSONObject of the id of given BudgetEntry
-    private JSONObject budgetEntryIdToJson(BudgetEntry budgetEntry) {
+    public JSONObject budgetEntryIdToJson(BudgetEntry budgetEntry) {
 
-        return null; // stub
+        JSONObject jsonBudgetEntry = new JSONObject();
+
+        String id = budgetEntry.getId();
+        jsonBudgetEntry.put("id", id);
+
+        return jsonBudgetEntry;
     }
 
     // EFFECT: returns JSONArray for given list of BudgetEntries
