@@ -25,6 +25,7 @@ public class JsonHandler {
 
         // use helpers
         budgetPrimitiveFieldsToJson(budget);
+        budgetEntriesToJson(null);
         budgeterToJson(null);
         trackerToJson(null);
 
@@ -49,7 +50,25 @@ public class JsonHandler {
     // TODO:
     // EFFECT: returns JSONObject for budget's budgeter
     public JSONObject budgeterToJson(Budgeter budgeter) {
-        budgetEntriesToJson(null); // use helper
+        budgetEntriesIdToJson(null); // use helper
+        return null; // stub
+    }
+
+    // TODO:
+    // EFFECT: returns JSONArray for the id's of each BudgetEntry in the
+    // given list of BudgetEntries
+    public JSONArray budgetEntriesIdToJson(List<BudgetEntry> budgetEntries) {
+
+        // use helper
+        budgetEntryIdToJson(null);
+
+        return null; // stub
+    }
+
+    // TODO:
+    // EFFECT: returns JSONObject of the id of given BudgetEntry
+    private JSONObject budgetEntryIdToJson(BudgetEntry budgetEntry) {
+
         return null; // stub
     }
 
@@ -66,7 +85,6 @@ public class JsonHandler {
         return jsonBudgetEntries;
     }
 
-    // TODO:
     // EFFECT: returns JSONObject for given BudgetEntry
     public JSONObject budgetEntryToJson(BudgetEntry budgetEntry) {
         JSONObject jsonBudgetEntry = new JSONObject();
