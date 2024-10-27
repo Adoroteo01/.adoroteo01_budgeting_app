@@ -2,6 +2,7 @@ package persistence;
 
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import model.Budget;
@@ -9,6 +10,7 @@ import model.Budgeter;
 import model.Tracker;
 import model.TrackerEntry;
 import model.budgetentries.BudgetEntry;
+import netscape.javascript.JSObject;
 
 // A handler for saving and loading the state of a Budgeting App
 // Saves app states by writing field values in json
@@ -52,12 +54,17 @@ public class JsonHandler {
         return null; // stub
     }
 
-    // TODO:
     // EFFECT: returns JSONObject for budgeter's list of BudgetEntries
-    public JSONObject budgetEntriesToJson(List<BudgetEntry> budgetEntries) {
+    public JSONArray budgetEntriesToJson(List<BudgetEntry> budgetEntries) {
 
-        budgetEntryToJson(null); // use helper
-        return null; // stub
+        JSONArray jsonBudgetEntries = new JSONArray();
+
+        for(BudgetEntry budgetEntry : budgetEntries) {
+            JSONObject jsonBudgetEntry = budgetEntryToJson(budgetEntry);
+            jsonBudgetEntries.put(jsonBudgetEntry);
+        }
+
+        return jsonBudgetEntries;
     }
 
     // TODO:
