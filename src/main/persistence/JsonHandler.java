@@ -54,18 +54,20 @@ public class JsonHandler {
         return null; // stub
     }
 
-    // TODO:
     // EFFECT: returns JSONArray for the id's of each BudgetEntry in the
     // given list of BudgetEntries
     public JSONArray budgetEntriesIdToJson(List<BudgetEntry> budgetEntries) {
 
-        // use helper
-        budgetEntryIdToJson(null);
+        JSONArray jsonBudgetEntries = new JSONArray();
 
-        return null; // stub
+        for (BudgetEntry budgetEntry : budgetEntries) {
+            JSONObject jsonBudgetEntry = budgetEntryIdToJson(budgetEntry);
+            jsonBudgetEntries.put(jsonBudgetEntry);
+        }
+
+        return jsonBudgetEntries;
     }
 
-    // TODO:
     // EFFECT: returns JSONObject of the id of given BudgetEntry
     public JSONObject budgetEntryIdToJson(BudgetEntry budgetEntry) {
 
