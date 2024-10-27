@@ -55,6 +55,8 @@ public class JsonHandlerTest {
         Double jsonBudgetAmount = jsonBudgetEntry.optDouble("budgetAmount");
         Double jsonActualAmount = jsonBudgetEntry.optDouble("actualAmount");
 
+        assertEquals(4, jsonBudgetEntry.keySet().size());
+
         assertEquals(be1.getId(), jsonId);
         assertEquals(be1.getName(), jsonName);
         assertEquals(be1.getBudgetAmount(), jsonBudgetAmount);
@@ -73,6 +75,8 @@ public class JsonHandlerTest {
         Double jsonBudgetAmount1 = jsonBudgetEntry1.optDouble("budgetAmount");
         Double jsonActualAmount1 = jsonBudgetEntry1.optDouble("actualAmount");
 
+        assertEquals(2, jsonBudgetEntries.length());
+
         assertEquals(be1.getId(), jsonId1);
         assertEquals(be1.getName(), jsonName1);
         assertEquals(be1.getBudgetAmount(), jsonBudgetAmount1);
@@ -87,6 +91,32 @@ public class JsonHandlerTest {
         assertEquals(be2.getName(), jsonName2);
         assertEquals(be2.getBudgetAmount(), jsonBudgetAmount2);
         assertEquals(be2.getActualAmount(), jsonActualAmount2);
+
+    }
+
+    @Test
+    void testBudgetEntryIdToJson() {
+        JSONObject jsonBudgetEntry = jh.budgetEntryIdToJson(be1);
+        String jsonId = jsonBudgetEntry.optString("id");
+
+        assertEquals(1, jsonBudgetEntry.keySet().size());
+        assertEquals(be1.getId(), jsonId);
+
+    }
+
+    @Test
+    void testBudgetEntriesIdToJson() {
+        JSONArray jsonBudgetEntries = jh.budgetEntriesIdToJson(listOfBE);
+        JSONObject jsonBudgetEntry1 = jsonBudgetEntries.optJSONObject(0);
+        JSONObject jsonBudgetEntry2 = jsonBudgetEntries.optJSONObject(1);
+
+        assertEquals(2, jsonBudgetEntries.length());
+
+        String jsonId1 = jsonBudgetEntry1.optString("id");
+        assertEquals(be1.getId(), jsonId1);
+
+        String jsonId2 = jsonBudgetEntry2.optString("id");
+        assertEquals(be2.getId(), jsonId2);
 
     }
 
