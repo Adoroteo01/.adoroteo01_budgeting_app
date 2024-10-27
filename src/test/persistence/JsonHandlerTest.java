@@ -26,11 +26,11 @@ public class JsonHandlerTest {
         b1 = new Budget("B1", "Oct 1", "Nov 1");
         be1 = new Expense("1000", "BE1", 200);
         be2 = new Expense("1001", "BE2", 500);
-        
+
         listOfBE = new ArrayList<BudgetEntry>();
         listOfBE.add(be1);
         listOfBE.add(be2);
-        
+
         jh = new JsonHandler();
     }
 
@@ -67,7 +67,7 @@ public class JsonHandlerTest {
         JSONArray jsonBudgetEntries = jh.budgetEntriesToJson(listOfBE);
         JSONObject jsonBudgetEntry1 = jsonBudgetEntries.optJSONObject(0);
         JSONObject jsonBudgetEntry2 = jsonBudgetEntries.optJSONObject(1);
-        
+
         String jsonId1 = jsonBudgetEntry1.optString("id");
         String jsonName1 = jsonBudgetEntry1.optString("name");
         Double jsonBudgetAmount1 = jsonBudgetEntry1.optDouble("budgetAmount");
@@ -89,6 +89,5 @@ public class JsonHandlerTest {
         assertEquals(be2.getActualAmount(), jsonActualAmount2);
 
     }
-
 
 }
