@@ -28,4 +28,8 @@ public class TrackerEntry {
         return amount;
     }
 
+    public String getBudgetEntryId() {
+        return budgetEntry.getId();
+    }
+
 }
