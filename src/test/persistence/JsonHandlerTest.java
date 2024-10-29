@@ -182,6 +182,7 @@ public class JsonHandlerTest {
         JSONObject jsonTrackerEntryBudgetEntry = jsonTrackerEntry.optJSONObject("budgetEntry");
 
         assertEquals(3, jsonTrackerEntry.keySet().size());
+        assertEquals(1, jsonTrackerEntryBudgetEntry.keySet().size());
 
         assertEquals(te1.getDate(), jsonTrackerEntry.opt("date"));
         assertEquals(te1.getBudgetEntryId(), jsonTrackerEntryBudgetEntry.opt("id"));
