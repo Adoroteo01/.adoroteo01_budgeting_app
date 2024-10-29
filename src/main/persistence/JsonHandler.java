@@ -124,12 +124,17 @@ public class JsonHandler {
         return null; // stub
     }
 
-    // TODO:
     // EFFECT: returns JSONObject for tracker's list of TrackerEntries
     public JSONArray trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
 
-        trackerEntryToJson(null); // use helper
-        return null; // stub
+        JSONArray jsonTrackerEntries = new JSONArray();
+
+        for (TrackerEntry trackerEntry : trackerEntries) {
+            JSONObject jsonTrackerEntry = trackerEntryToJson(trackerEntry);
+            jsonTrackerEntries.put(jsonTrackerEntry);
+        }
+
+        return jsonTrackerEntries;
     }
 
     // EFFECT: returns JSONObject for a TrackerEntry
