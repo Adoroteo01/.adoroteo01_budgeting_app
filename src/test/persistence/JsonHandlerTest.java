@@ -13,20 +13,30 @@ import org.junit.jupiter.api.Test;
 
 import model.Budget;
 import model.Budgeter;
+import model.Tracker;
+import model.TrackerEntry;
 import model.budgetentries.BudgetEntry;
 import model.budgetentries.Expense;
 
 public class JsonHandlerTest {
     Budget b1;
+
     Budgeter btr1;
     BudgetEntry be1;
     BudgetEntry be2;
     List<BudgetEntry> listOfBE;
+
+    Tracker tr1;
+    TrackerEntry te1;
+    TrackerEntry te2;
+    List<TrackerEntry> listOfTE;
+
     JsonHandler jh;
 
     @BeforeEach
     void setup() {
         b1 = new Budget("B1", "Oct 1", "Nov 1");
+
         be1 = new Expense("1000", "BE1", 200);
         be2 = new Expense("1001", "BE2", 500);
 
@@ -37,6 +47,17 @@ public class JsonHandlerTest {
         listOfBE = new ArrayList<BudgetEntry>();
         listOfBE.add(be1);
         listOfBE.add(be2);
+
+        te1 = new TrackerEntry("Jan 1", be1, 12.99);
+        te2 = new TrackerEntry("Jan 2", be2, 1.5);
+
+        tr1 = new Tracker();
+        tr1.addEntry(te1);
+        tr1.addEntry(te2);
+
+        listOfTE = new ArrayList<TrackerEntry>();
+        listOfTE.add(te1);
+        listOfTE.add(te2);
 
         jh = new JsonHandler();
     }
@@ -151,6 +172,20 @@ public class JsonHandlerTest {
 
         assertTrue(listOfId.contains(be1.getId()));
         assertTrue(listOfId.contains(be2.getId()));
+
+    }
+
+    @Test
+    void testTrackerEntryToJson() {
+
+        JSONObject jsonTrackerEntry = jh.trackerEntryToJson(te1);
+        JSONObject jsonTrackerEntryBudgetEntry = jsonTrackerEntry.optJSONObject("budgetEntry");
+
+        assertEquals(3, jsonTrackerEntry.keySet().size());
+
+        assertEquals(te1.getDate(), jsonTrackerEntry.opt("date"));
+        assertEquals(te1.getBudgetEntryId(), jsonTrackerEntryBudgetEntry.opt("id"));
+        assertEquals(te1.getAmount(), jsonTrackerEntry.opt("amount"));
 
     }
 

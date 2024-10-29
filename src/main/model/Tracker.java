@@ -19,7 +19,7 @@ public class Tracker {
     }
 
     // add entry to entries.
-    protected void addEntry(TrackerEntry entry) {
+    public void addEntry(TrackerEntry entry) {
         entries.add(entry);
     }
 
