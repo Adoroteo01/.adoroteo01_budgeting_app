@@ -116,12 +116,15 @@ public class JsonHandler {
 
     }
 
-    // TODO:
     // EFFECT: returns JSONObject for budget's tracker
     public JSONObject trackerToJson(Tracker tracker) {
 
-        trackerEntriesToJson(null); // use helper
-        return null; // stub
+        JSONObject jsonTracker = new JSONObject();
+        JSONArray jsonTrackerEntries = trackerEntriesToJson(tracker.getEntries());
+
+        jsonTracker.put("entries", jsonTrackerEntries);
+
+        return jsonTracker;
     }
 
     // EFFECT: returns JSONObject for tracker's list of TrackerEntries
