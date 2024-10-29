@@ -47,12 +47,17 @@ public class JsonHandler {
         return jsonPrimitives;
     }
 
-    // TODO:
     // EFFECT: returns JSONObject for budget's budgeter
     // where each BudgetEntry in budgeter gets it's id saved
+    // in no particular order.
     public JSONObject budgeterToJson(Budgeter budgeter) {
-        budgetEntriesIdToJson(null); // use helper
-        return null; // stub
+        JSONObject jsonBudgter = new JSONObject();
+
+        JSONArray jsonBudgetEntries = budgetEntriesIdToJson(budgeter.getbudgetEntries());
+
+        jsonBudgter.put("budgetEntries", jsonBudgetEntries);
+
+        return jsonBudgter;
     }
 
     // EFFECT: returns JSONArray for the id's of each BudgetEntry in the

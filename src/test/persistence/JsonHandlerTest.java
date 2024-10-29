@@ -1,6 +1,7 @@
 package persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,10 +143,14 @@ public class JsonHandlerTest {
         String jsonbudgetEntryId1 = jsonbudgetEntry1.optString("id");
         String jsonbudgetEntryId2 = jsonbudgetEntry2.optString("id");
 
+        List<String> listOfId = new ArrayList<String>();
+        listOfId.add(jsonbudgetEntryId1);
+        listOfId.add(jsonbudgetEntryId2);
+
         assertEquals(2, jsonBudgetEntries.length());
 
-        assertEquals(be1.getId(), jsonbudgetEntryId1);
-        assertEquals(be2.getId(), jsonbudgetEntryId2);
+        assertTrue(listOfId.contains(be1.getId()));
+        assertTrue(listOfId.contains(be2.getId()));
 
     }
 
