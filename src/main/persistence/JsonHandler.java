@@ -49,6 +49,7 @@ public class JsonHandler {
 
     // TODO:
     // EFFECT: returns JSONObject for budget's budgeter
+    // where each BudgetEntry in budgeter gets it's id saved
     public JSONObject budgeterToJson(Budgeter budgeter) {
         budgetEntriesIdToJson(null); // use helper
         return null; // stub
