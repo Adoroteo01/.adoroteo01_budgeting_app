@@ -132,10 +132,18 @@ public class JsonHandler {
         return null; // stub
     }
 
-    // TODO:
     // EFFECT: returns JSONObject for a TrackerEntry
     public JSONObject trackerEntryToJson(TrackerEntry trackerEntry) {
-        return null; // stub
+        JSONObject jsonTrackerEntry = new JSONObject();
+
+        BudgetEntry budgetEntry = trackerEntry.getBudgetEntry();
+        JSONObject jsonBudgetEntryId = budgetEntryIdToJson(budgetEntry);
+
+        jsonTrackerEntry.put("date", trackerEntry.getDate());
+        jsonTrackerEntry.put("budgetEntry", jsonBudgetEntryId);
+        jsonTrackerEntry.put("amount", trackerEntry.getAmount());
+
+        return jsonTrackerEntry;
     }
 
 }
