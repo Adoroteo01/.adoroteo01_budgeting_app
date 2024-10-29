@@ -131,7 +131,7 @@ public class JsonHandlerTest {
     }
 
     @Test
-    void testbudgeterToJson() {
+    void testBudgeterToJson() {
         JSONObject jsonBudgeter = jh.budgeterToJson(btr1);
 
         JSONArray jsonBudgetEntries = jsonBudgeter.optJSONArray("budgetEntries");
