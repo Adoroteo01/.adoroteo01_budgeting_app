@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -215,6 +215,35 @@ public class JsonHandlerTest {
         assertEquals(te2.getBudgetEntryId(), jsonTrackerEntryBudgetEntry2.opt("id"));
         assertEquals(te2.getAmount(), jsonTrackerEntry2.opt("amount"));
 
+    }
+
+    @Test
+    void testTrackerToJson() {
+
+        JSONObject jsonTracker = jh.trackerToJson(tr1);
+
+        JSONArray jsonTrackerEntries = jsonTracker.optJSONArray("entries");
+
+        JSONObject jsonTrackerEntry1 = jsonTrackerEntries.getJSONObject(0);
+        JSONObject jsonTrackerEntry2 = jsonTrackerEntries.getJSONObject(1);
+
+        JSONObject jsonTrackerEntryBudgetEntry1 = jsonTrackerEntry1.optJSONObject("budgetEntry");
+        JSONObject jsonTrackerEntryBudgetEntry2 = jsonTrackerEntry2.optJSONObject("budgetEntry");
+
+        assertEquals(1, jsonTrackerEntryBudgetEntry1.keySet().size());
+        assertEquals(1, jsonTrackerEntryBudgetEntry2.keySet().size());
+
+        assertEquals(2, jsonTrackerEntries.length());
+        assertEquals(3, jsonTrackerEntry1.keySet().size());
+        assertEquals(3, jsonTrackerEntry2.keySet().size());
+
+        assertEquals(te1.getDate(), jsonTrackerEntry1.opt("date"));
+        assertEquals(te1.getBudgetEntryId(), jsonTrackerEntryBudgetEntry1.opt("id"));
+        assertEquals(te1.getAmount(), jsonTrackerEntry1.opt("amount"));
+
+        assertEquals(te2.getDate(), jsonTrackerEntry2.opt("date"));
+        assertEquals(te2.getBudgetEntryId(), jsonTrackerEntryBudgetEntry2.opt("id"));
+        assertEquals(te2.getAmount(), jsonTrackerEntry2.opt("amount"));
     }
 
 }
