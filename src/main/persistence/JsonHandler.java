@@ -126,7 +126,7 @@ public class JsonHandler {
 
     // TODO:
     // EFFECT: returns JSONObject for tracker's list of TrackerEntries
-    public JSONObject trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
+    public JSONArray trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
 
         trackerEntryToJson(null); // use helper
         return null; // stub
