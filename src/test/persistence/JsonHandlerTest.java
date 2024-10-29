@@ -11,11 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.Budget;
+import model.Budgeter;
 import model.budgetentries.BudgetEntry;
 import model.budgetentries.Expense;
 
 public class JsonHandlerTest {
     Budget b1;
+    Budgeter btr1;
     BudgetEntry be1;
     BudgetEntry be2;
     List<BudgetEntry> listOfBE;
@@ -26,6 +28,10 @@ public class JsonHandlerTest {
         b1 = new Budget("B1", "Oct 1", "Nov 1");
         be1 = new Expense("1000", "BE1", 200);
         be2 = new Expense("1001", "BE2", 500);
+
+        btr1 = new Budgeter();
+        btr1.addEntry(be1);
+        btr1.addEntry(be2);
 
         listOfBE = new ArrayList<BudgetEntry>();
         listOfBE.add(be1);
@@ -121,6 +127,25 @@ public class JsonHandlerTest {
         String jsonId2 = jsonBudgetEntry2.optString("id");
         assertEquals(be2.getId(), jsonId2);
         assertEquals(1, jsonBudgetEntry2.keySet().size());
+
+    }
+
+    @Test
+    void testbudgeterToJson() {
+        JSONObject jsonBudgeter = jh.budgeterToJson(btr1);
+
+        JSONArray jsonBudgetEntries = jsonBudgeter.optJSONArray("budgetEntries");
+
+        JSONObject jsonbudgetEntry1 = jsonBudgetEntries.optJSONObject(0);
+        JSONObject jsonbudgetEntry2 = jsonBudgetEntries.optJSONObject(1);
+
+        String jsonbudgetEntryId1 = jsonbudgetEntry1.optString("id");
+        String jsonbudgetEntryId2 = jsonbudgetEntry2.optString("id");
+
+        assertEquals(2, jsonBudgetEntries.length());
+
+        assertEquals(be1.getId(), jsonbudgetEntryId1);
+        assertEquals(be2.getId(), jsonbudgetEntryId2);
 
     }
 

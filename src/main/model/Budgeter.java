@@ -18,12 +18,12 @@ public class Budgeter {
     }
 
     // EFFECTS: returns an ArrayList of all the entries in budgetEntries
-    protected ArrayList<BudgetEntry> getbudgetEntries() {
+    public ArrayList<BudgetEntry> getbudgetEntries() {
         return new ArrayList<BudgetEntry>(budgetEntries.values());
     }
 
     // EFFECTS: clears budgetEntries
-    protected void clear() {
+    public void clear() {
         budgetEntries.clear();
     }
 
@@ -31,7 +31,7 @@ public class Budgeter {
     // MODIFIES: this
     // EFFECTS: adds budgetEntry to budgetEntries with a key the
     // same as the budgetEntry name
-    protected void addEntry(BudgetEntry budgetEntry) {
+    public void addEntry(BudgetEntry budgetEntry) {
 
         budgetEntries.put(budgetEntry.getName(), budgetEntry);
     }
@@ -46,7 +46,7 @@ public class Budgeter {
 
     // MODIFIES: this
     // EFFECTS: removes specified entry from budgetEntries
-    protected void removeEntry(String key) {
+    public void removeEntry(String key) {
         budgetEntries.remove(key);
     }
 
