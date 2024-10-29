@@ -20,16 +20,22 @@ public class JsonHandler {
 
     }
 
+    // EFFECT: returns JSONArray containing JSONObjects of Budgets in budgets list
+    public JSONArray saveBudgets(List<Budget> budgets) {
+        
+        return null; // stub
+    }
+
     // EFFECTS: writes fields of budget in a JSONObject for saving
-    public void saveBudget(Budget budget) {
+    public JSONObject saveBudget(Budget budget) {
 
         // use helpers
-        budgetPrimitiveFieldsToJson(budget);
-        budgetEntriesToJson(null);
-        budgeterToJson(null);
-        trackerToJson(null);
+        // budgetPrimitiveFieldsToJson(budget);
+        // budgetEntriesToJson(null);
+        // budgeterToJson(null);
+        // trackerToJson(null);
 
-        // stub
+        return null;// stub
     }
 
     // EFFECTS: returns JSONObject for primitive fields in budget
