@@ -4,6 +4,9 @@ import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -381,6 +384,23 @@ public class JsonHandlerTest {
         JSONArray jsonBudgets = jh.saveBudgets(listOfB);
 
         assertEquals(2, jsonBudgets.length());
+    }
+
+    @Test
+    void testWriteBudgetsToFile() {
+
+        String path = "data/";
+        String name = "writeBudgetsToFileTest";
+
+        jh.writeBudgetsToFile(listOfB, path, name);
+
+        Path testFile = Paths.get(path, name + ".json");
+
+        if (Files.exists(testFile)) {
+            // expected
+        } else {
+            fail();
+        }
     }
 
 }
