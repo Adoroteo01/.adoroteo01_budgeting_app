@@ -1,5 +1,6 @@
 package ui.console;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +9,13 @@ import model.Budgeter;
 import model.budgetentries.BudgetEntry;
 import model.budgetentries.Expense;
 import model.exceptions.InvalidBudgetEntryException;
+import persistence.JsonHandler;
 import ui.console.menus.BudgetEntryMaker;
 import ui.console.menus.BudgetOpener;
 import ui.console.menus.BudgetViewer;
 import ui.console.menus.MainMenu;
 import ui.console.menus.NewBudgetMaker;
+import ui.console.menus.SaveWindow;
 import ui.console.menus.SummaryWindow;
 import ui.console.menus.TrackerEntryMaker;
 import ui.console.menus.TrackingWindow;
@@ -23,6 +26,8 @@ import ui.console.menus.Window;
 public class BudgetingApp {
 
     boolean running;
+
+    private JsonHandler jsonHandler;
 
     private String userInput;
     private List<String> userInputs;
@@ -38,11 +43,14 @@ public class BudgetingApp {
     private Window trackerEntryMaker;
     private Window budgetEntryMaker;
     private Window summaryWindow;
+    private Window saveWindow;
 
     private List<Budget> budgets;
 
     // EFFECTS: creates new budgeting app and runs the app
     public BudgetingApp() {
+
+        jsonHandler = new JsonHandler();
 
         mainMenu = new MainMenu();
         newBudgetMaker = new NewBudgetMaker();
@@ -52,6 +60,7 @@ public class BudgetingApp {
         trackerEntryMaker = new TrackerEntryMaker();
         budgetEntryMaker = new BudgetEntryMaker();
         summaryWindow = new SummaryWindow();
+        saveWindow = new SaveWindow();
 
         budgets = new ArrayList<Budget>();
 
@@ -114,16 +123,18 @@ public class BudgetingApp {
     // EFFECTS: opens app saving window, writes the app state to file, and prints if
     // saving was successful or not
     private void saveWindow() {
-        // TODO:
-        /*
-         * JSONArray jsonBudgets = new JSONArray();
-         * 
-         * for (Budget budget : budgets) {
-         * JSONObject jsonBudget = JsonHandler.save(budget);
-         * jsonBudgets.add(jsonBudget);
-         * }
-         * 
-         */
+        saveWindow.open();
+
+        userInputs = saveWindow.getAllInputs();
+
+        try {
+            jsonHandler.writeBudgetsToFile(budgets, userInputs.get(1), userInputs.get(0));
+            System.out.println("File Saved!\nReturning to Main Menu...");
+            currentWindow = "mainMenu";
+        } catch (FileNotFoundException e) {
+            System.out.println("Saving failed...\nReturning to Main Menu...");
+            currentWindow = "mainMenu";
+        }
     }
 
     // EFFECTS: opens summary window
