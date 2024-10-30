@@ -4,6 +4,7 @@ import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -392,7 +393,11 @@ public class JsonHandlerTest {
         String path = "data/";
         String name = "writeBudgetsToFileTest";
 
-        jh.writeBudgetsToFile(listOfB, path, name);
+        try {
+            jh.writeBudgetsToFile(listOfB, path, name);
+        } catch (FileNotFoundException e) {
+            fail();
+        }
 
         Path testFile = Paths.get(path, name + ".json");
 
