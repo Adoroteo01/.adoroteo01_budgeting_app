@@ -17,6 +17,7 @@ import model.Tracker;
 import model.TrackerEntry;
 import model.budgetentries.BudgetEntry;
 import model.budgetentries.Expense;
+import model.exceptions.InvalidBudgetEntryException;
 
 public class JsonHandlerTest {
     Budget b1;
@@ -35,8 +36,6 @@ public class JsonHandlerTest {
 
     @BeforeEach
     void setup() {
-        b1 = new Budget("B1", "Oct 1", "Nov 1");
-
         be1 = new Expense("1000", "BE1", 200);
         be2 = new Expense("1001", "BE2", 500);
 
@@ -58,6 +57,16 @@ public class JsonHandlerTest {
         listOfTE = new ArrayList<TrackerEntry>();
         listOfTE.add(te1);
         listOfTE.add(te2);
+
+        b1 = new Budget("B1", "Oct 1", "Nov 1");
+        b1.addBudgetEntry(be1);
+        b1.addBudgetEntry(be2);
+        try {
+            b1.addTrackerEntry("Jan 1", "BE1", 1.3);
+            b1.addTrackerEntry("Jan 2", "BE2", 0.99);
+        } catch (InvalidBudgetEntryException e) {
+            // do nothing
+        }
 
         jh = new JsonHandler();
     }
@@ -194,8 +203,8 @@ public class JsonHandlerTest {
     void testTrackerEntriesToJson() {
         JSONArray jsonTrackerEntries = jh.trackerEntriesToJson(listOfTE);
 
-        JSONObject jsonTrackerEntry1 = jsonTrackerEntries.getJSONObject(0);
-        JSONObject jsonTrackerEntry2 = jsonTrackerEntries.getJSONObject(1);
+        JSONObject jsonTrackerEntry1 = jsonTrackerEntries.optJSONObject(0);
+        JSONObject jsonTrackerEntry2 = jsonTrackerEntries.optJSONObject(1);
 
         JSONObject jsonTrackerEntryBudgetEntry1 = jsonTrackerEntry1.optJSONObject("budgetEntry");
         JSONObject jsonTrackerEntryBudgetEntry2 = jsonTrackerEntry2.optJSONObject("budgetEntry");
@@ -224,8 +233,8 @@ public class JsonHandlerTest {
 
         JSONArray jsonTrackerEntries = jsonTracker.optJSONArray("entries");
 
-        JSONObject jsonTrackerEntry1 = jsonTrackerEntries.getJSONObject(0);
-        JSONObject jsonTrackerEntry2 = jsonTrackerEntries.getJSONObject(1);
+        JSONObject jsonTrackerEntry1 = jsonTrackerEntries.optJSONObject(0);
+        JSONObject jsonTrackerEntry2 = jsonTrackerEntries.optJSONObject(1);
 
         JSONObject jsonTrackerEntryBudgetEntry1 = jsonTrackerEntry1.optJSONObject("budgetEntry");
         JSONObject jsonTrackerEntryBudgetEntry2 = jsonTrackerEntry2.optJSONObject("budgetEntry");
@@ -244,6 +253,96 @@ public class JsonHandlerTest {
         assertEquals(te2.getDate(), jsonTrackerEntry2.opt("date"));
         assertEquals(te2.getBudgetEntryId(), jsonTrackerEntryBudgetEntry2.opt("id"));
         assertEquals(te2.getAmount(), jsonTrackerEntry2.opt("amount"));
+    }
+
+    @Test
+    void testSaveBudgetPrimitives() {
+        JSONObject jsonBudget = jh.saveBudget(b1);
+
+        JSONObject jsonPrimitives = jsonBudget.optJSONObject("primitives");
+
+        assertEquals(4, jsonBudget.keySet().size());
+        assertEquals(3, jsonPrimitives.keySet().size());
+
+        // Checking primitives
+        assertEquals(b1.getName(), jsonPrimitives.opt("name"));
+        assertEquals(b1.getStartDate(), jsonPrimitives.opt("startDate"));
+        assertEquals(b1.getEndDate(), jsonPrimitives.opt("endDate"));
+    }
+
+    @Test
+    void testSaveBudgetPrimitivesBudgetEntries() {
+        JSONObject jsonBudget = jh.saveBudget(b1);
+
+        JSONArray jsonBudgetEntries = jsonBudget.optJSONArray("budgetEntries");
+
+        assertEquals(4, jsonBudget.keySet().size());
+        assertEquals(2, jsonBudgetEntries.length());
+
+        // Checking Budget Entry Look Up Data
+        assertEquals(2, jsonBudgetEntries.length());
+
+        JSONObject jsonBE1 = jsonBudgetEntries.optJSONObject(0);
+        JSONObject jsonBE2 = jsonBudgetEntries.optJSONObject(1);
+
+        assertEquals(4, jsonBE1.keySet().size());
+        assertEquals(be1.getId(), jsonBE1.opt("id"));
+        assertEquals(be1.getName(), jsonBE1.opt("name"));
+        assertEquals(be1.getBudgetAmount(), jsonBE1.opt("budgetAmount"));
+        assertEquals(be1.getActualAmount(), jsonBE1.opt("actualAmount"));
+
+        assertEquals(4, jsonBE2.keySet().size());
+        assertEquals(be2.getId(), jsonBE2.opt("id"));
+        assertEquals(be2.getName(), jsonBE2.opt("name"));
+        assertEquals(be2.getBudgetAmount(), jsonBE2.opt("budgetAmount"));
+        assertEquals(be2.getActualAmount(), jsonBE2.opt("actualAmount"));
+    }
+
+    @Test
+    void testSaveBudgetBudgeter() {
+        JSONObject jsonBudget = jh.saveBudget(b1);
+
+        JSONObject jsonBudgeter = jsonBudget.optJSONObject("budgeter");
+
+        assertEquals(4, jsonBudget.keySet().size());
+
+        // Checking Budgeter
+        JSONArray jsonBudgeterBudgetEntries = jsonBudgeter.optJSONArray("budgetEntries");
+        assertEquals(2, jsonBudgeterBudgetEntries.length());
+
+        String jsonString = jsonBudgeterBudgetEntries.toString();
+        assertTrue(jsonString.contains("\"id\":1001"));
+        assertTrue(jsonString.contains("\"id\":1002"));
+
+    }
+
+    @Test
+    void testSaveBudgetTracker() {
+        JSONObject jsonBudget = jh.saveBudget(b1);
+
+        JSONObject jsonTracker = jsonBudget.optJSONObject("tracker");
+        assertEquals(4, jsonBudget.keySet().size());
+
+        // Checking Tracker
+        JSONArray jsonTrackerEntries = jsonTracker.optJSONArray("entries");
+        JSONObject jsonTE1 = jsonTrackerEntries.optJSONObject(0);
+        JSONObject jsonTE2 = jsonTrackerEntries.optJSONObject(1);
+
+        List<TrackerEntry> listOfTE = b1.getTracker().getEntries();
+        TrackerEntry te1 = listOfTE.get(0);
+        TrackerEntry te2 = listOfTE.get(1);
+
+        assertEquals(2, jsonTrackerEntries.length());
+        assertEquals(3, jsonTE1.keySet().size());
+        assertEquals(3, jsonTE2.keySet().size());
+
+        assertEquals(te1.getDate(), jsonTE1.optString("date"));
+        assertEquals(be1.getId(), jsonTE1.optJSONObject("budgetEntry").opt("id"));
+        assertEquals(te1.getAmount(), jsonTE1.optString("amount"));
+
+        assertEquals(te2.getDate(), jsonTE2.optString("date"));
+        assertEquals(be2.getId(), jsonTE2.optJSONObject("budgetEntry").opt("id"));
+        assertEquals(te2.getAmount(), jsonTE2.optString("amount"));
     }
 
 }
