@@ -1,0 +1,100 @@
+[
+    {
+        "primitives": {
+            "endDate": "Feb 1",
+            "name": "Jan",
+            "startDate": "Jan 1"
+        },
+        "budgetEntries": [
+            {
+                "budgetAmount": 400,
+                "actualAmount": 56.99,
+                "name": "Grocery",
+                "id": "1000"
+            },
+            {
+                "budgetAmount": 200,
+                "actualAmount": 40.5,
+                "name": "Gas",
+                "id": "1001"
+            }
+        ],
+        "tracker": {
+            "entries": [
+                {
+                    "date": "Jan 2",
+                    "amount": 56.99,
+                    "budgetEntry": {
+                        "id": "1000"
+                    }
+                },
+                {
+                    "date": "Jan 2",
+                    "amount": 40.5,
+                    "budgetEntry": {
+                        "id": "1001"
+                    }
+                }
+            ]
+        },
+        "budgeter": {
+            "budgetEntries": [
+                {
+                    "id": "1000"
+                },
+                {
+                    "id": "1001"
+                }
+            ]
+        }
+    },
+    {
+        "primitives": {
+            "endDate": "Mar 1",
+            "name": "Feb",
+            "startDate": "Feb 1"
+        },
+        "budgetEntries": [
+            {
+                "budgetAmount": 33.44,
+                "actualAmount": 98,
+                "name": "Grocery",
+                "id": "1001"
+            },
+            {
+                "budgetAmount": 66.99,
+                "actualAmount": 50,
+                "name": "Gas",
+                "id": "1000"
+            }
+        ],
+        "tracker": {
+            "entries": [
+                {
+                    "date": "Feb 3",
+                    "amount": 50,
+                    "budgetEntry": {
+                        "id": "1000"
+                    }
+                },
+                {
+                    "date": "Feb 4",
+                    "amount": 98,
+                    "budgetEntry": {
+                        "id": "1001"
+                    }
+                }
+            ]
+        },
+        "budgeter": {
+            "budgetEntries": [
+                {
+                    "id": "1001"
+                },
+                {
+                    "id": "1000"
+                }
+            ]
+        }
+    }
+]
