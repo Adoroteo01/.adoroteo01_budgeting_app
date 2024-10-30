@@ -22,6 +22,8 @@ import model.exceptions.InvalidBudgetEntryException;
 
 public class JsonHandlerTest {
     Budget b1;
+    Budget b2;
+    List<Budget> listOfB;
 
     Budgeter btr1;
     BudgetEntry be1;
@@ -61,6 +63,12 @@ public class JsonHandlerTest {
         } catch (InvalidBudgetEntryException e) {
             System.out.println("Could not add Tracker Entries");
         }
+
+        b2 = new Budget("B2", "Sep 1", "Oct 1");
+
+        listOfB = new ArrayList<Budget>();
+        listOfB.add(b1);
+        listOfB.add(b2);
     }
 
     private void initTracker() {
@@ -370,7 +378,7 @@ public class JsonHandlerTest {
 
     @Test
     void testSaveBudgets() {
-        JSONArray jsonBudgets = new JSONArray();
+        JSONArray jsonBudgets = jh.saveBudgets(listOfB);
 
         assertEquals(2, jsonBudgets.length());
     }
