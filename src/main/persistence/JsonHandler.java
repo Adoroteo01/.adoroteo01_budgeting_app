@@ -1,6 +1,8 @@
 package persistence;
 
+import java.io.PrintWriter;
 import java.util.List;
+import java.io.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,15 +18,22 @@ import model.budgetentries.BudgetEntry;
 // Loads app states by reading saved json files and setting fields to corrisponding values
 public class JsonHandler {
 
+    private PrintWriter printWriter;
+
     public JsonHandler() {
 
     }
 
-    // REQUIRES: 
+    // REQUIRES: path must be a valid path
     // EFFECT: creates file in json format at the location of path.
-    // file is named name.json and is a json data of a list of Budget
-    public void writeBudgetsToFile(List<Budget> budgets, String path, String name) {
+    // file is named filename.json and is a json data of a list of Budget
+    public void writeBudgetsToFile(List<Budget> budgets, String path, String filename) throws FileNotFoundException{
 
+        printWriter = new PrintWriter(new File(path + filename + ".json"));
+
+        String jsonStringSavedBudgets = saveBudgets(budgets).toString();
+        printWriter.print(jsonStringSavedBudgets);
+        printWriter.close();
     }
 
     // EFFECT: returns JSONArray containing JSONObjects of Budgets in budgets list
