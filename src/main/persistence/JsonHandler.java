@@ -1,7 +1,12 @@
 package persistence;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,8 +24,9 @@ public class JsonHandler {
 
     private PrintWriter printWriter;
 
+    // creates new JsonHandler with no printWriter
     public JsonHandler() {
-
+        // no action
     }
 
     // REQUIRES: path must be a valid path
@@ -66,7 +72,7 @@ public class JsonHandler {
     }
 
     // EFFECTS: returns JSONObject for primitive fields in budget
-    public JSONObject budgetPrimitiveFieldsToJson(Budget budget) {
+    JSONObject budgetPrimitiveFieldsToJson(Budget budget) {
         JSONObject jsonPrimitives = new JSONObject();
 
         String name = budget.getName();
@@ -83,7 +89,7 @@ public class JsonHandler {
     // EFFECT: returns JSONObject for budget's budgeter
     // where each BudgetEntry in budgeter gets it's id saved
     // in no particular order.
-    public JSONObject budgeterToJson(Budgeter budgeter) {
+    JSONObject budgeterToJson(Budgeter budgeter) {
         JSONObject jsonBudgter = new JSONObject();
 
         JSONArray jsonBudgetEntries = budgetEntriesIdToJson(budgeter.getbudgetEntries());
@@ -95,7 +101,7 @@ public class JsonHandler {
 
     // EFFECT: returns JSONArray for the id's of each BudgetEntry in the
     // given list of BudgetEntries
-    public JSONArray budgetEntriesIdToJson(List<BudgetEntry> budgetEntries) {
+    JSONArray budgetEntriesIdToJson(List<BudgetEntry> budgetEntries) {
 
         JSONArray jsonBudgetEntries = new JSONArray();
 
@@ -108,7 +114,7 @@ public class JsonHandler {
     }
 
     // EFFECT: returns JSONObject of the id of given BudgetEntry
-    public JSONObject budgetEntryIdToJson(BudgetEntry budgetEntry) {
+    JSONObject budgetEntryIdToJson(BudgetEntry budgetEntry) {
 
         JSONObject jsonBudgetEntry = new JSONObject();
 
@@ -119,7 +125,7 @@ public class JsonHandler {
     }
 
     // EFFECT: returns JSONArray for given list of BudgetEntries
-    public JSONArray budgetEntriesToJson(List<BudgetEntry> budgetEntries) {
+    JSONArray budgetEntriesToJson(List<BudgetEntry> budgetEntries) {
 
         JSONArray jsonBudgetEntries = new JSONArray();
 
@@ -132,7 +138,7 @@ public class JsonHandler {
     }
 
     // EFFECT: returns JSONObject for given BudgetEntry
-    public JSONObject budgetEntryToJson(BudgetEntry budgetEntry) {
+    JSONObject budgetEntryToJson(BudgetEntry budgetEntry) {
         JSONObject jsonBudgetEntry = new JSONObject();
 
         String id = budgetEntry.getId();
@@ -150,7 +156,7 @@ public class JsonHandler {
     }
 
     // EFFECT: returns JSONObject for budget's tracker
-    public JSONObject trackerToJson(Tracker tracker) {
+    JSONObject trackerToJson(Tracker tracker) {
 
         JSONObject jsonTracker = new JSONObject();
         JSONArray jsonTrackerEntries = trackerEntriesToJson(tracker.getEntries());
@@ -161,7 +167,7 @@ public class JsonHandler {
     }
 
     // EFFECT: returns JSONObject for tracker's list of TrackerEntries
-    public JSONArray trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
+    JSONArray trackerEntriesToJson(List<TrackerEntry> trackerEntries) {
 
         JSONArray jsonTrackerEntries = new JSONArray();
 
@@ -174,7 +180,7 @@ public class JsonHandler {
     }
 
     // EFFECT: returns JSONObject for a TrackerEntry
-    public JSONObject trackerEntryToJson(TrackerEntry trackerEntry) {
+    JSONObject trackerEntryToJson(TrackerEntry trackerEntry) {
         JSONObject jsonTrackerEntry = new JSONObject();
 
         BudgetEntry budgetEntry = trackerEntry.getBudgetEntry();
@@ -189,12 +195,93 @@ public class JsonHandler {
 
     // ---------------- LOADING ----------------
 
-    // TODO:
+    // TODO: Test
     // REQUIRES: - all BudgetEntry in budgetEntries must have actualAmount equal
     // to the sum of all amounts of their associated TrackerEntry(s)
-    // - path is a path to a .json Budgets save file
     // EFFECT: returns a list of Budget of the given path to a Budgets save file
-    public List<Budget> loadBudgetsFromFile(String path) {
-        return null; // stub
+    public List<Budget> loadBudgetsFromFile(String path) throws IOException {
+
+        String jsonString = readJsonSave(path);
+        JSONArray jsonBudgets = new JSONArray(jsonString);
+
+        List<Budget> budgets = new ArrayList<Budget>();
+
+        for (int index = 0; index < jsonBudgets.length(); index++) {
+
+            JSONObject jsonBudget = jsonBudgets.optJSONObject(index);
+            Budget budget = loadBudget(jsonBudget);
+            budgets.add(budget);
+        }
+
+        return budgets;
+    }
+
+    // EFFECT: returns contents of the save file at path as a string
+    String readJsonSave(String path) throws IOException {
+        // This portion of code design was from UBC CPSC 210 JsonSerializationDemo
+        // TODO: Cite code
+        // TODO: Test
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try (Stream<String> Stringstream = Files.lines(Paths.get(path), StandardCharsets.UTF_8)) {
+            Stringstream.forEach(s -> stringBuilder.append(s));
+        }
+
+        // ---------------------------------------------
+
+        String jsonString = stringBuilder.toString();
+        return jsonString;
+    }
+
+    // TODO: Test
+    // EFFECT: returns a Budget with data of jsonBudget
+    Budget loadBudget(JSONObject jsonBudget) {
+
+        List<String> listOfPrimitives = loadBudgetPrimitives(jsonBudget.optJSONObject("primitives"));
+        
+        String budgetEndDate = listOfPrimitives.get(0);
+        String budgetName = listOfPrimitives.get(1);
+        String budgetStartDate = listOfPrimitives.get(2);
+
+
+        List<BudgetEntry> budgetEntries =loadBudgetEntries(jsonBudget.optJSONArray("budgetEntries"));
+
+        Tracker tracker = loadTracker(jsonBudget.optJSONObject("tracker"), budgetEntries);
+        Budgeter budgeter = loadBudgeter(jsonBudget.optJSONObject("budgeter"), budgetEntries);
+        Budget budget = new Budget(budgetName, budgetStartDate, budgetEndDate, budgeter, tracker);
+
+        return budget;
+    }
+
+    // TODO:
+    // REQUIRES: jsonBudgeter contains data for a Budget's Budgeter 
+    // EFFECT: returns a Budget's Budgeter with given data.
+    Budgeter loadBudgeter(JSONObject jsonBudgeter, List<BudgetEntry> budgetEntries) {
+
+        return new Budgeter(); // stub
+    }
+
+    // TODO:
+    // REQUIRES: jsonTracker contains data for a Budget's Tracker
+    // EFFECT: returns a Budget's Tracker with given data
+    Tracker loadTracker(JSONObject jsonTracker, List<BudgetEntry> budgetEntries) {
+        
+        return new Tracker(); // stub
+    }
+
+    // TODO:
+    // REQUIRES: jsonBudgetEntries contains data for a Budget's BudgetEntry(s)
+    // EFFECT: returns a list of a Budget's BudgetEntry(s) with given data.
+    List<BudgetEntry> loadBudgetEntries(JSONArray jsonBudgetEntries) {
+        
+        return new ArrayList<BudgetEntry>(); // stub
+    }
+
+    // TODO:
+    // REQUIRES: jsonBudgetPrimitives contains data for a Budget's primitive fields 
+    // EFFECT: returns a Budget's name, startDate, and endDate in a List in that order with given data.
+    List<String> loadBudgetPrimitives(JSONObject jsonBudgetPrimitives) {
+        
+        return new ArrayList<String>(); // stub
     }
 }
