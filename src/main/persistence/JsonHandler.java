@@ -28,14 +28,19 @@ public class JsonHandler {
 
     // EFFECTS: writes fields of budget in a JSONObject for saving
     public JSONObject saveBudget(Budget budget) {
+        JSONObject jsonBudget = new JSONObject();
 
-        // use helpers
-        // budgetPrimitiveFieldsToJson(budget);
-        // budgetEntriesToJson(null);
-        // budgeterToJson(null);
-        // trackerToJson(null);
+        JSONObject jsonPrimitives = budgetPrimitiveFieldsToJson(budget);
+        JSONArray jsonBudgetEntries = budgetEntriesToJson(budget.getBudgetEntries());
+        JSONObject jsonBudgeter = budgeterToJson(budget.getBudgeter());
+        JSONObject jsonTracker = trackerToJson(budget.getTracker());
 
-        return null;// stub
+        jsonBudget.put("primitives", jsonPrimitives);
+        jsonBudget.put("budgetEntries", jsonBudgetEntries);
+        jsonBudget.put("budgeter", jsonBudgeter);
+        jsonBudget.put("tracker", jsonTracker);
+
+        return jsonBudget;
     }
 
     // EFFECTS: returns JSONObject for primitive fields in budget
