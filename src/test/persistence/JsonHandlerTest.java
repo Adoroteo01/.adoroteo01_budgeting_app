@@ -1,5 +1,6 @@
 package persistence;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,28 +37,21 @@ public class JsonHandlerTest {
 
     @BeforeEach
     void setup() {
-        be1 = new Expense("1000", "BE1", 200);
-        be2 = new Expense("1001", "BE2", 500);
 
-        btr1 = new Budgeter();
-        btr1.addEntry(be1);
-        btr1.addEntry(be2);
+        init();
+    }
 
-        listOfBE = new ArrayList<BudgetEntry>();
-        listOfBE.add(be1);
-        listOfBE.add(be2);
+    private void init() {
+        initBudgetEntries();
+        initBudgeter();
+        initTrackerEntries();
+        initTracker();
+        initBudget();
 
-        te1 = new TrackerEntry("Jan 1", be1, 12.99);
-        te2 = new TrackerEntry("Jan 2", be2, 1.5);
+        jh = new JsonHandler();
+    }
 
-        tr1 = new Tracker();
-        tr1.addEntry(te1);
-        tr1.addEntry(te2);
-
-        listOfTE = new ArrayList<TrackerEntry>();
-        listOfTE.add(te1);
-        listOfTE.add(te2);
-
+    private void initBudget() {
         b1 = new Budget("B1", "Oct 1", "Nov 1");
         b1.addBudgetEntry(be1);
         b1.addBudgetEntry(be2);
@@ -65,10 +59,36 @@ public class JsonHandlerTest {
             b1.addTrackerEntry("Jan 1", "BE1", 1.3);
             b1.addTrackerEntry("Jan 2", "BE2", 0.99);
         } catch (InvalidBudgetEntryException e) {
-            // do nothing
+            System.out.println("Could not add Tracker Entries");
         }
+    }
 
-        jh = new JsonHandler();
+    private void initTracker() {
+        tr1 = new Tracker();
+        tr1.addEntry(te1);
+        tr1.addEntry(te2);
+    }
+
+    private void initTrackerEntries() {
+        te1 = new TrackerEntry("Jan 1", be1, 12.99);
+        te2 = new TrackerEntry("Jan 2", be2, 1.5);
+        listOfTE = new ArrayList<TrackerEntry>();
+        listOfTE.add(te1);
+        listOfTE.add(te2);
+    }
+
+    private void initBudgeter() {
+        btr1 = new Budgeter();
+        btr1.addEntry(be1);
+        btr1.addEntry(be2);
+    }
+
+    private void initBudgetEntries() {
+        be1 = new Expense("1000", "BE1", 200);
+        be2 = new Expense("1001", "BE2", 500);
+        listOfBE = new ArrayList<BudgetEntry>();
+        listOfBE.add(be1);
+        listOfBE.add(be2);
     }
 
     @Test
