@@ -20,6 +20,13 @@ public class JsonHandler {
 
     }
 
+    // REQUIRES: 
+    // EFFECT: creates file in json format at the location of path.
+    // file is named name.json and is a json data of a list of Budget
+    public void writeBudgetsToFile(List<Budget> budgets, String path, String name) {
+
+    }
+
     // EFFECT: returns JSONArray containing JSONObjects of Budgets in budgets list
     public JSONArray saveBudgets(List<Budget> budgets) {
         JSONArray jsonBudgets = new JSONArray();
