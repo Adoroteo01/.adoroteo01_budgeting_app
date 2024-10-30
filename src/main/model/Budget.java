@@ -25,6 +25,17 @@ public class Budget {
         tracker = new Tracker();
     }
 
+    // EFFECT: creates a new budget with given name, start date, end date,
+    // budgeter, and tracker.
+    // TODO: Test
+    public Budget(String name, String startDate, String endDate, Budgeter budgeter, Tracker tracker) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.budgeter = budgeter;
+        this.tracker = tracker;
+    }
+
     // EFFECT: returns name
     public String getName() {
         return name;
