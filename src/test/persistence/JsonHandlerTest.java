@@ -368,4 +368,11 @@ public class JsonHandlerTest {
         assertEquals(te2.getAmount(), jsonTE2.optDouble("amount"));
     }
 
+    @Test
+    void testSaveBudgets() {
+        JSONArray jsonBudgets = new JSONArray();
+
+        assertEquals(2, jsonBudgets.length());
+    }
+
 }
