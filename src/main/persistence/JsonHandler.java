@@ -22,8 +22,15 @@ public class JsonHandler {
 
     // EFFECT: returns JSONArray containing JSONObjects of Budgets in budgets list
     public JSONArray saveBudgets(List<Budget> budgets) {
-        
-        return null; // stub
+        JSONArray jsonBudgets = new JSONArray();
+
+        for (Budget budget : budgets) {
+            JSONObject jsonBudget = saveBudget(budget);
+            jsonBudgets.put(jsonBudget);
+
+        }
+
+        return jsonBudgets;
     }
 
     // EFFECTS: writes fields of budget in a JSONObject for saving
