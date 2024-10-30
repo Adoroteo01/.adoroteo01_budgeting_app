@@ -238,13 +238,12 @@ public class JsonHandler {
     Budget loadBudget(JSONObject jsonBudget) {
 
         List<String> listOfPrimitives = loadBudgetPrimitives(jsonBudget.optJSONObject("primitives"));
-        
+
         String budgetEndDate = listOfPrimitives.get(0);
         String budgetName = listOfPrimitives.get(1);
         String budgetStartDate = listOfPrimitives.get(2);
 
-
-        List<BudgetEntry> budgetEntries =loadBudgetEntries(jsonBudget.optJSONArray("budgetEntries"));
+        List<BudgetEntry> budgetEntries = loadBudgetEntries(jsonBudget.optJSONArray("budgetEntries"));
 
         Tracker tracker = loadTracker(jsonBudget.optJSONObject("tracker"), budgetEntries);
         Budgeter budgeter = loadBudgeter(jsonBudget.optJSONObject("budgeter"), budgetEntries);
@@ -254,7 +253,7 @@ public class JsonHandler {
     }
 
     // TODO:
-    // REQUIRES: jsonBudgeter contains data for a Budget's Budgeter 
+    // REQUIRES: jsonBudgeter contains data for a Budget's Budgeter
     // EFFECT: returns a Budget's Budgeter with given data.
     Budgeter loadBudgeter(JSONObject jsonBudgeter, List<BudgetEntry> budgetEntries) {
 
@@ -265,7 +264,7 @@ public class JsonHandler {
     // REQUIRES: jsonTracker contains data for a Budget's Tracker
     // EFFECT: returns a Budget's Tracker with given data
     Tracker loadTracker(JSONObject jsonTracker, List<BudgetEntry> budgetEntries) {
-        
+
         return new Tracker(); // stub
     }
 
@@ -273,15 +272,16 @@ public class JsonHandler {
     // REQUIRES: jsonBudgetEntries contains data for a Budget's BudgetEntry(s)
     // EFFECT: returns a list of a Budget's BudgetEntry(s) with given data.
     List<BudgetEntry> loadBudgetEntries(JSONArray jsonBudgetEntries) {
-        
+
         return new ArrayList<BudgetEntry>(); // stub
     }
 
     // TODO:
-    // REQUIRES: jsonBudgetPrimitives contains data for a Budget's primitive fields 
-    // EFFECT: returns a Budget's name, startDate, and endDate in a List in that order with given data.
+    // REQUIRES: jsonBudgetPrimitives contains data for a Budget's primitive fields
+    // EFFECT: returns a Budget's name, startDate, and endDate in a List in that
+    // order with given data.
     List<String> loadBudgetPrimitives(JSONObject jsonBudgetPrimitives) {
-        
+
         return new ArrayList<String>(); // stub
     }
 }
