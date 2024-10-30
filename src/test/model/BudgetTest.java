@@ -76,4 +76,7 @@ public class BudgetTest {
         assertThrows(InvalidBudgetEntryException.class, () -> budget1.addTrackerEntry("Jan 1, 2024", "B120", 8.95));
     }
 
+
+    
+
 }
