@@ -1,6 +1,5 @@
 package persistence;
 
-import java.io.PrintWriter;
 import java.util.List;
 import java.io.*;
 
@@ -27,7 +26,7 @@ public class JsonHandler {
     // REQUIRES: path must be a valid path
     // EFFECT: creates file in json format at the location of path.
     // file is named filename.json and is a json data of a list of Budget
-    public void writeBudgetsToFile(List<Budget> budgets, String path, String filename) throws FileNotFoundException{
+    public void writeBudgetsToFile(List<Budget> budgets, String path, String filename) throws FileNotFoundException {
 
         printWriter = new PrintWriter(new File(path + filename + ".json"));
 
@@ -188,4 +187,14 @@ public class JsonHandler {
         return jsonTrackerEntry;
     }
 
+    // ---------------- LOADING ----------------
+
+    // TODO:
+    // REQUIRES: - all BudgetEntry in budgetEntries must have actualAmount equal
+    // to the sum of all amounts of their associated TrackerEntry(s)
+    // - path is a path to a .json Budgets save file
+    // EFFECT: returns a list of Budget of the given path to a Budgets save file
+    public List<Budget> loadBudgetsFromFile(String path) {
+        return null; // stub
+    }
 }
