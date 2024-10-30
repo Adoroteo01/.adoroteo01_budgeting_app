@@ -286,16 +286,19 @@ public class JsonHandlerTest {
         JSONObject jsonBE2 = jsonBudgetEntries.optJSONObject(1);
 
         assertEquals(4, jsonBE1.keySet().size());
-        assertEquals(be1.getId(), jsonBE1.opt("id"));
-        assertEquals(be1.getName(), jsonBE1.opt("name"));
-        assertEquals(be1.getBudgetAmount(), jsonBE1.opt("budgetAmount"));
-        assertEquals(be1.getActualAmount(), jsonBE1.opt("actualAmount"));
-
         assertEquals(4, jsonBE2.keySet().size());
-        assertEquals(be2.getId(), jsonBE2.opt("id"));
-        assertEquals(be2.getName(), jsonBE2.opt("name"));
-        assertEquals(be2.getBudgetAmount(), jsonBE2.opt("budgetAmount"));
-        assertEquals(be2.getActualAmount(), jsonBE2.opt("actualAmount"));
+
+        // Checking string because BudgetEntries were generated from a Map
+        // thus the objects don't have an expected order
+        String jsonString = jsonBudgetEntries.toString();
+        assertTrue(jsonString.contains("\"id\":\"1001\""));
+        assertTrue(jsonString.contains("\"name\":\"BE2\""));
+        assertTrue(jsonString.contains("\"budgetAmount\":500"));
+        assertTrue(jsonString.contains("\"actualAmount\":0.99"));
+        assertTrue(jsonString.contains("\"id\":\"1000\""));
+        assertTrue(jsonString.contains("\"name\":\"BE1\""));
+        assertTrue(jsonString.contains("\"budgetAmount\":200"));
+        assertTrue(jsonString.contains("\"actualAmount\":1.3"));
     }
 
     @Test
@@ -311,8 +314,8 @@ public class JsonHandlerTest {
         assertEquals(2, jsonBudgeterBudgetEntries.length());
 
         String jsonString = jsonBudgeterBudgetEntries.toString();
-        assertTrue(jsonString.contains("\"id\":1001"));
-        assertTrue(jsonString.contains("\"id\":1002"));
+        assertTrue(jsonString.contains("\"id\":\"1001\""));
+        assertTrue(jsonString.contains("\"id\":\"1000\""));
 
     }
 
@@ -338,11 +341,11 @@ public class JsonHandlerTest {
 
         assertEquals(te1.getDate(), jsonTE1.optString("date"));
         assertEquals(be1.getId(), jsonTE1.optJSONObject("budgetEntry").opt("id"));
-        assertEquals(te1.getAmount(), jsonTE1.optString("amount"));
+        assertEquals(te1.getAmount(), jsonTE1.optDouble("amount"));
 
         assertEquals(te2.getDate(), jsonTE2.optString("date"));
         assertEquals(be2.getId(), jsonTE2.optJSONObject("budgetEntry").opt("id"));
-        assertEquals(te2.getAmount(), jsonTE2.optString("amount"));
+        assertEquals(te2.getAmount(), jsonTE2.optDouble("amount"));
     }
 
 }
