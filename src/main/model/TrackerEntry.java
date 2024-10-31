@@ -20,10 +20,15 @@ public class TrackerEntry {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         TrackerEntry that = (TrackerEntry) o;
-        return Double.compare(getAmount(), that.getAmount()) == 0 && Objects.equals(getDate(), that.getDate()) && Objects.equals(getBudgetEntry(), that.getBudgetEntry());
+        return Double.compare(getAmount(), that.getAmount()) == 0 && Objects.equals(getDate(), that.getDate())
+                && Objects.equals(getBudgetEntry(), that.getBudgetEntry());
     }
 
     @Override

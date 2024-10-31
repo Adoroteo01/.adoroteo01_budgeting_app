@@ -10,7 +10,8 @@ public abstract class BudgetEntry {
     protected String id;
 
     // REQUIRES: id is unique to each BudgetEntry Object
-    // EFFECTS: creates a new BudgetEntry object with given name, budgetAmount, and a unique id.
+    // EFFECTS: creates a new BudgetEntry object with given name, budgetAmount, and
+    // a unique id.
     // the actualAmount starts at 0
     public BudgetEntry(String id, String name, double budgetAmount) {
         this.id = id;
@@ -29,10 +30,18 @@ public abstract class BudgetEntry {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            {
+                return false;
+            }
+        }
         BudgetEntry that = (BudgetEntry) o;
-        return Double.compare(getBudgetAmount(), that.getBudgetAmount()) == 0 && Double.compare(getActualAmount(), that.getActualAmount()) == 0 && Objects.equals(getName(), that.getName()) && Objects.equals(getId(), that.getId());
+        return Double.compare(getBudgetAmount(), that.getBudgetAmount()) == 0
+                && Double.compare(getActualAmount(), that.getActualAmount()) == 0
+                && Objects.equals(getName(), that.getName()) && Objects.equals(getId(), that.getId());
     }
 
     @Override

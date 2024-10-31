@@ -39,10 +39,17 @@ public class Budget {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Budget budget = (Budget) o;
-        return Objects.equals(getName(), budget.getName()) && Objects.equals(getStartDate(), budget.getStartDate()) && Objects.equals(getEndDate(), budget.getEndDate()) && Objects.equals(getBudgeter(), budget.getBudgeter()) && Objects.equals(getTracker(), budget.getTracker());
+        return Objects.equals(getName(), budget.getName()) && Objects.equals(getStartDate(), budget.getStartDate())
+                && Objects.equals(getEndDate(), budget.getEndDate())
+                && Objects.equals(getBudgeter(), budget.getBudgeter())
+                && Objects.equals(getTracker(), budget.getTracker());
     }
 
     @Override
