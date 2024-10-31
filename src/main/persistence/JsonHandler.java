@@ -195,7 +195,6 @@ public class JsonHandler {
 
     // ---------------- LOADING ----------------
 
-    // TODO: Test
     // REQUIRES: - all BudgetEntry in budgetEntries must have actualAmount equal
     // to the sum of all amounts of their associated TrackerEntry(s)
     // EFFECT: returns a list of Budget of the given path to a Budgets save file
@@ -218,9 +217,7 @@ public class JsonHandler {
 
     // EFFECT: returns contents of the save file at path as a string
     String readJsonSave(String path) throws IOException {
-        // This portion of code design was from UBC CPSC 210 JsonSerializationDemo
-        // TODO: Cite code
-        // TODO: Test
+        // Adapted from: CPSC 210 JsonSerializationDemo, University of British Columbia, 2024W1
         StringBuilder stringBuilder = new StringBuilder();
 
         try (Stream<String> Stringstream = Files.lines(Paths.get(path), StandardCharsets.UTF_8)) {
