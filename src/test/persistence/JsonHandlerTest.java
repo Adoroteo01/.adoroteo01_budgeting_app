@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -82,8 +83,8 @@ public class JsonHandlerTest {
     }
 
     private void initTrackerEntries() {
-        te1 = new TrackerEntry("Jan 1", be1, 12.99);
-        te2 = new TrackerEntry("Jan 2", be2, 1.5);
+        te1 = new TrackerEntry("Jan 2", be1, 56.99);
+        te2 = new TrackerEntry("Jan 2", be2, 40.5);
         listOfTE = new ArrayList<TrackerEntry>();
         listOfTE.add(te1);
         listOfTE.add(te2);
@@ -96,8 +97,8 @@ public class JsonHandlerTest {
     }
 
     private void initBudgetEntries() {
-        be1 = new Expense("1000", "BE1", 200);
-        be2 = new Expense("1001", "BE2", 500);
+        be1 = new Expense("1000", "Grocery", 400, 56.99);
+        be2 = new Expense("1001", "Gas", 200, 40.5);
         listOfBE = new ArrayList<BudgetEntry>();
         listOfBE.add(be1);
         listOfBE.add(be2);
@@ -404,6 +405,25 @@ public class JsonHandlerTest {
         if (Files.exists(testFile)) {
             // expected
         } else {
+            fail();
+        }
+    }
+
+    @Test
+    void testLoadBudgetsFromFile() {
+        String path = "data/loadBudgetsTest.json";
+        try {
+            List<Budget> budgets = jh.loadBudgetsFromFile(path);
+
+            Budget expectedBudget1 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
+            Budget expectedBudget2 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
+            List<Budget> expectedBudgets = new ArrayList<Budget>();
+            expectedBudgets.add(expectedBudget1);
+            expectedBudgets.add(expectedBudget2);
+
+            assertTrue(budgets.equals(expectedBudgets));
+
+        } catch (IOException e) {
             fail();
         }
     }
