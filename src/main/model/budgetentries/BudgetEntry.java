@@ -1,5 +1,7 @@
 package model.budgetentries;
 
+import java.util.Objects;
+
 // A budget entry that has a name, budgeted amount, and actual amount
 public abstract class BudgetEntry {
     protected String name;
@@ -23,6 +25,19 @@ public abstract class BudgetEntry {
         this.name = name;
         this.budgetAmount = budgetAmount;
         this.actualAmount = actualAmount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BudgetEntry that = (BudgetEntry) o;
+        return Double.compare(getBudgetAmount(), that.getBudgetAmount()) == 0 && Double.compare(getActualAmount(), that.getActualAmount()) == 0 && Objects.equals(getName(), that.getName()) && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getBudgetAmount(), getActualAmount(), getId());
     }
 
     // getters

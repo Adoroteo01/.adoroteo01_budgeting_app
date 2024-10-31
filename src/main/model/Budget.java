@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 
 import model.budgetentries.BudgetEntry;
 import model.exceptions.InvalidBudgetEntryException;
@@ -34,6 +35,19 @@ public class Budget {
         this.endDate = endDate;
         this.budgeter = budgeter;
         this.tracker = tracker;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Budget budget = (Budget) o;
+        return Objects.equals(getName(), budget.getName()) && Objects.equals(getStartDate(), budget.getStartDate()) && Objects.equals(getEndDate(), budget.getEndDate()) && Objects.equals(getBudgeter(), budget.getBudgeter()) && Objects.equals(getTracker(), budget.getTracker());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getStartDate(), getEndDate(), getBudgeter(), getTracker());
     }
 
     // EFFECT: returns name

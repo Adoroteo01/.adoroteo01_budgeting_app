@@ -1,9 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import model.budgetentries.BudgetEntry;
 
@@ -15,6 +12,19 @@ public class Budgeter {
     // EFFECTS: creates a new budgeter with no budget entries
     public Budgeter() {
         budgetEntries = new HashMap<String, BudgetEntry>();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(budgetEntries);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Budgeter budgeter = (Budgeter) o;
+        return Objects.equals(budgetEntries, budgeter.budgetEntries);
     }
 
     // EFFECTS: returns an ArrayList of all the entries in budgetEntries

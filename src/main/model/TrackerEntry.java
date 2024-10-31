@@ -2,6 +2,8 @@ package model;
 
 import model.budgetentries.BudgetEntry;
 
+import java.util.Objects;
+
 // An entry for Tracker. Has a date, corrisponding budgetEntry, and amount
 public class TrackerEntry {
     private String date;
@@ -14,6 +16,19 @@ public class TrackerEntry {
         this.budgetEntry = budgetEntry;
         this.amount = amount;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrackerEntry that = (TrackerEntry) o;
+        return Double.compare(getAmount(), that.getAmount()) == 0 && Objects.equals(getDate(), that.getDate()) && Objects.equals(getBudgetEntry(), that.getBudgetEntry());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDate(), getBudgetEntry(), getAmount());
     }
 
     public String getDate() {
