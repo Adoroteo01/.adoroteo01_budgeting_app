@@ -40,6 +40,10 @@ public class JsonHandlerTest {
     TrackerEntry te2;
     List<TrackerEntry> listOfTE;
 
+    JSONArray jsonBudgets;
+    JSONObject jsonBudget1;
+    JSONObject jsonBudget2;
+
     JsonHandler jh;
 
     @BeforeEach
@@ -54,8 +58,43 @@ public class JsonHandlerTest {
         initTrackerEntries();
         initTracker();
         initBudget();
+        initJsonBudgets();
+        jsonBudget1 = jsonBudgets.getJSONObject(0);
+        jsonBudget2 = jsonBudgets.getJSONObject(1);
 
         jh = new JsonHandler();
+    }
+
+    @SuppressWarnings("methodlength") // cannot split up into more methods
+    private void initJsonBudgets() {
+        jsonBudgets = new JSONArray(
+                "[{\"primitives\":{\"endDate\":\"Feb 1\",\"name\":\"Jan\",\"startDate\":\"Jan 1"
+                        +
+                        "\"},\"budgetEntries\":[{\"budgetAmount\":400,\"actualAmount\":56.99,\"name\":\""
+                        +
+                        "Grocery\",\"id\":\"1000\"},{\"budgetAmount\":200,\"actualAmount\":40.5,\"name\":"
+                        +
+                        "\"Gas\",\"id\":\"1001\"}],\"tracker\":{\"entries\":[{\"date\":\"Jan 2\",\"amount"
+                        +
+                        "\":56.99,\"budgetEntry\":{\"id\":\"1000\"}},{\"date\":\"Jan 2\",\"amount\":40.5,"
+                        +
+                        "\"budgetEntry\":{\"id\":\"1001\"}}]},\"budgeter\":{\"budgetEntries\":[{\"id\":\""
+                        +
+                        "1000\"},{\"id\":\"1001\"}]}},{\"primitives\":{\"endDate\":\"Mar 1\",\"name\":\""
+                        +
+                        "Feb\",\"startDate\":\"Feb 1\"},\"budgetEntries\":[{\"budgetAmount\":33.44,\""
+                        +
+                        "actualAmount\":98,\"name\":\"Grocery\",\"id\":\"1001\"},{\"budgetAmount\":66.99,"
+                        +
+                        "\"actualAmount\":50,\"name\":\"Gas\",\"id\":\"1000\"}],\"tracker\":{\"entries\":[{"
+                        +
+                        "\"date\":\"Feb 3\",\"amount\":50,\"budgetEntry\":{\"id\":\"1000\"}},{\"date\":\""
+                        +
+                        "Feb 4\",\"amount\":98,\"budgetEntry\":{\"id\":\"1001\"}}]},\"budgeter\":{\""
+                        +
+                        "budgetEntries\":[{\"id\":\"1001\"},{\"id\":\"1000\"}]}}]\r\n"
+                        +
+                        "");
     }
 
     private void initBudget() {
@@ -433,7 +472,11 @@ public class JsonHandlerTest {
         String path = "data/loadBudgetsTest.json";
         try {
             String budgetsString = jh.readJsonSave(path);
-            String expectedString = "[{\"primitives\":{\"endDate\":\"Feb 1\",\"name\":\"Jan\",\"startDate\":\"Jan 1\"},\"budgetEntries\":[{\"budgetAmount\":400,\"actualAmount\":56.99,\"name\":\"Grocery\",\"id\":\"100\r\n"
+            String expectedString = "[{\"primitives\":{\"endDate\":\"Feb 1\",\"name\":\"Jan\",\""
+                    +
+                    "startDate\":\"Jan 1\"},\"budgetEntries\":[{\"budgetAmount\":400,\"actualAmount\":56.99,"
+                    +
+                    "\"name\":\"Grocery\",\"id\":\"100\r\n"
                     + //
                     "";
 
@@ -444,4 +487,15 @@ public class JsonHandlerTest {
         }
     }
 
+    @Test
+    void testLoadBudget() {
+        Budget budget1 = jh.loadBudget(jsonBudget1);
+        Budget budget2 = jh.loadBudget(jsonBudget2);
+
+        Budget expectedBudget1 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
+        Budget expectedBudget2 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
+
+        assertTrue(budget1.equals(expectedBudget1));
+        assertTrue(budget2.equals(expectedBudget2));
+    }
 }
