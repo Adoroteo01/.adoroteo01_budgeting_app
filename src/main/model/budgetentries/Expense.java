@@ -9,7 +9,7 @@ public class Expense extends BudgetEntry {
     }
 
     // EFFECT: creates Expense with given id, name, budgetAmount, and actualAmount
-    Expense(String id, String name, double budgetAmount, double actualAmount) {
+    public Expense(String id, String name, double budgetAmount, double actualAmount) {
         super(id, name, budgetAmount, actualAmount);
     }
 }
