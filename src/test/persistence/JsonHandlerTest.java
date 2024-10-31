@@ -428,4 +428,20 @@ public class JsonHandlerTest {
         }
     }
 
+    @Test
+    void testReadJsonSave() {
+        String path = "data/loadBudgetsTest.json";
+        try {
+            String budgetsString = jh.readJsonSave(path);
+            String expectedString = "[{\"primitives\":{\"endDate\":\"Feb 1\",\"name\":\"Jan\",\"startDate\":\"Jan 1\"},\"budgetEntries\":[{\"budgetAmount\":400,\"actualAmount\":56.99,\"name\":\"Grocery\",\"id\":\"100\r\n"
+                    + //
+                    "";
+
+            assertEquals(expectedString, budgetsString);
+
+        } catch (IOException e) {
+            fail();
+        }
+    }
+
 }
