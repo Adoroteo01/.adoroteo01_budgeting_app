@@ -230,7 +230,6 @@ public class JsonHandler {
         return jsonString;
     }
 
-    // TODO: Test
     // EFFECT: returns a Budget with data of jsonBudget
     Budget loadBudget(JSONObject jsonBudget) {
 
