@@ -498,4 +498,11 @@ public class JsonHandlerTest {
         assertTrue(budget1.equals(expectedBudget1));
         assertTrue(budget2.equals(expectedBudget2));
     }
+
+    @Test
+    void testLoadBudgeter() {
+        Budgeter budgeter = jh.loadBudgeter(jsonBudget1, listOfBE);
+
+        assertEquals(btr1, budgeter);
+    }
 }
