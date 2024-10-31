@@ -6,4 +6,8 @@ public class Expense extends BudgetEntry {
     public Expense(String id, String name, double budgetAmount) {
         super(id, name, budgetAmount);
     }
+
+    Expense(String id, String name, double budgetAmount, double actualAmount) {
+        super(id, name, budgetAmount, actualAmount);
+    }
 }

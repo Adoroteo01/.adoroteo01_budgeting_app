@@ -6,46 +6,55 @@ import org.junit.jupiter.api.Test;
 
 abstract class BudgetEntryTest {
 
-    protected BudgetEntry budgetEntry;
+    protected BudgetEntry budgetEntry1;
+    protected BudgetEntry budgetEntry2;
 
     abstract void setup();
 
     @Test
     void testConstructor() {
-        assertEquals("1000", budgetEntry.getId());
-        assertEquals("Test", budgetEntry.getName());
-        assertEquals(100, budgetEntry.getBudgetAmount());
-        assertEquals(0, budgetEntry.getActualAmount());
+        assertEquals("1000", budgetEntry1.getId());
+        assertEquals("Test", budgetEntry1.getName());
+        assertEquals(100, budgetEntry1.getBudgetAmount());
+        assertEquals(0, budgetEntry1.getActualAmount());
     }
-    
+
+    @Test
+    void testConstructorWithActualAmount() {
+        assertEquals("1000", budgetEntry2.getId());
+        assertEquals("Test", budgetEntry2.getName());
+        assertEquals(100, budgetEntry2.getBudgetAmount());
+        assertEquals(200, budgetEntry2.getActualAmount());
+    }
+
     @Test
     void testSetters() {
-        budgetEntry.setActualAmount(2.99);
-        budgetEntry.setBudgetAmount(3);
-        budgetEntry.setName("changed");
+        budgetEntry1.setActualAmount(2.99);
+        budgetEntry1.setBudgetAmount(3);
+        budgetEntry1.setName("changed");
 
-        assertEquals(2.99, budgetEntry.getActualAmount());
-        assertEquals(3, budgetEntry.getBudgetAmount());
-        assertEquals("changed", budgetEntry.getName());
+        assertEquals(2.99, budgetEntry1.getActualAmount());
+        assertEquals(3, budgetEntry1.getBudgetAmount());
+        assertEquals("changed", budgetEntry1.getName());
     }
 
     @Test
     void testAddActual() {
-        budgetEntry.addActual(1);
-        assertEquals(1, budgetEntry.getActualAmount());
-        budgetEntry.addActual(1);
-        assertEquals(2, budgetEntry.getActualAmount());
-        budgetEntry.addActual(5.52);
-        assertEquals(7.52, budgetEntry.getActualAmount());
+        budgetEntry1.addActual(1);
+        assertEquals(1, budgetEntry1.getActualAmount());
+        budgetEntry1.addActual(1);
+        assertEquals(2, budgetEntry1.getActualAmount());
+        budgetEntry1.addActual(5.52);
+        assertEquals(7.52, budgetEntry1.getActualAmount());
     }
 
     @Test
     void testSubtractActual() {
-        budgetEntry.substractActual(1);
-        assertEquals(-1, budgetEntry.getActualAmount());
-        budgetEntry.substractActual(1);
-        assertEquals(-2, budgetEntry.getActualAmount());
-        budgetEntry.substractActual(5.52);
-        assertEquals(-7.52, budgetEntry.getActualAmount());
+        budgetEntry1.substractActual(1);
+        assertEquals(-1, budgetEntry1.getActualAmount());
+        budgetEntry1.substractActual(1);
+        assertEquals(-2, budgetEntry1.getActualAmount());
+        budgetEntry1.substractActual(5.52);
+        assertEquals(-7.52, budgetEntry1.getActualAmount());
     }
 }

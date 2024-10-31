@@ -6,6 +6,7 @@ public class ExpenseTest extends BudgetEntryTest {
     @Override
     @BeforeEach
     void setup() {
-        budgetEntry = new Expense("1000","Test", 100);
+        budgetEntry1 = new Expense("1000", "Test", 100);
+        budgetEntry2 = new Expense("1000", "Test", 100, 200);
     }
 }
