@@ -40,6 +40,8 @@ public class BudgeterTest {
     void testConstructor() {
         assertEquals(0, budgeter1.getbudgetEntries().size());
     }
+
+    @Test
     void testConstructor2() {
         assertEquals(2, budgeter2.getbudgetEntries().size());
         assertTrue(budgeter2.getbudgetEntries().contains(b1));
