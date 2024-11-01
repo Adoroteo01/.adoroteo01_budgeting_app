@@ -15,8 +15,12 @@ public class Budgeter {
     }
 
     // EFFECTS: creates a new budgeter with given budget entries
-    public Budgeter(List<BudgetEntry> foundBudgetEntries) {
-        // stub
+    public Budgeter(List<BudgetEntry> budgetEntries) {
+        this.budgetEntries = new HashMap<String, BudgetEntry>();
+
+        for (BudgetEntry budgetEntry : budgetEntries) {
+            this.budgetEntries.put(budgetEntry.getName(), budgetEntry);
+        }
     }
 
     @Override
