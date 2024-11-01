@@ -57,7 +57,6 @@ public class BudgeterTest {
         assertTrue(output.equals(budgeter1.getbudgetEntries()));
     }
 
-
     @Test
     void testClear() {
         budgeter1.addEntry(b1);
@@ -77,7 +76,6 @@ public class BudgeterTest {
         budgeter1.addEntry(b3);
         assertTrue(budgeter1.getbudgetEntries().contains(b3));
         assertEquals(2, budgeter1.getbudgetEntries().size());
-
 
         budgeter1.clear();
         assertEquals(0, budgeter1.getbudgetEntries().size());
@@ -199,7 +197,6 @@ public class BudgeterTest {
 
         assertEquals(output, budgeter1.rankSpending());
     }
-
 
     @Test
     void testFindEntry1Entry() {
