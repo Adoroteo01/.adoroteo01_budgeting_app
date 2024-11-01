@@ -255,7 +255,8 @@ public class JsonHandler {
     // REQUIRES: jsonBudgeter contains data for a Budget's Budgeter, budgetEntries
     // have the same ids as
     // budgetEntries in jsonBudgeter
-    // EFFECT: returns a Budget's Budgeter with given data.
+    // EFFECT: returns a Budget's Budgeter with given data. returns null if
+    // arguments invalid.
     Budgeter loadBudgeter(JSONObject jsonBudgeter, List<BudgetEntry> budgetEntries) {
 
         JSONObject jsonBudgeterData = jsonBudgeter.getJSONObject("budgeter");
@@ -267,6 +268,9 @@ public class JsonHandler {
 
             String id = jsonBudgetEntry.getString("id");
             BudgetEntry budgetEntry = lookupBudgetEntry(id, budgetEntries);
+            if (budgetEntry == null) {
+                return null;
+            }
             foundBudgetEntries.add(budgetEntry);
         }
 

@@ -2,6 +2,7 @@ package persistence;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileNotFoundException;
@@ -504,5 +505,13 @@ public class JsonHandlerTest {
         Budgeter budgeter = jh.loadBudgeter(jsonBudget1, listOfBE);
 
         assertEquals(btr1, budgeter);
+    }
+
+    @Test
+    void testLoadBudgeterNotFound() {
+        listOfBE.remove(0);
+        Budgeter budgeter = jh.loadBudgeter(jsonBudget1, listOfBE);
+
+        assertNull(budgeter);
     }
 }
