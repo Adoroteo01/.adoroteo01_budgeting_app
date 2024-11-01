@@ -1,12 +1,15 @@
 package persistence;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -217,7 +220,8 @@ public class JsonHandler {
 
     // EFFECT: returns contents of the save file at path as a string
     String readJsonSave(String path) throws IOException {
-        // Adapted from: CPSC 210 JsonSerializationDemo, University of British Columbia, 2024W1
+        // Adapted from: CPSC 210 JsonSerializationDemo, University of British Columbia,
+        // 2024W1
         StringBuilder stringBuilder = new StringBuilder();
 
         try (Stream<String> Stringstream = Files.lines(Paths.get(path), StandardCharsets.UTF_8)) {
@@ -241,19 +245,48 @@ public class JsonHandler {
 
         List<BudgetEntry> budgetEntries = loadBudgetEntries(jsonBudget.optJSONArray("budgetEntries"));
 
-        Tracker tracker = loadTracker(jsonBudget.optJSONObject("tracker"), budgetEntries);
-        Budgeter budgeter = loadBudgeter(jsonBudget.optJSONObject("budgeter"), budgetEntries);
+        Tracker tracker = loadTracker(jsonBudget.getJSONObject("tracker"), budgetEntries);
+        Budgeter budgeter = loadBudgeter(jsonBudget.getJSONObject("budgeter"), budgetEntries);
         Budget budget = new Budget(budgetName, budgetStartDate, budgetEndDate, budgeter, tracker);
 
         return budget;
     }
 
-    // TODO:
-    // REQUIRES: jsonBudgeter contains data for a Budget's Budgeter
+    // REQUIRES: jsonBudgeter contains data for a Budget's Budgeter, budgetEntries
+    // have the same ids as
+    // budgetEntries in jsonBudgeter
     // EFFECT: returns a Budget's Budgeter with given data.
     Budgeter loadBudgeter(JSONObject jsonBudgeter, List<BudgetEntry> budgetEntries) {
 
-        return new Budgeter(); // stub
+        JSONObject jsonBudgeterData = jsonBudgeter.getJSONObject("budgeter");
+        JSONArray jsonBudgetEntries = jsonBudgeterData.getJSONArray("budgetEntries");
+        List<BudgetEntry> foundBudgetEntries = new ArrayList<BudgetEntry>();
+
+        for (int i = 0; i < jsonBudgetEntries.length(); i++) {
+            JSONObject jsonBudgetEntry = jsonBudgetEntries.getJSONObject(i);
+
+            String id = jsonBudgetEntry.getString("id");
+            BudgetEntry budgetEntry = lookupBudgetEntry(id, budgetEntries);
+            foundBudgetEntries.add(budgetEntry);
+        }
+
+        Budgeter budgeter = new Budgeter(foundBudgetEntries);
+
+        return budgeter;
+
+    }
+
+    // REQUIRES: there is a BudgetEntry with id of id in budgetEntries
+    // EFFECT: returns the BudgetEntry in budgetEntries with given id
+    private BudgetEntry lookupBudgetEntry(String id, List<BudgetEntry> budgetEntries) {
+
+        for (BudgetEntry budgetEntry : budgetEntries) {
+            if (budgetEntry.getId().equals(id)) {
+                return budgetEntry;
+            }
+        }
+
+        return null; // if cannot find corrisponding budget entry
     }
 
     // TODO:
