@@ -14,6 +14,11 @@ public class Budgeter {
         budgetEntries = new HashMap<String, BudgetEntry>();
     }
 
+    // EFFECTS: creates a new budgeter with given budget entries
+    public Budgeter(List<BudgetEntry> foundBudgetEntries) {
+        // stub
+    }
+
     @Override
     public int hashCode() {
         return Objects.hashCode(budgetEntries);
