@@ -516,7 +516,7 @@ public class JsonHandlerTest {
     }
 
     @Test
-    void loadBudgetEntries() {
+    void testLoadBudgetEntries() {
 
         JSONArray jsonBudgetEntries = jsonBudget1.optJSONArray("budgetEntries");
 
@@ -527,12 +527,27 @@ public class JsonHandlerTest {
     }
 
     @Test
-    void loadTracker() {
+    void testLoadTracker() {
 
         JSONObject jsonTracker = jsonBudget1.optJSONObject("tracker");
         Tracker tracker = jh.loadTracker(jsonTracker, listOfBE);
 
         assertTrue(tracker.equals(tr1));
+
+    }
+
+    @Test
+    void testLoadBudgetPrimitives() {
+
+        JSONObject jsonPrimitives = jsonBudget1.optJSONObject("primitives");
+        List<String> primitives = jh.loadBudgetPrimitives(jsonPrimitives);
+
+        List<String> expectedPrimitives = new ArrayList<String>();
+        expectedPrimitives.add("Feb 1");
+        expectedPrimitives.add("Jan");
+        expectedPrimitives.add("Jan 1");
+
+        assertTrue(primitives.equals(expectedPrimitives));
 
     }
 }
