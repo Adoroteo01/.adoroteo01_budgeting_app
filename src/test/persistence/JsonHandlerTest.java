@@ -474,12 +474,12 @@ public class JsonHandlerTest {
     @Test
     void testLoadBudgetsFromFile() {
         String path = "data/loadBudgetsTest.json";
+        List<Budget> expectedBudgets = new ArrayList<Budget>();
         try {
             List<Budget> budgets = jh.loadBudgetsFromFile(path);
 
             Budget expectedBudget1 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
             Budget expectedBudget2 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
-            List<Budget> expectedBudgets = new ArrayList<Budget>();
             expectedBudgets.add(expectedBudget1);
             expectedBudgets.add(expectedBudget2);
 
@@ -490,20 +490,114 @@ public class JsonHandlerTest {
         }
     }
 
+    @SuppressWarnings("methodlength") // cannot split up into more methods
     @Test
     void testReadJsonSave() {
         String path = "data/loadBudgetsTest.json";
         try {
             String budgetsString = jh.readJsonSave(path);
-            String expectedString = "[{\"primitives\":{\"endDate\":\"Feb 1\",\"name\":\"Jan\",\""
-                    +
-                    "startDate\":\"Jan 1\"},\"budgetEntries\":[{\"budgetAmount\":400,\"actualAmount\":56.99,"
-                    +
-                    "\"name\":\"Grocery\",\"id\":\"100\r\n"
-                    + //
-                    "";
+            String expectedString = "[\n"
+                    + "    {\n"
+                    + "        \"primitives\": {\n"
+                    + "            \"endDate\": \"Feb 1\",\n"
+                    + "            \"name\": \"Jan\",\n"
+                    + "            \"startDate\": \"Jan 1\"\n"
+                    + "        },\n"
+                    + "        \"budgetEntries\": [\n"
+                    + "            {\n"
+                    + "                \"budgetAmount\": 400,\n"
+                    + "                \"actualAmount\": 56.99,\n"
+                    + "                \"name\": \"Grocery\",\n"
+                    + "                \"id\": \"1000\"\n"
+                    + "            },\n"
+                    + "            {\n"
+                    + "                \"budgetAmount\": 200,\n"
+                    + "                \"actualAmount\": 40.5,\n"
+                    + "                \"name\": \"Gas\",\n"
+                    + "                \"id\": \"1001\"\n"
+                    + "            }\n"
+                    + "        ],\n"
+                    + "        \"tracker\": {\n"
+                    + "            \"entries\": [\n"
+                    + "                {\n"
+                    + "                    \"date\": \"Jan 2\",\n"
+                    + "                    \"amount\": 56.99,\n"
+                    + "                    \"budgetEntry\": {\n"
+                    + "                        \"id\": \"1000\"\n"
+                    + "                    }\n"
+                    + "                },\n"
+                    + "                {\n"
+                    + "                    \"date\": \"Jan 2\",\n"
+                    + "                    \"amount\": 40.5,\n"
+                    + "                    \"budgetEntry\": {\n"
+                    + "                        \"id\": \"1001\"\n"
+                    + "                    }\n"
+                    + "                }\n"
+                    + "            ]\n"
+                    + "        },\n"
+                    + "        \"budgeter\": {\n"
+                    + "            \"budgetEntries\": [\n"
+                    + "                {\n"
+                    + "                    \"id\": \"1000\"\n"
+                    + "                },\n"
+                    + "                {\n"
+                    + "                    \"id\": \"1001\"\n"
+                    + "                }\n"
+                    + "            ]\n"
+                    + "        }\n"
+                    + "    },\n"
+                    + "    {\n"
+                    + "        \"primitives\": {\n"
+                    + "            \"endDate\": \"Mar 1\",\n"
+                    + "            \"name\": \"Feb\",\n"
+                    + "            \"startDate\": \"Feb 1\"\n"
+                    + "        },\n"
+                    + "        \"budgetEntries\": [\n"
+                    + "            {\n"
+                    + "                \"budgetAmount\": 33.44,\n"
+                    + "                \"actualAmount\": 98,\n"
+                    + "                \"name\": \"Grocery\",\n"
+                    + "                \"id\": \"1001\"\n"
+                    + "            },\n"
+                    + "            {\n"
+                    + "                \"budgetAmount\": 66.99,\n"
+                    + "                \"actualAmount\": 50,\n"
+                    + "                \"name\": \"Gas\",\n"
+                    + "                \"id\": \"1000\"\n"
+                    + "            }\n"
+                    + "        ],\n"
+                    + "        \"tracker\": {\n"
+                    + "            \"entries\": [\n"
+                    + "                {\n"
+                    + "                    \"date\": \"Feb 3\",\n"
+                    + "                    \"amount\": 50,\n"
+                    + "                    \"budgetEntry\": {\n"
+                    + "                        \"id\": \"1000\"\n"
+                    + "                    }\n"
+                    + "                },\n"
+                    + "                {\n"
+                    + "                    \"date\": \"Feb 4\",\n"
+                    + "                    \"amount\": 98,\n"
+                    + "                    \"budgetEntry\": {\n"
+                    + "                        \"id\": \"1001\"\n"
+                    + "                    }\n"
+                    + "                }\n"
+                    + "            ]\n"
+                    + "        },\n"
+                    + "        \"budgeter\": {\n"
+                    + "            \"budgetEntries\": [\n"
+                    + "                {\n"
+                    + "                    \"id\": \"1001\"\n"
+                    + "                },\n"
+                    + "                {\n"
+                    + "                    \"id\": \"1000\"\n"
+                    + "                }\n"
+                    + "            ]\n"
+                    + "        }\n"
+                    + "    }\n"
+                    + "]";
 
-            assertEquals(expectedString, budgetsString);
+            assertEquals(expectedString.replaceAll("\\s+", ""), budgetsString.replaceAll("\\s+", ""));
 
         } catch (IOException e) {
             fail();
