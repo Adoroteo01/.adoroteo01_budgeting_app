@@ -294,15 +294,29 @@ public class JsonHandler {
         return null; // if cannot find corrisponding budget entry
     }
 
-    // TODO:
     // REQUIRES: jsonTracker contains data for a Budget's Tracker
     // EFFECT: returns a Budget's Tracker with given data
     Tracker loadTracker(JSONObject jsonTracker, List<BudgetEntry> budgetEntries) {
 
-        return new Tracker(); // stub
+        JSONArray jsonTrackerEntries = jsonTracker.getJSONArray("entries");
+        Tracker tracker = new Tracker();
+
+        for (int i = 0; i < jsonTrackerEntries.length(); i++) {
+            JSONObject jsonTrackerEntry = jsonTrackerEntries.getJSONObject(i);
+
+            String date = jsonTrackerEntry.getString("date");
+            Double amount = jsonTrackerEntry.getDouble("amount");
+
+            String id = jsonTrackerEntry.getJSONObject("budgetEntry").getString("id");
+            BudgetEntry budgetEntry = lookupBudgetEntry(id, budgetEntries);
+
+            TrackerEntry trackerEntry = new TrackerEntry(date, budgetEntry, amount);
+            tracker.addEntry(trackerEntry);
+        }
+
+        return tracker;
     }
 
-    // TODO:
     // REQUIRES: jsonBudgetEntries contains data for a Budget's BudgetEntry(s)
     // EFFECT: returns a list of a Budget's BudgetEntry(s) with given data.
     List<BudgetEntry> loadBudgetEntries(JSONArray jsonBudgetEntries) {
@@ -315,12 +329,12 @@ public class JsonHandler {
             Double actualAmount = jsonBudgetEntry.getDouble("actualAmount");
             String name = jsonBudgetEntry.getString("name");
             String id = jsonBudgetEntry.getString("id");
-            
+
             BudgetEntry budgetEntry = new Expense(id, name, budgetAmount, actualAmount);
             budgetEntries.add(budgetEntry);
         }
 
-            return budgetEntries;
+        return budgetEntries;
     }
 
     // TODO:
