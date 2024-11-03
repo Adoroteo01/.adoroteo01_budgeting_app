@@ -365,13 +365,13 @@ public class JsonHandlerTest {
         // thus the objects don't have an expected order
         String jsonString = jsonBudgetEntries.toString();
         assertTrue(jsonString.contains("\"id\":\"1001\""));
-        assertTrue(jsonString.contains("\"name\":\"BE2\""));
-        assertTrue(jsonString.contains("\"budgetAmount\":500"));
-        assertTrue(jsonString.contains("\"actualAmount\":0.99"));
-        assertTrue(jsonString.contains("\"id\":\"1000\""));
-        assertTrue(jsonString.contains("\"name\":\"BE1\""));
+        assertTrue(jsonString.contains("\"name\":\"Gas\""));
         assertTrue(jsonString.contains("\"budgetAmount\":200"));
-        assertTrue(jsonString.contains("\"actualAmount\":1.3"));
+        assertTrue(jsonString.contains("\"actualAmount\":40.5"));
+        assertTrue(jsonString.contains("\"id\":\"1000\""));
+        assertTrue(jsonString.contains("\"name\":\"Grocery\""));
+        assertTrue(jsonString.contains("\"budgetAmount\":400"));
+        assertTrue(jsonString.contains("\"actualAmount\":56.99"));
     }
 
     @Test
