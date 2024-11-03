@@ -516,13 +516,23 @@ public class JsonHandlerTest {
     }
 
     @Test
-    void testLoadTracker() {
+    void loadBudgetEntries() {
 
         JSONArray jsonBudgetEntries = jsonBudget1.optJSONArray("budgetEntries");
 
         List<BudgetEntry> budgetEntries = jh.loadBudgetEntries(jsonBudgetEntries);
 
         assertTrue(budgetEntries.equals(listOfBE));
+
+    }
+
+    @Test
+    void loadTracker() {
+
+        JSONObject jsonTracker = jsonBudget1.optJSONObject("tracker");
+        Tracker tracker = jh.loadTracker(jsonTracker, listOfBE);
+
+        assertTrue(tracker.equals(tr1));
 
     }
 }
