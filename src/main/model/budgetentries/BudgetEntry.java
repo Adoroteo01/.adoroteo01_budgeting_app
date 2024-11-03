@@ -21,7 +21,7 @@ public abstract class BudgetEntry {
     }
 
     // TODO: Test
-    BudgetEntry(String id, String name, double budgetAmount, double actualAmount) {
+    public BudgetEntry(String id, String name, double budgetAmount, double actualAmount) {
         this.id = id;
         this.name = name;
         this.budgetAmount = budgetAmount;

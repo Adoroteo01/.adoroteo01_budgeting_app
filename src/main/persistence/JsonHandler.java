@@ -19,6 +19,7 @@ import model.Budgeter;
 import model.Tracker;
 import model.TrackerEntry;
 import model.budgetentries.BudgetEntry;
+import model.budgetentries.Expense;
 
 // A handler for saving and loading the state of a Budgeting App
 // Saves app states by writing field values in json
@@ -306,7 +307,20 @@ public class JsonHandler {
     // EFFECT: returns a list of a Budget's BudgetEntry(s) with given data.
     List<BudgetEntry> loadBudgetEntries(JSONArray jsonBudgetEntries) {
 
-        return new ArrayList<BudgetEntry>(); // stub
+        List<BudgetEntry> budgetEntries = new ArrayList<BudgetEntry>();
+
+        for (int i = 0; i < jsonBudgetEntries.length(); i++) {
+            JSONObject jsonBudgetEntry = jsonBudgetEntries.getJSONObject(i);
+            Double budgetAmount = jsonBudgetEntry.getDouble("budgetAmount");
+            Double actualAmount = jsonBudgetEntry.getDouble("actualAmount");
+            String name = jsonBudgetEntry.getString("name");
+            String id = jsonBudgetEntry.getString("id");
+            
+            BudgetEntry budgetEntry = new Expense(id, name, budgetAmount, actualAmount);
+            budgetEntries.add(budgetEntry);
+        }
+
+            return budgetEntries;
     }
 
     // TODO:
