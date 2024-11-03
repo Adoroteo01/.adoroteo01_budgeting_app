@@ -514,4 +514,15 @@ public class JsonHandlerTest {
 
         assertNull(budgeter);
     }
+
+    @Test
+    void testLoadTracker() {
+
+        JSONArray jsonBudgetEntries = jsonBudget1.optJSONArray("budgetEntries");
+
+        List<BudgetEntry> budgetEntries = jh.loadBudgetEntries(jsonBudgetEntries);
+
+        assertTrue(budgetEntries.equals(listOfBE));
+
+    }
 }
