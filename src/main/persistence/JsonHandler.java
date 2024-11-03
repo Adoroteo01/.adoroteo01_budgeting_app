@@ -337,12 +337,21 @@ public class JsonHandler {
         return budgetEntries;
     }
 
-    // TODO:
     // REQUIRES: jsonBudgetPrimitives contains data for a Budget's primitive fields
     // EFFECT: returns a Budget's name, startDate, and endDate in a List in that
     // order with given data.
     List<String> loadBudgetPrimitives(JSONObject jsonBudgetPrimitives) {
 
-        return new ArrayList<String>(); // stub
+        ArrayList<String> primitives = new ArrayList<String>();
+
+        String endDate = jsonBudgetPrimitives.getString("endDate");
+        String name = jsonBudgetPrimitives.getString("name");
+        String startDate = jsonBudgetPrimitives.getString("startDate");
+
+        primitives.add(endDate);
+        primitives.add(name);
+        primitives.add(startDate);
+
+        return primitives;
     }
 }
