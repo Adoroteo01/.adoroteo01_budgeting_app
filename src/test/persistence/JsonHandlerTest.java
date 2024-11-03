@@ -111,8 +111,8 @@ public class JsonHandlerTest {
         b1.addBudgetEntry(be1);
         b1.addBudgetEntry(be2);
         try {
-            b1.addTrackerEntry("Jan 1", "BE1", 1.3);
-            b1.addTrackerEntry("Jan 2", "BE2", 0.99);
+            b1.addTrackerEntry("Jan 1", "Grocery", 1.3);
+            b1.addTrackerEntry("Jan 2", "Gas", 0.99);
         } catch (InvalidBudgetEntryException e) {
             System.out.println("Could not add Tracker Entries");
         }
