@@ -260,8 +260,7 @@ public class JsonHandler {
     // arguments invalid.
     Budgeter loadBudgeter(JSONObject jsonBudgeter, List<BudgetEntry> budgetEntries) {
 
-        JSONObject jsonBudgeterData = jsonBudgeter.getJSONObject("budgeter");
-        JSONArray jsonBudgetEntries = jsonBudgeterData.getJSONArray("budgetEntries");
+        JSONArray jsonBudgetEntries = jsonBudgeter.getJSONArray("budgetEntries");
         List<BudgetEntry> foundBudgetEntries = new ArrayList<BudgetEntry>();
 
         for (int i = 0; i < jsonBudgetEntries.length(); i++) {

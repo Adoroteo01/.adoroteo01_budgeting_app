@@ -36,10 +36,18 @@ public class JsonHandlerTest {
     BudgetEntry be2;
     List<BudgetEntry> listOfBE;
 
+    Budgeter btr2;
+    BudgetEntry be3;
+    BudgetEntry be4;
+
     Tracker tr1;
     TrackerEntry te1;
     TrackerEntry te2;
     List<TrackerEntry> listOfTE;
+
+    Tracker tr2;
+    TrackerEntry te3;
+    TrackerEntry te4;
 
     JSONArray jsonBudgets;
     JSONObject jsonBudget1;
@@ -120,6 +128,10 @@ public class JsonHandlerTest {
         tr1 = new Tracker();
         tr1.addEntry(te1);
         tr1.addEntry(te2);
+
+        tr2 = new Tracker();
+        tr2.addEntry(te3);
+        tr2.addEntry(te4);
     }
 
     private void initTrackerEntries() {
@@ -128,12 +140,19 @@ public class JsonHandlerTest {
         listOfTE = new ArrayList<TrackerEntry>();
         listOfTE.add(te1);
         listOfTE.add(te2);
+
+        te3 = new TrackerEntry("Feb 3", be4, 50);
+        te4 = new TrackerEntry("Feb 4", be3, 98);
     }
 
     private void initBudgeter() {
         btr1 = new Budgeter();
         btr1.addEntry(be1);
         btr1.addEntry(be2);
+
+        btr2 = new Budgeter();
+        btr2.addEntry(be3);
+        btr2.addEntry(be4);
     }
 
     private void initBudgetEntries() {
@@ -142,6 +161,9 @@ public class JsonHandlerTest {
         listOfBE = new ArrayList<BudgetEntry>();
         listOfBE.add(be1);
         listOfBE.add(be2);
+
+        be3 = new Expense("1001", "Grocery", 33.44, 98);
+        be4 = new Expense("1000", "Gas", 66.99, 50);
     }
 
     @Test
@@ -494,7 +516,7 @@ public class JsonHandlerTest {
         Budget budget2 = jh.loadBudget(jsonBudget2);
 
         Budget expectedBudget1 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
-        Budget expectedBudget2 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
+        Budget expectedBudget2 = new Budget("Feb", "Feb 1", "Mar 1", btr2, tr2);
 
         assertTrue(budget1.equals(expectedBudget1));
         assertTrue(budget2.equals(expectedBudget2));
