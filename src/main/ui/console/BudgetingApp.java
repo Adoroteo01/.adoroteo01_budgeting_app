@@ -1,6 +1,7 @@
 package ui.console;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import persistence.JsonHandler;
 import ui.console.menus.BudgetEntryMaker;
 import ui.console.menus.BudgetOpener;
 import ui.console.menus.BudgetViewer;
+import ui.console.menus.LoadWindow;
 import ui.console.menus.MainMenu;
 import ui.console.menus.NewBudgetMaker;
 import ui.console.menus.SaveWindow;
@@ -44,6 +46,7 @@ public class BudgetingApp {
     private Window budgetEntryMaker;
     private Window summaryWindow;
     private Window saveWindow;
+    private Window loadWindow;
 
     private List<Budget> budgets;
 
@@ -61,6 +64,7 @@ public class BudgetingApp {
         budgetEntryMaker = new BudgetEntryMaker();
         summaryWindow = new SummaryWindow();
         saveWindow = new SaveWindow();
+        loadWindow = new LoadWindow();
 
         budgets = new ArrayList<Budget>();
 
@@ -114,10 +118,19 @@ public class BudgetingApp {
     // if loading was
     // succesful or not.
     private void loadWindow() {
-        // TODO:
-        /*
-         * budgets = JsonHandler.load("../data/save.json")
-         */
+        loadWindow.open();
+        userInputs = loadWindow.getAllInputs();
+        String path = userInputs.get(0);
+
+        try {
+            budgets = jsonHandler.loadBudgetsFromFile(path);
+            System.out.println("File loaded successfully!\nReturning to Main Menu...");
+            currentWindow = "mainMenu";
+        } catch (IOException e) {
+            System.out.println("Could not load file...\nReturning to Main Menu...");
+            currentWindow = "mainMenu";
+        }
+
     }
 
     // EFFECTS: opens app saving window, writes the app state to file, and prints if
