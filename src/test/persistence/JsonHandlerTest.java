@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -111,8 +112,8 @@ public class JsonHandlerTest {
         b1.addBudgetEntry(be1);
         b1.addBudgetEntry(be2);
         try {
-            b1.addTrackerEntry("Jan 1", "Grocery", 1.3);
-            b1.addTrackerEntry("Jan 2", "Gas", 0.99);
+            b1.addTrackerEntry("Jan 1", "Grocery", 0);
+            b1.addTrackerEntry("Jan 2", "Gas", 0);
         } catch (InvalidBudgetEntryException e) {
             System.out.println("Could not add Tracker Entries");
         }
@@ -479,7 +480,7 @@ public class JsonHandlerTest {
             List<Budget> budgets = jh.loadBudgetsFromFile(path);
 
             Budget expectedBudget1 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
-            Budget expectedBudget2 = new Budget("Jan", "Jan 1", "Feb 1", btr1, tr1);
+            Budget expectedBudget2 = new Budget("Feb", "Feb 1", "Mar 1", btr2, tr2);
             expectedBudgets.add(expectedBudget1);
             expectedBudgets.add(expectedBudget2);
 
