@@ -2,7 +2,7 @@ package ui.console.menus;
 
 import java.util.ArrayList;
 
-public class LoadWindow extends Window{
+public class LoadWindow extends Window {
 
     // EFFECT: Creates new LoadWindow
     public LoadWindow() {
@@ -22,5 +22,5 @@ public class LoadWindow extends Window{
     public void open() {
         newPage();
     }
-    
+
 }
