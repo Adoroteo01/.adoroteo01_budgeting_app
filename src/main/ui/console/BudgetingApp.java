@@ -119,11 +119,11 @@ public class BudgetingApp {
     // succesful or not.
     private void loadWindow() {
         loadWindow.open();
-        userInputs = loadWindow.getAllInputs();
-        String path = userInputs.get(0);
+        // userInputs = loadWindow.getAllInputs(); # gets custom laod path from user
+        // String path = userInputs.get(0);
 
         try {
-            budgets = jsonHandler.loadBudgetsFromFile(path);
+            budgets = jsonHandler.loadBudgetsFromFile("data/save.json");
             System.out.println("File loaded successfully!\nReturning to Main Menu...");
             currentWindow = "mainMenu";
         } catch (IOException e) {
@@ -138,10 +138,11 @@ public class BudgetingApp {
     private void saveWindow() {
         saveWindow.open();
 
-        userInputs = saveWindow.getAllInputs();
+        // userInputs = saveWindow.getAllInputs(); # asks user to name save file and choose path
+        // jsonHandler.writeBudgetsToFile(budgets, userInputs.get(1), userInputs.get(0)); # use of custom name and path
 
         try {
-            jsonHandler.writeBudgetsToFile(budgets, userInputs.get(1), userInputs.get(0));
+            jsonHandler.writeBudgetsToFile(budgets, "data/", "save");
             System.out.println("File Saved!\nReturning to Main Menu...");
             currentWindow = "mainMenu";
         } catch (FileNotFoundException e) {
