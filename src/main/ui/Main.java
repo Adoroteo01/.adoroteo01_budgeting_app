@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.UIManager;
 
-// import java.awt.*;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import ui.gui.GraphicalBudgetingApp;
@@ -19,6 +18,7 @@ public class Main {
         }
 
         // new BudgetingApp(); // for console ui
+
         new GraphicalBudgetingApp(); // for gui
     }
 }
