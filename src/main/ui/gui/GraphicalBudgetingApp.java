@@ -10,9 +10,10 @@ import javax.swing.JPanel;
 
 public class GraphicalBudgetingApp {
 
-    JFrame appWindow;
+    private static final int SCREEN_HEIGHT = 512;
+    private static final int SCREEN_WIDTH = 720;
+    private JFrame appWindow;
 
-    
     // Creates new Budgeting app
     public GraphicalBudgetingApp() {
         run();
@@ -24,7 +25,6 @@ public class GraphicalBudgetingApp {
         createAppWindow();
 
         JPanel sideMenu = createSideMenu();
-
 
         JPanel mainContent = createMainContentPanel();
 
@@ -54,8 +54,8 @@ public class GraphicalBudgetingApp {
     // EFFECT: initialises the app window
     private void createAppWindow() {
         appWindow = new JFrame("Budget.ly");
-        appWindow.setMinimumSize(new Dimension(480, 340));
-        appWindow.setResizable(true);
+        appWindow.setMinimumSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+        appWindow.setResizable(false);
         appWindow.setLayout(new BorderLayout());
     }
 }
