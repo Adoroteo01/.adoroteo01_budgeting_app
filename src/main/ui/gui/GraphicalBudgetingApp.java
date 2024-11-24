@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,9 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import model.Budget;
+import ui.gui.listeners.CreateNewBudgetEntryListener;
 import ui.gui.listeners.CreateNewBudgetListener;
+import ui.gui.listeners.CreateNewTrackerEntryListener;
 
 public class GraphicalBudgetingApp {
 
@@ -111,56 +114,76 @@ public class GraphicalBudgetingApp {
 
     private JPanel createMainContentPanel() {
 
-        // TODO: resume here
-        // TODO: seperate this into more methods
         // TODO: implement budget entry adding
         // TODO: implement tracker entry adding
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
-        JButton newBudgetWindowOpener = new JButton("New Budget");
-        newBudgetWindowOpener.addActionListener(new CreateNewBudgetListener(budgets));
+        JButton newBudgetWindowOpener = createNewItemButton("New Budget", new CreateNewBudgetListener(budgets));
+        JButton newBudgetEntryWindowOpener = createNewItemButton("New Budget Entry",
+                new CreateNewBudgetEntryListener());
+        JButton newTrackerEntryWindowOpener = createNewItemButton("New Tracker Entry",
+                new CreateNewTrackerEntryListener());
 
         List<String> budgetsSampleData = new ArrayList<String>();
         budgetsSampleData.add("Jan");
         budgetsSampleData.add("Feb");
         budgetsSampleData.add("Mar");
-        String[] budgetsSampleArray = budgetsSampleData.toArray(new String[0]);
 
         List<String> budgetEntriesSampleData = new ArrayList<String>();
         budgetEntriesSampleData.add("Expense 1");
         budgetEntriesSampleData.add("Expense 2");
         budgetEntriesSampleData.add("Expense 3");
-        String[] budgetEntriesSampleArray = budgetEntriesSampleData.toArray(new String[0]);
 
         List<String> trackerSampleData = new ArrayList<String>();
         trackerSampleData.add("Jan 1 - $20");
         trackerSampleData.add("Jan 2 - $30");
         trackerSampleData.add("jan 2 - $4");
-        String[] trackerSampleArray = trackerSampleData.toArray(new String[0]);
 
-        JList<String> budgetList = new JList<>(budgetsSampleArray);
-        JList<String> budgetEntriesList = new JList<>(budgetEntriesSampleArray);
-        JList<String> trackerList = new JList<>(trackerSampleArray);
-
-        JScrollPane budgetsScroller = new JScrollPane(budgetList);
-        budgetsScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
-
-        JScrollPane budgetEntriesScroller = new JScrollPane(budgetEntriesList);
-        budgetEntriesScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
-
-        JScrollPane trackerScroller = new JScrollPane(trackerList);
-        trackerScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
+        JScrollPane budgetsScroller = createScrollingList(budgetsSampleData);
+        JScrollPane budgetEntriesScroller = createScrollingList(budgetEntriesSampleData);
+        JScrollPane trackerScroller = createScrollingList(budgetEntriesSampleData);
 
         panel.add(new JScrollPane(budgetsScroller));
         panel.add(newBudgetWindowOpener);
         panel.add(new JScrollPane(budgetEntriesScroller));
-        panel.add(new JButton("New Budget Entry"));
+        panel.add(newBudgetEntryWindowOpener);
         panel.add(new JScrollPane(trackerScroller));
-        panel.add(new JButton("New Tracker Entry"));
+        panel.add(newTrackerEntryWindowOpener);
 
         return panel;
+    }
+
+    // REQUIRES: scrollingList contains EXACTLY a single JList<String>
+    // EFFECTS: updates the JList<String> inside given scrollingList with the given
+    // updatedList
+    private void updateScrollingList(JScrollPane scrollingList, List<String> updatedList) {
+
+        JList<String> list = (JList<String>) scrollingList.getViewport().getView();
+
+        String[] newlistData = updatedList.toArray(new String[0]);
+        list.setListData(newlistData);
+    }
+
+    // EFFECT: returns a JScrollPane that contains a JList with given content
+    private JScrollPane createScrollingList(List<String> lsitContent) {
+
+        String[] listContentArray = lsitContent.toArray(new String[0]);
+        JList<String> listComponent = new JList<String>(listContentArray);
+
+        JScrollPane listScroller = new JScrollPane(listComponent);
+        listScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
+        return listScroller;
+    }
+
+    // REQUIRES: actionListener has open a new window functionality
+    // EFFECT: returns a JButton with given buttonLabel and actionListener. This
+    // button opens a new window specidfied by actionListener
+    private JButton createNewItemButton(String buttonLabel, ActionListener actionListener) {
+        JButton newItemWindowOpener = new JButton(buttonLabel);
+        newItemWindowOpener.addActionListener(actionListener);
+        return newItemWindowOpener;
     }
 
     // EFFECT: returns JPanel for the side menu of the app
