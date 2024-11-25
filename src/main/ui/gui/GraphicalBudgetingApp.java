@@ -1,7 +1,6 @@
 package ui.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,13 +16,14 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import model.Budget;
 import ui.gui.listeners.CreateNewBudgetEntryListener;
 import ui.gui.listeners.CreateNewBudgetListener;
 import ui.gui.listeners.CreateNewTrackerEntryListener;
+import ui.gui.listeners.SaveNewBudgetEntryListener;
+import ui.gui.listeners.SelectedBudgetListener;
 
 public class GraphicalBudgetingApp {
 
@@ -33,6 +32,7 @@ public class GraphicalBudgetingApp {
     private JFrame appWindow;
 
     private List<Budget> budgets;
+    private Budget currenBudget;
 
     // Creates new Budgeting app
     public GraphicalBudgetingApp() {
@@ -141,7 +141,7 @@ public class GraphicalBudgetingApp {
         trackerSampleData.add("Jan 2 - $30");
         trackerSampleData.add("jan 2 - $4");
 
-        JScrollPane budgetsScroller = createScrollingList(budgetsSampleData);
+        JScrollPane budgetsScroller = createScrollingList(budgetsSampleData, this);
         JScrollPane budgetEntriesScroller = createScrollingList(budgetEntriesSampleData);
         JScrollPane trackerScroller = createScrollingList(budgetEntriesSampleData);
 
@@ -158,12 +158,25 @@ public class GraphicalBudgetingApp {
     // REQUIRES: scrollingList contains EXACTLY a single JList<String>
     // EFFECTS: updates the JList<String> inside given scrollingList with the given
     // updatedList
-    private void updateScrollingList(JScrollPane scrollingList, List<String> updatedList) {
+    void updateScrollingList(JScrollPane scrollingList, List<String> updatedList) {
 
         JList<String> list = (JList<String>) scrollingList.getViewport().getView();
 
         String[] newlistData = updatedList.toArray(new String[0]);
         list.setListData(newlistData);
+    }
+
+    // EFFECT: returns a JScrollPane that contains a JList with given content and
+    // has selectable functionality
+    private JScrollPane createScrollingList(List<String> lsitContent, GraphicalBudgetingApp app) {
+
+        String[] listContentArray = lsitContent.toArray(new String[0]);
+        JList<String> listComponent = new JList<String>(listContentArray);
+        listComponent.addListSelectionListener(new SelectedBudgetListener(listComponent, app));
+
+        JScrollPane listScroller = new JScrollPane(listComponent);
+        listScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
+        return listScroller;
     }
 
     // EFFECT: returns a JScrollPane that contains a JList with given content
@@ -190,10 +203,12 @@ public class GraphicalBudgetingApp {
     private JPanel createSideMenu() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        JButton loadButton = new JButton("Load File");
-        JButton saveButton = new JButton("Save File");
+        JButton loadButton = new JButton("Load File ");
+        JButton saveButton = new JButton("Save File ");
+        JButton summaryButton = new JButton("Summary");
         panel.add(loadButton);
         panel.add(saveButton);
+        panel.add(summaryButton);
 
         return panel;
     }
@@ -202,7 +217,17 @@ public class GraphicalBudgetingApp {
     private void createAppWindow() {
         appWindow = new JFrame("Budget.ly");
         appWindow.setMinimumSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        // appWindow.setResizable(false); // TODO: Decide to use resizable or not
+        // appWindow.setResizable(false); // TODO: decide to use resizable or not
         appWindow.setLayout(new BorderLayout());
+    }
+
+    // EFFECTS: Sets currentBudget to first budget found in budgets with the given
+    // budgetName;
+    public void setCurrentBudget(String budgetName) {
+        for (Budget budget : budgets) {
+            if (budget.getName() == budgetName) {
+                currenBudget = budget;
+            }
+        }
     }
 }

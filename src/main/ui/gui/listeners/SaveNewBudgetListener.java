@@ -31,6 +31,8 @@ public class SaveNewBudgetListener implements ActionListener {
     }
 
     @Override
+    // REQUIRES: The budget that will be created has unique name from existing
+    // budgets
     // EFFECTS: Creates new budget with specified name, startDate, and endDate. Then
     // adds new budget to budgets
     public void actionPerformed(ActionEvent e) {
