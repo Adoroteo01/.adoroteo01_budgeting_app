@@ -20,7 +20,6 @@ public abstract class BudgetEntry {
         this.actualAmount = 0;
     }
 
-    // TODO: Test
     public BudgetEntry(String id, String name, double budgetAmount, double actualAmount) {
         this.id = id;
         this.name = name;

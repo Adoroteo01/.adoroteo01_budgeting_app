@@ -41,7 +41,6 @@ public class SaveNewBudgetListener implements ActionListener {
     // adds new budget to budgets. Then updates the app's graphical budget list.
     // Then closes create new budget menu
     public void actionPerformed(ActionEvent e) {
-        System.out.println("New Budget Has Been Made!!!"); // TODO: for testing, remove later
 
         String name = nameField.getText();
         String startDate = startDateField.getText();
@@ -52,9 +51,6 @@ public class SaveNewBudgetListener implements ActionListener {
         budgets.add(budget);
 
         app.updateScrollingList(app.getBudgetsScroller(), app.getBudgetNames());
-
-        System.out.println(// TODO: For testing, delete later
-                "name:" + budget.getName() + "\nstart:" + budget.getStartDate() + "\nend:" + budget.getEndDate());
 
         parentWindow.dispose();
     }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -159,12 +160,17 @@ public class GraphicalBudgetingApp {
 
     private JPanel createTitleBar() {
         JPanel titleBar = new JPanel();
-        titleBar.setLayout(new BoxLayout(titleBar, BoxLayout.Y_AXIS));
+        titleBar.setLayout(new BoxLayout(titleBar, BoxLayout.X_AXIS));
+
+        ImageIcon logoImage = new ImageIcon("data/logo.png");
+        JLabel logo = new JLabel(logoImage);
+        logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel titleBarLabel = new JLabel("Budget.ly");
         titleBarLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         titleBarLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        titleBar.add(logo);
         titleBar.add(titleBarLabel);
         return titleBar;
     }
@@ -262,7 +268,7 @@ public class GraphicalBudgetingApp {
         listComponent.addListSelectionListener(new SelectedBudgetListener(listComponent, app));
 
         JScrollPane listScroller = new JScrollPane(listComponent);
-        listScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
+        listScroller.setPreferredSize(new Dimension(40, 500));
         return listScroller;
     }
 
@@ -272,7 +278,7 @@ public class GraphicalBudgetingApp {
         JList<String> listComponent = new JList<String>();
 
         JScrollPane listScroller = new JScrollPane(listComponent);
-        listScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
+        listScroller.setPreferredSize(new Dimension(40, 500));
         return listScroller;
     }
 
@@ -308,7 +314,6 @@ public class GraphicalBudgetingApp {
     private void createAppWindow() {
         appWindow = new JFrame("Budget.ly");
         appWindow.setMinimumSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
-        // appWindow.setResizable(false); // TODO: decide to use resizable or not
         appWindow.setLayout(new BorderLayout());
     }
 

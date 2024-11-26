@@ -30,8 +30,6 @@ public class SelectedBudgetListener implements ListSelectionListener {
             app.setCurrentBudget(selectedBudgetName);
             app.updateBudgetEntriesList();
             app.updateTrackerEntriesList();
-
-            System.out.println("Budget changed to " + selectedBudgetName); // TODO: for testing, delete later
         }
     }
 
