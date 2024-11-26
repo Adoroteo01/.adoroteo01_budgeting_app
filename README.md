@@ -25,11 +25,12 @@
 - As a user, I want to be able to have the option to load my budgets from file
 
 
-<!-- TODO: Specify these instructions -->
 # Instructions for End User 
 
-- You can generate the first required action related to the user story "adding multiple Xs to a Y" by...
-- You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
-- You can locate my visual component by...
-- You can save the state of my application by...
-- You can reload the state of my application by...
+- You can create new Budgets with the New Budget button
+- You can add Budget Entries to a Budget by selecting desired budget in the list then clicking New Budget Entry
+- You can add Tracker Entries to a Budget by selecting desired budget in the list then clicking New Tracker Entry
+- You can view the categories of most spending in any selected budget by clicking Summary
+- You can locate my visual component by looking at the title bar. The visual component is the logo
+- You can save the state of my application by clicking the save button on the left menu
+- You can reload the state of my application by clicking the load button on the left menu
