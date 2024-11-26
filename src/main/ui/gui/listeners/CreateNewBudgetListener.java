@@ -11,16 +11,21 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import model.Budget;
+import ui.gui.GraphicalBudgetingApp;
 
 public class CreateNewBudgetListener implements ActionListener {
 
     private static final int WIDTH = 300;
     private static final int HEIGHT = 200;
 
+    GraphicalBudgetingApp app;
     List<Budget> budgets;
 
-    public CreateNewBudgetListener(List<Budget> budgets) {
-        this.budgets = budgets;
+    // EFFECTS: creates a new CreateNewBudgetListener with given app and app's List<Budget>
+    public CreateNewBudgetListener(GraphicalBudgetingApp app) {
+
+        this.app = app;
+        budgets = app.getBudgets();
     }
 
     @Override
@@ -46,7 +51,7 @@ public class CreateNewBudgetListener implements ActionListener {
 
         JButton createButton = new JButton("Create");
         createButton.addActionListener(new SaveNewBudgetListener(createBudgetWindow, nameField,
-                startDateField, endDateField, budgets));
+                startDateField, endDateField, app));
 
         // Add components to the frame
         createBudgetWindow.add(nameLabel);

@@ -32,7 +32,12 @@ public class GraphicalBudgetingApp {
     private JFrame appWindow;
 
     private List<Budget> budgets;
-    private Budget currenBudget;
+
+    private Budget currentBudget;
+
+    private JScrollPane budgetsScroller;
+    private JScrollPane budgetEntriesScroller;
+    private JScrollPane trackerScroller;
 
     // Creates new Budgeting app
     public GraphicalBudgetingApp() {
@@ -40,6 +45,41 @@ public class GraphicalBudgetingApp {
         budgets = new ArrayList<Budget>();
 
         run();
+    }
+
+    // EFFECT: returns a list of budget's names in budgets
+    public List<String> getBudgetNames() {
+
+        List<String> budgetNames = new ArrayList<String>();
+
+        for (Budget budget : budgets) {
+
+            String name = budget.getName();
+
+            budgetNames.add(name);
+        }
+
+        return budgetNames;
+    }
+
+    public List<Budget> getBudgets() {
+        return budgets;
+    }
+
+    public Budget getCurrentBudget() {
+        return currentBudget;
+    }
+
+    public JScrollPane getBudgetsScroller() {
+        return budgetsScroller;
+    }
+
+    public JScrollPane getBudgetEntriesScroller() {
+        return budgetEntriesScroller;
+    }
+
+    public JScrollPane getTrackerScroller() {
+        return trackerScroller;
     }
 
     // EFFECTS: Runs Budgeting app gui
@@ -120,7 +160,7 @@ public class GraphicalBudgetingApp {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
-        JButton newBudgetWindowOpener = createNewItemButton("New Budget", new CreateNewBudgetListener(budgets));
+        JButton newBudgetWindowOpener = createNewItemButton("New Budget", new CreateNewBudgetListener(this));
         JButton newBudgetEntryWindowOpener = createNewItemButton("New Budget Entry",
                 new CreateNewBudgetEntryListener());
         JButton newTrackerEntryWindowOpener = createNewItemButton("New Tracker Entry",
@@ -141,9 +181,9 @@ public class GraphicalBudgetingApp {
         trackerSampleData.add("Jan 2 - $30");
         trackerSampleData.add("jan 2 - $4");
 
-        JScrollPane budgetsScroller = createScrollingList(budgetsSampleData, this);
-        JScrollPane budgetEntriesScroller = createScrollingList(budgetEntriesSampleData);
-        JScrollPane trackerScroller = createScrollingList(budgetEntriesSampleData);
+        budgetsScroller = createScrollingList(budgetsSampleData, this);
+        budgetEntriesScroller = createScrollingList(budgetEntriesSampleData);
+        trackerScroller = createScrollingList(budgetEntriesSampleData);
 
         panel.add(new JScrollPane(budgetsScroller));
         panel.add(newBudgetWindowOpener);
@@ -158,7 +198,7 @@ public class GraphicalBudgetingApp {
     // REQUIRES: scrollingList contains EXACTLY a single JList<String>
     // EFFECTS: updates the JList<String> inside given scrollingList with the given
     // updatedList
-    void updateScrollingList(JScrollPane scrollingList, List<String> updatedList) {
+    public void updateScrollingList(JScrollPane scrollingList, List<String> updatedList) {
 
         JList<String> list = (JList<String>) scrollingList.getViewport().getView();
 
@@ -226,7 +266,7 @@ public class GraphicalBudgetingApp {
     public void setCurrentBudget(String budgetName) {
         for (Budget budget : budgets) {
             if (budget.getName() == budgetName) {
-                currenBudget = budget;
+                currentBudget = budget;
             }
         }
     }

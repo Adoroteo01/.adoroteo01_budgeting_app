@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import model.Budget;
+import ui.gui.GraphicalBudgetingApp;
 
 public class SaveNewBudgetListener implements ActionListener {
 
@@ -16,25 +17,29 @@ public class SaveNewBudgetListener implements ActionListener {
     private JTextField endDateField;
     private List<Budget> budgets;
     private JFrame parentWindow;
+    private GraphicalBudgetingApp app;
 
     // EFECTS: Creates SaveNewBudgetListener with given name, startDate, endDate,
-    // and budgets
+    // app, budgets of the app.
     public SaveNewBudgetListener(JFrame parentWindow, JTextField nameField, JTextField startDateField,
             JTextField endDateField,
-            List<Budget> budgets) {
+            GraphicalBudgetingApp app) {
 
+        this.parentWindow = parentWindow;
         this.nameField = nameField;
         this.startDateField = startDateField;
         this.endDateField = endDateField;
-        this.budgets = budgets;
-        this.parentWindow = parentWindow;
+        this.app = app;
+        this.budgets = app.getBudgets();
+
     }
 
     @Override
     // REQUIRES: The budget that will be created has unique name from existing
     // budgets
     // EFFECTS: Creates new budget with specified name, startDate, and endDate. Then
-    // adds new budget to budgets
+    // adds new budget to budgets. Then updates the app's graphical budget list.
+    // Then closes create new budget menu
     public void actionPerformed(ActionEvent e) {
         System.out.println("New Budget Has Been Made!!!"); // TODO: for testing, remove later
 
@@ -45,6 +50,8 @@ public class SaveNewBudgetListener implements ActionListener {
         Budget budget = new Budget(name, startDate, endDate);
 
         budgets.add(budget);
+
+        app.updateScrollingList(app.getBudgetsScroller(), app.getBudgetNames());
 
         System.out.println(// TODO: For testing, delete later
                 "name:" + budget.getName() + "\nstart:" + budget.getStartDate() + "\nend:" + budget.getEndDate());
