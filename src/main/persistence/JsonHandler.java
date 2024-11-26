@@ -16,6 +16,8 @@ import org.json.JSONObject;
 
 import model.Budget;
 import model.Budgeter;
+import model.Event;
+import model.EventLog;
 import model.Tracker;
 import model.TrackerEntry;
 import model.budgetentries.BudgetEntry;
@@ -43,6 +45,10 @@ public class JsonHandler {
         String jsonStringSavedBudgets = saveBudgets(budgets).toString();
         printWriter.print(jsonStringSavedBudgets);
         printWriter.close();
+
+        EventLog.getInstance()
+                .logEvent(new Event(
+                        "Saved budgets to file"));
     }
 
     // EFFECT: returns JSONArray containing JSONObjects of Budgets in budgets list
@@ -215,6 +221,10 @@ public class JsonHandler {
             Budget budget = loadBudget(jsonBudget);
             budgets.add(budget);
         }
+
+        EventLog.getInstance()
+                .logEvent(new Event(
+                        "Loaded budgets to file"));
 
         return budgets;
     }
