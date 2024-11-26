@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import model.Budget;
+import model.TrackerEntry;
+import model.budgetentries.BudgetEntry;
 import ui.gui.listeners.CreateNewBudgetEntryListener;
 import ui.gui.listeners.CreateNewBudgetListener;
 import ui.gui.listeners.CreateNewTrackerEntryListener;
@@ -37,7 +39,7 @@ public class GraphicalBudgetingApp {
 
     private JScrollPane budgetsScroller;
     private JScrollPane budgetEntriesScroller;
-    private JScrollPane trackerScroller;
+    private JScrollPane trackerEntriesScroller;
 
     // Creates new Budgeting app
     public GraphicalBudgetingApp() {
@@ -78,8 +80,8 @@ public class GraphicalBudgetingApp {
         return budgetEntriesScroller;
     }
 
-    public JScrollPane getTrackerScroller() {
-        return trackerScroller;
+    public JScrollPane getTrackerEntriesScroller() {
+        return trackerEntriesScroller;
     }
 
     // EFFECTS: Runs Budgeting app gui
@@ -183,13 +185,13 @@ public class GraphicalBudgetingApp {
 
         budgetsScroller = createScrollingList(budgetsSampleData, this);
         budgetEntriesScroller = createScrollingList(budgetEntriesSampleData);
-        trackerScroller = createScrollingList(budgetEntriesSampleData);
+        trackerEntriesScroller = createScrollingList(budgetEntriesSampleData);
 
         panel.add(new JScrollPane(budgetsScroller));
         panel.add(newBudgetWindowOpener);
         panel.add(new JScrollPane(budgetEntriesScroller));
         panel.add(newBudgetEntryWindowOpener);
-        panel.add(new JScrollPane(trackerScroller));
+        panel.add(new JScrollPane(trackerEntriesScroller));
         panel.add(newTrackerEntryWindowOpener);
 
         return panel;
@@ -204,6 +206,51 @@ public class GraphicalBudgetingApp {
 
         String[] newlistData = updatedList.toArray(new String[0]);
         list.setListData(newlistData);
+    }
+
+    // EFFECT: updates the contents of budgetEntriesScroller with currentBudget's
+    // budget entries
+    public void updateBudgetEntriesList() {
+        updateScrollingList(budgetEntriesScroller, getCurrentBudgetEntriesName());
+    }
+
+    // EFFECT: updates the contents of trackerEntriesScroller with currentBudget's
+    // tracker entries
+    public void updateTrackerEntriesList() {
+        updateScrollingList(trackerEntriesScroller, getCurrentTrackerEntriesName());
+    }
+
+    // EFFECT: returns a list of currentBudget's budget entry names
+    private List<String> getCurrentBudgetEntriesName() {
+
+        List<String> currentBudgetEntriesNames = new ArrayList<String>();
+
+        for (BudgetEntry budgetEntry : currentBudget.getBudgetEntries()) {
+
+            String name = budgetEntry.getName();
+            currentBudgetEntriesNames.add(name);
+        }
+
+        return currentBudgetEntriesNames;
+    }
+
+    // EFFECT: returns a list of strings about the details of currentBudget's
+    // tracker entries
+    private List<String> getCurrentTrackerEntriesName() {
+
+        List<String> currentTrackerEntriesNames = new ArrayList<String>();
+
+        for (TrackerEntry trackerEntry : currentBudget.getTracker().getEntries()) {
+
+            String budgetEntry = trackerEntry.getBudgetEntry().getName();
+            String date = trackerEntry.getDate();
+            String amount = Double.toString(trackerEntry.getAmount());
+
+            String name = amount + " | " + date + " | " + budgetEntry;
+            currentTrackerEntriesNames.add(name);
+        }
+
+        return currentTrackerEntriesNames;
     }
 
     // EFFECT: returns a JScrollPane that contains a JList with given content and
@@ -270,4 +317,5 @@ public class GraphicalBudgetingApp {
             }
         }
     }
+
 }

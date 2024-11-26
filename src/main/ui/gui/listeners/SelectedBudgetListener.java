@@ -20,13 +20,17 @@ public class SelectedBudgetListener implements ListSelectionListener {
     // REQUIRES: list.getSelectedValue() returns a name that is the name of an
     // existing budget
     // EFFECTS: changes currentBudget of app to the budget with the same name as
-    // selectedBudgetName.
+    // selectedBudgetName. Then updates the lists that dispays the budget's details
+    // in app
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
 
             String selectedBudgetName = list.getSelectedValue();
 
             app.setCurrentBudget(selectedBudgetName);
+            app.updateBudgetEntriesList();
+            app.updateTrackerEntriesList();
+
             System.out.println("Budget changed to " + selectedBudgetName); // TODO: for testing, delete later
         }
     }
