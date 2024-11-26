@@ -1,5 +1,6 @@
 package model;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -61,11 +62,11 @@ public class BudgetTest {
     void testAddTrackerEntryExistingBudgetEntry() throws InvalidBudgetEntryException {
         budget1.addTrackerEntry("Jan 1, 2024", "B1", 3.99);
 
-        assertEquals(3.99, budget1.getBudgeter().findEntry("B1").getActualAmount());   
-        assertEquals(3.99, budget1.getTracker().getEntries().get(0).getAmount());     
-        assertEquals(3.99, budget1.getTracker().getEntries().get(0).getAmount());     
-        assertEquals("Jan 1, 2024", budget1.getTracker().getEntries().get(0).getDate());     
-        assertEquals(b1, budget1.getTracker().getEntries().get(0).getBudgetEntry());     
+        assertEquals(3.99, budget1.getBudgeter().findEntry("B1").getActualAmount());
+        assertEquals(3.99, budget1.getTracker().getEntries().get(0).getAmount());
+        assertEquals(3.99, budget1.getTracker().getEntries().get(0).getAmount());
+        assertEquals("Jan 1, 2024", budget1.getTracker().getEntries().get(0).getDate());
+        assertEquals(b1, budget1.getTracker().getEntries().get(0).getBudgetEntry());
     }
 
     @Test
@@ -74,7 +75,30 @@ public class BudgetTest {
         assertThrows(InvalidBudgetEntryException.class, () -> budget1.addTrackerEntry("Jan 1, 2024", "B120", 8.95));
     }
 
+    @Test
+    public void testEquals() {
+        Tracker tracker = new Tracker();
+        Budgeter budgeter = new Budgeter();
 
-    
+        Budget budget1 = new Budget("Personal Budget", "2024-01-01", "2024-12-31", budgeter, tracker);
+        Budget budget2 = new Budget("Personal Budget", "2024-01-01", "2024-12-31", budgeter, tracker);
 
+        assertEquals(budget1, budget1);
+
+        assertEquals(budget1, budget2);
+        assertEquals(budget2, budget1);
+
+        assertNotEquals(budget1, null);
+    }
+
+    @Test
+    public void testHashCode() {
+        Tracker tracker = new Tracker();
+        Budgeter budgeter = new Budgeter();
+
+        Budget budget1 = new Budget("Personal Budget", "2024-01-01", "2024-12-31", budgeter, tracker);
+        Budget budget2 = new Budget("Personal Budget", "2024-01-01", "2024-12-31", budgeter, tracker);
+
+        assertEquals(budget1.hashCode(), budget2.hashCode());
+    }
 }

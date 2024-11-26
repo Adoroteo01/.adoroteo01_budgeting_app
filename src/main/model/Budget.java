@@ -28,7 +28,6 @@ public class Budget {
 
     // EFFECT: creates a new budget with given name, start date, end date,
     // budgeter, and tracker.
-    // TODO: Test
     public Budget(String name, String startDate, String endDate, Budgeter budgeter, Tracker tracker) {
         this.name = name;
         this.startDate = startDate;

@@ -3,6 +3,7 @@ package model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -225,5 +226,40 @@ public class BudgeterTest {
         assertEquals(null, budgeter1.findEntry("B7"));
         assertEquals(1, budgeter1.getbudgetEntries().size());
         assertTrue(budgeter1.getbudgetEntries().contains(b1));
+    }
+
+    @Test
+    public void testEquals() {
+        BudgetEntry entry1 = new Expense("id1", "Rent", 1000.0);
+        BudgetEntry entry2 = new Expense("id2", "Utilities", 200.0);
+
+        List<BudgetEntry> entries = new ArrayList<>();
+        entries.add(entry1);
+        entries.add(entry2);
+
+        Budgeter budgeter1 = new Budgeter(entries);
+        Budgeter budgeter2 = new Budgeter(entries);
+
+        assertEquals(budgeter1, budgeter1);
+
+        assertEquals(budgeter1, budgeter2);
+        assertEquals(budgeter2, budgeter1);
+
+        assertNotEquals(budgeter1, null);
+    }
+
+    @Test
+    public void testHashCode() {
+        BudgetEntry entry1 = new Expense("id1", "Rent", 1000.0);
+        BudgetEntry entry2 = new Expense("id2", "Utilities", 200.0);
+
+        List<BudgetEntry> entries = new ArrayList<>();
+        entries.add(entry1);
+        entries.add(entry2);
+
+        Budgeter budgeter1 = new Budgeter(entries);
+        Budgeter budgeter2 = new Budgeter(entries);
+
+        assertEquals(budgeter1.hashCode(), budgeter2.hashCode());
     }
 }
