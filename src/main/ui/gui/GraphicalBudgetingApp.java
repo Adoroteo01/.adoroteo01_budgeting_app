@@ -27,6 +27,7 @@ import ui.gui.listeners.CreateNewTrackerEntryListener;
 import ui.gui.listeners.LoadButtonListener;
 import ui.gui.listeners.SaveButtonListener;
 import ui.gui.listeners.SelectedBudgetListener;
+import ui.gui.listeners.SummaryButtonListener;
 
 public class GraphicalBudgetingApp {
 
@@ -170,8 +171,6 @@ public class GraphicalBudgetingApp {
 
     private JPanel createMainContentPanel() {
 
-        // TODO: implement tracker entry adding
-
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
 
@@ -296,6 +295,7 @@ public class GraphicalBudgetingApp {
 
         loadButton.addActionListener(new LoadButtonListener(this));
         saveButton.addActionListener(new SaveButtonListener(this));
+        summaryButton.addActionListener(new SummaryButtonListener(this));
 
         panel.add(loadButton);
         panel.add(saveButton);
