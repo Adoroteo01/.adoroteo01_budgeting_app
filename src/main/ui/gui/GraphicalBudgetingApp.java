@@ -164,7 +164,7 @@ public class GraphicalBudgetingApp {
         JButton newBudgetEntryWindowOpener = createNewItemButton("New Budget Entry",
                 new CreateNewBudgetEntryListener(this));
         JButton newTrackerEntryWindowOpener = createNewItemButton("New Tracker Entry",
-                new CreateNewTrackerEntryListener());
+                new CreateNewTrackerEntryListener(this));
 
         budgetsScroller = createScrollingList(this);
         budgetEntriesScroller = createScrollingList();
