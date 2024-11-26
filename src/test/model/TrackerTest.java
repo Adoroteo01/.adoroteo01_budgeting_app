@@ -9,16 +9,21 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.budgetentries.BudgetEntry;
+import model.budgetentries.Expense;
+
 public class TrackerTest {
 
     Tracker tracker;
 
+    BudgetEntry b1;
     TrackerEntry t1;
 
     @BeforeEach
     void setup() {
+        b1 = new Expense("id0", "Expense", 500);
         tracker = new Tracker();
-        t1 = new TrackerEntry("Jan 1 2024", null, 9.99);
+        t1 = new TrackerEntry("Jan 1 2024", b1, 9.99);
     }
 
     @Test
@@ -40,7 +45,7 @@ public class TrackerTest {
         Tracker tracker2 = new Tracker();
 
         List<TrackerEntry> entries = new ArrayList<>();
-        entries.add(new TrackerEntry("2024-11-25", null, 100.0));
+        entries.add(new TrackerEntry("2024-11-25", b1, 100.0));
 
         tracker1.getEntries().addAll(entries);
         tracker2.getEntries().addAll(entries);
@@ -61,7 +66,7 @@ public class TrackerTest {
         Tracker tracker2 = new Tracker();
 
         List<TrackerEntry> entries = new ArrayList<>();
-        entries.add(new TrackerEntry("2024-11-25", null, 100.0));
+        entries.add(new TrackerEntry("2024-11-25", b1, 100.0));
 
         tracker1.getEntries().addAll(entries);
         tracker2.getEntries().addAll(entries);
