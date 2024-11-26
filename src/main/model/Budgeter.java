@@ -94,6 +94,10 @@ public class Budgeter {
         byActualAmount = Comparator.comparingDouble(BudgetEntry::getActualAmount).reversed();
 
         entries.sort(byActualAmount);
+
+        EventLog.getInstance()
+                .logEvent(new Event(
+                        "Created Summary for Budget Entries"));
     }
 
 }

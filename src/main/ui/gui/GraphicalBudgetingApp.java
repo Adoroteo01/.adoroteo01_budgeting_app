@@ -315,6 +315,8 @@ public class GraphicalBudgetingApp {
         appWindow = new JFrame("Budget.ly");
         appWindow.setMinimumSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         appWindow.setLayout(new BorderLayout());
+
+        appWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
 }

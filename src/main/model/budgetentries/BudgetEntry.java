@@ -2,6 +2,9 @@ package model.budgetentries;
 
 import java.util.Objects;
 
+import model.Event;
+import model.EventLog;
+
 // A budget entry that has a name, budgeted amount, and actual amount
 public abstract class BudgetEntry {
     protected String name;
@@ -18,6 +21,10 @@ public abstract class BudgetEntry {
         this.name = name;
         this.budgetAmount = budgetAmount;
         this.actualAmount = 0;
+
+        EventLog.getInstance()
+                .logEvent(new Event(
+                        "Created new Bugdet Entry " + name + " with budgeted amount:" + budgetAmount));
     }
 
     public BudgetEntry(String id, String name, double budgetAmount, double actualAmount) {

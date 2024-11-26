@@ -24,6 +24,8 @@ public class Budget {
         this.endDate = endDate;
         budgeter = new Budgeter();
         tracker = new Tracker();
+
+        EventLog.getInstance().logEvent(new Event("Created new Budget " + name));
     }
 
     // EFFECT: creates a new budget with given name, start date, end date,

@@ -16,6 +16,10 @@ public class TrackerEntry {
         this.budgetEntry = budgetEntry;
         this.amount = amount;
 
+        EventLog.getInstance()
+                .logEvent(new Event(
+                        "Created new Tracker Entry for $" + amount + " for Budget Entry:" + budgetEntry.getName()));
+
     }
 
     @Override
