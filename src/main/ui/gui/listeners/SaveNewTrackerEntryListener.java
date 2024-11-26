@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import model.Budget;
-import model.budgetentries.BudgetEntry;
-import model.budgetentries.Expense;
 import model.exceptions.InvalidBudgetEntryException;
 import ui.gui.GraphicalBudgetingApp;
 
