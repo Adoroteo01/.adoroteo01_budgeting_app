@@ -24,7 +24,6 @@ import model.budgetentries.BudgetEntry;
 import ui.gui.listeners.CreateNewBudgetEntryListener;
 import ui.gui.listeners.CreateNewBudgetListener;
 import ui.gui.listeners.CreateNewTrackerEntryListener;
-import ui.gui.listeners.SaveNewBudgetEntryListener;
 import ui.gui.listeners.SelectedBudgetListener;
 
 public class GraphicalBudgetingApp {
@@ -156,7 +155,6 @@ public class GraphicalBudgetingApp {
 
     private JPanel createMainContentPanel() {
 
-        // TODO: implement budget entry adding
         // TODO: implement tracker entry adding
 
         JPanel panel = new JPanel();
@@ -164,28 +162,13 @@ public class GraphicalBudgetingApp {
 
         JButton newBudgetWindowOpener = createNewItemButton("New Budget", new CreateNewBudgetListener(this));
         JButton newBudgetEntryWindowOpener = createNewItemButton("New Budget Entry",
-                new CreateNewBudgetEntryListener());
+                new CreateNewBudgetEntryListener(this));
         JButton newTrackerEntryWindowOpener = createNewItemButton("New Tracker Entry",
                 new CreateNewTrackerEntryListener());
 
-        List<String> budgetsSampleData = new ArrayList<String>();
-        budgetsSampleData.add("Jan");
-        budgetsSampleData.add("Feb");
-        budgetsSampleData.add("Mar");
-
-        List<String> budgetEntriesSampleData = new ArrayList<String>();
-        budgetEntriesSampleData.add("Expense 1");
-        budgetEntriesSampleData.add("Expense 2");
-        budgetEntriesSampleData.add("Expense 3");
-
-        List<String> trackerSampleData = new ArrayList<String>();
-        trackerSampleData.add("Jan 1 - $20");
-        trackerSampleData.add("Jan 2 - $30");
-        trackerSampleData.add("jan 2 - $4");
-
-        budgetsScroller = createScrollingList(budgetsSampleData, this);
-        budgetEntriesScroller = createScrollingList(budgetEntriesSampleData);
-        trackerEntriesScroller = createScrollingList(budgetEntriesSampleData);
+        budgetsScroller = createScrollingList(this);
+        budgetEntriesScroller = createScrollingList();
+        trackerEntriesScroller = createScrollingList();
 
         panel.add(new JScrollPane(budgetsScroller));
         panel.add(newBudgetWindowOpener);
@@ -228,7 +211,11 @@ public class GraphicalBudgetingApp {
         for (BudgetEntry budgetEntry : currentBudget.getBudgetEntries()) {
 
             String name = budgetEntry.getName();
-            currentBudgetEntriesNames.add(name);
+            String budgetAmount = String.valueOf(budgetEntry.getBudgetAmount());
+            String actualAmount = String.valueOf(budgetEntry.getActualAmount());
+
+            String rowname = name + " | " + budgetAmount + " | " + actualAmount;
+            currentBudgetEntriesNames.add(rowname);
         }
 
         return currentBudgetEntriesNames;
@@ -255,10 +242,9 @@ public class GraphicalBudgetingApp {
 
     // EFFECT: returns a JScrollPane that contains a JList with given content and
     // has selectable functionality
-    private JScrollPane createScrollingList(List<String> lsitContent, GraphicalBudgetingApp app) {
+    private JScrollPane createScrollingList(GraphicalBudgetingApp app) {
 
-        String[] listContentArray = lsitContent.toArray(new String[0]);
-        JList<String> listComponent = new JList<String>(listContentArray);
+        JList<String> listComponent = new JList<String>();
         listComponent.addListSelectionListener(new SelectedBudgetListener(listComponent, app));
 
         JScrollPane listScroller = new JScrollPane(listComponent);
@@ -267,10 +253,9 @@ public class GraphicalBudgetingApp {
     }
 
     // EFFECT: returns a JScrollPane that contains a JList with given content
-    private JScrollPane createScrollingList(List<String> lsitContent) {
+    private JScrollPane createScrollingList() {
 
-        String[] listContentArray = lsitContent.toArray(new String[0]);
-        JList<String> listComponent = new JList<String>(listContentArray);
+        JList<String> listComponent = new JList<String>();
 
         JScrollPane listScroller = new JScrollPane(listComponent);
         listScroller.setPreferredSize(new Dimension(40, 500)); // TODO: remove later, for testing
