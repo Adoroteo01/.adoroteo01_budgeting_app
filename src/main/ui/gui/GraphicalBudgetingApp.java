@@ -25,6 +25,7 @@ import ui.gui.listeners.CreateNewBudgetEntryListener;
 import ui.gui.listeners.CreateNewBudgetListener;
 import ui.gui.listeners.CreateNewTrackerEntryListener;
 import ui.gui.listeners.LoadButtonListener;
+import ui.gui.listeners.SaveButtonListener;
 import ui.gui.listeners.SelectedBudgetListener;
 
 public class GraphicalBudgetingApp {
@@ -135,7 +136,6 @@ public class GraphicalBudgetingApp {
         // Padding
         JPanel padding = new JPanel();
         padding.setBorder(new EmptyBorder(top, left, bottom, right));
-        // padding.setBackground(Color.RED); // TODO: Delete later. For testing
         return padding;
     }
 
@@ -295,6 +295,7 @@ public class GraphicalBudgetingApp {
         JButton summaryButton = new JButton("Summary");
 
         loadButton.addActionListener(new LoadButtonListener(this));
+        saveButton.addActionListener(new SaveButtonListener(this));
 
         panel.add(loadButton);
         panel.add(saveButton);
