@@ -24,6 +24,7 @@ import model.budgetentries.BudgetEntry;
 import ui.gui.listeners.CreateNewBudgetEntryListener;
 import ui.gui.listeners.CreateNewBudgetListener;
 import ui.gui.listeners.CreateNewTrackerEntryListener;
+import ui.gui.listeners.LoadButtonListener;
 import ui.gui.listeners.SelectedBudgetListener;
 
 public class GraphicalBudgetingApp {
@@ -69,6 +70,20 @@ public class GraphicalBudgetingApp {
 
     public Budget getCurrentBudget() {
         return currentBudget;
+    }
+
+    public void setCurrentBudget(Budget currentBudget) {
+        this.currentBudget = currentBudget;
+    }
+
+    // EFFECTS: Sets currentBudget to first budget found in budgets with the given
+    // budgetName;
+    public void setCurrentBudget(String budgetName) {
+        for (Budget budget : budgets) {
+            if (budget.getName() == budgetName) {
+                currentBudget = budget;
+            }
+        }
     }
 
     public JScrollPane getBudgetsScroller() {
@@ -278,6 +293,9 @@ public class GraphicalBudgetingApp {
         JButton loadButton = new JButton("Load File ");
         JButton saveButton = new JButton("Save File ");
         JButton summaryButton = new JButton("Summary");
+
+        loadButton.addActionListener(new LoadButtonListener(this));
+
         panel.add(loadButton);
         panel.add(saveButton);
         panel.add(summaryButton);
@@ -291,16 +309,6 @@ public class GraphicalBudgetingApp {
         appWindow.setMinimumSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         // appWindow.setResizable(false); // TODO: decide to use resizable or not
         appWindow.setLayout(new BorderLayout());
-    }
-
-    // EFFECTS: Sets currentBudget to first budget found in budgets with the given
-    // budgetName;
-    public void setCurrentBudget(String budgetName) {
-        for (Budget budget : budgets) {
-            if (budget.getName() == budgetName) {
-                currentBudget = budget;
-            }
-        }
     }
 
 }
