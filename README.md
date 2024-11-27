@@ -34,3 +34,32 @@
 - You can locate my visual component by looking at the title bar. The visual component is the logo
 - You can save the state of my application by clicking the save button on the left menu
 - You can reload the state of my application by clicking the load button on the left menu
+
+
+# Phase 4: Task 2
+
+Tue Nov 26 15:42:43 PST 2024
+Created new Budget buget 1
+Tue Nov 26 15:42:59 PST 2024
+Created new Bugdet Entry BE1 with budgeted amount:123.0
+Tue Nov 26 15:43:58 PST 2024
+Created new Tracker Entry for $40.0 for Budget Entry:BE1
+Tue Nov 26 15:44:28 PST 2024
+Created new Budget budget 2
+Tue Nov 26 15:44:53 PST 2024
+Created new Bugdet Entry BE1(2) with budgeted amount:987.0
+Tue Nov 26 15:45:34 PST 2024
+Tue Nov 26 15:45:59 PST 2024
+Created new Tracker Entry for $77.0 for Budget Entry:BE2(2)
+Tue Nov 26 15:46:40 PST 2024
+Created new Tracker Entry for $88.0 for Budget Entry:BE1(2)
+Tue Nov 26 15:47:44 PST 2024
+Created new Tracker Entry for $8.77 for Budget Entry:BE2(2)
+Tue Nov 26 15:48:11 PST 2024
+Created Summary for Budget Entries
+Tue Nov 26 15:48:42 PST 2024
+Created Summary for Budget Entries
+Tue Nov 26 15:49:07 PST 2024
+Created Summary for Budget Entries
+Tue Nov 26 15:49:10 PST 2024
+Saved budgets to file
