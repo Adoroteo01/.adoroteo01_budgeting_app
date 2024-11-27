@@ -36,6 +36,8 @@ public class Budget {
         this.endDate = endDate;
         this.budgeter = budgeter;
         this.tracker = tracker;
+
+        EventLog.getInstance().logEvent(new Event("Loaded Budget " + name + " from file"));
     }
 
     @Override

@@ -32,6 +32,10 @@ public abstract class BudgetEntry {
         this.name = name;
         this.budgetAmount = budgetAmount;
         this.actualAmount = actualAmount;
+
+        EventLog.getInstance()
+                .logEvent(new Event(
+                        "Loaded Bugdet Entry " + name + " with budgeted amount:" + budgetAmount + " from file"));
     }
 
     @Override

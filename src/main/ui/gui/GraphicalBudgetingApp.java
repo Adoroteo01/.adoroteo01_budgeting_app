@@ -25,6 +25,7 @@ import model.budgetentries.BudgetEntry;
 import ui.gui.listeners.CreateNewBudgetEntryListener;
 import ui.gui.listeners.CreateNewBudgetListener;
 import ui.gui.listeners.CreateNewTrackerEntryListener;
+import ui.gui.listeners.ExitAppListener;
 import ui.gui.listeners.LoadButtonListener;
 import ui.gui.listeners.SaveButtonListener;
 import ui.gui.listeners.SelectedBudgetListener;
@@ -317,6 +318,8 @@ public class GraphicalBudgetingApp {
         appWindow.setLayout(new BorderLayout());
 
         appWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        appWindow.addWindowListener(new ExitAppListener());
+
     }
 
 }

@@ -224,7 +224,7 @@ public class JsonHandler {
 
         EventLog.getInstance()
                 .logEvent(new Event(
-                        "Loaded budgets to file"));
+                        "Loaded budgets from file"));
 
         return budgets;
     }
