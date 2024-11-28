@@ -63,3 +63,10 @@ Tue Nov 26 15:49:07 PST 2024
 Created Summary for Budget Entries
 Tue Nov 26 15:49:10 PST 2024
 Saved budgets to file
+
+
+# Phase 4: Task 3
+
+If there were more time to work on this project, a refactoring I would make to improve my design would be to remove the abstract class of BudgetEntry that is extended by Expense. My reasons for this refactoring are because BudgetEntry is redundant in this case. Since Expense is the only BudgetEntry in our code and the features we need or will need likley only use Expense, we should refactor it so Expense contains all the code in BudgetEntry. There is also not much code in BudgetEntry other than getters for fields that could be in Expense.
+
+I think another refactoring that is needed would be to make all the ActionListeners into inner classes and not top level classes. This is because they are all used in exactly 1 place and nowhere else and they will only ever be used in 1 place. Making them into inner classes would remove all the associations they have in my UML diagram becuase all those inner classes would already have access to the information we give them as fields.
