@@ -2,7 +2,6 @@ package ui.gui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import javax.swing.JScrollPane;
 
 import model.Budget;
 import model.budgetentries.BudgetEntry;
-import persistence.JsonHandler;
 import ui.gui.GraphicalBudgetingApp;
 
 public class SummaryButtonListener implements ActionListener {
@@ -22,7 +20,6 @@ public class SummaryButtonListener implements ActionListener {
 
     GraphicalBudgetingApp app;
     Budget currentBudget;
-    JsonHandler jsonHandler;
 
     // EFFECTS: creates new SummaryButtonListener with given associated app
     public SummaryButtonListener(GraphicalBudgetingApp app) {
